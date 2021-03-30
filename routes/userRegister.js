@@ -81,16 +81,9 @@ router.route('/').post((req, res) => {
                     password: hash
                 })
 
-                newUser.save(function(err){
-                    if(!err){
-                        res.json(user.uName)
-                    }
-                    else{
-                        res.status(400).json('Error: ' + err)
-                    }
-                })
-                // .then(()=> )
-                //  .catch(err => );
+                newUser.save()
+                .then(()=> res.json(newUser.uName))
+                .catch(err => res.status(400).json('Error: ' + err));
         
                 // Store hash in your password DB.
             });
