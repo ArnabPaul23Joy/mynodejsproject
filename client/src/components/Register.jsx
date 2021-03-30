@@ -7,7 +7,7 @@ function Register(props){
   const [conPassword, setCon] = useState("")
   const [pasHolder, setHolder] = useState("password")
   const [user, setUser] = useState({
-    uname: "",
+    uName: "",
     email: "",
     password: ""
   });
