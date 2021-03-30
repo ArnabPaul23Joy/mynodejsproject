@@ -5,8 +5,8 @@ const router = require('express').Router();
 // const bodyParser=require("body-parser")
 // const ejs=require("ejs")
 // const app=express()
-// const mongoose =require("mongoose")
-// const bcrypt=require("bcrypt")
+const mongoose =require("mongoose")
+const bcrypt=require("bcrypt")
 // const session=require("express-session")
 
 
@@ -16,7 +16,7 @@ let User = require("../models/userModel.js");
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // const FacebookStrategy = require('passport-facebook').Strategy;
 // const findOrCreate = require('mongoose-findorcreate')
-// const md5 =require("md5")
+const md5 =require("md5")
 // const encrypt=require("mongoose-encryption")
 // app.set("view engine", "ejs")
 // app.use(express.static("public"))
