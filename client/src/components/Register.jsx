@@ -36,7 +36,7 @@ function Register(props){
     if(conPassword==user.password){   
       
       console.log("registerrrrrrrrr beyatch!")
-      axios.post('register', user)
+      axios.post('register/', user)
         .then(res => registerResponse=res.data);
         console.log("register Response "+ registerResponse)
     }

@@ -26,7 +26,7 @@ function LogIn(props){
 
     // console.log(user);
 
-    axios.post('login', user)
+    axios.post('login/', user)
       .then(res => console.log(res.data));
 
     // this.setState({
