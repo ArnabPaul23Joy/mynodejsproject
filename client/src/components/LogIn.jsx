@@ -25,9 +25,9 @@ function LogIn(props){
     console.log("sign in button")
 
     // console.log(user);
-    if (user.password<8){
-      alert("too short password!")
-    }
+    // if (user.password.length<8){
+    //   alert("too short password!")
+    // }
     axios.post('login/', user)
       .then(res => console.log(res.data));
     

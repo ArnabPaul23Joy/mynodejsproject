@@ -50,7 +50,7 @@ router.route('/').post((req, res) => {
                 
         //     }
         // })
-            
+    console.log("POST REQUEST LOGIN")
         User.findOne({email: uName},function(err,foundUser){
             if(!err){
                 
