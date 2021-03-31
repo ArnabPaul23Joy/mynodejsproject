@@ -57,7 +57,11 @@ router.route('/').post((req, res) => {
                 if(foundUser){
                     bcrypt.compare(pword,foundUser.password,function(err,result){
                         if (result==true){
-                            res.json(foundUser.email+" "+foundUser._id)
+                            res.json({
+                                status: "Success",
+                                email: foundUser.email,
+                                u_id: foundUser._id
+                            })
                         }
                         else{
                             res.json("wrong password bro!")
