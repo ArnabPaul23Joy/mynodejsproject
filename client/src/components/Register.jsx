@@ -37,7 +37,7 @@ function Register(props){
       
       console.log("registerrrrrrrrr beyatch!")
       axios.post('register/', user)
-        .then(res => console.log(res.data));
+        .then(res => console.log("res data  "+res.data));
         // console.log("register Response "+ JSON.stringify(registerResponse))
     }
     else{
