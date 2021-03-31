@@ -83,7 +83,7 @@ router.route('/').post((req, res) => {
 
                 newUser.save(function(err){
                     if(!err){
-                        res.json('User added Successfully')
+                        res.json(newUser._id+" "+newUser.email)
                     }
                     else{
                         res.status(400).json('Error: ' + err)
