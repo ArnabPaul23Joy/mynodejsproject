@@ -86,7 +86,7 @@ router.route('/').post((req, res) => {
                         res.json(newUser._id+" "+newUser.email)
                     }
                     else{
-                        res.status(400).json('Error: ' + err)
+                        res.json("user exists already")
                     }
                 })
                 // .then(()=> res.json('User added Successfully'))
