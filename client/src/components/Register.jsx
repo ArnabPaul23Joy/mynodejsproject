@@ -33,7 +33,7 @@ function Register(props){
     console.log(conPassword);
     console.log(user);
     let registerResponse={}
-    if(conPassword==user.password && user.password>=8){   
+    if(conPassword==user.password && user.password.length>=8){   
       
       console.log("registerrrrrrrrr beyatch!")
       axios.post('register/', user)
@@ -44,7 +44,7 @@ function Register(props){
         if (conPassword!=user.password){
           alert("wrong password!")
         }
-        else if (user.password<8){
+        else if (user.password.length<8){
           alert("too short password!")
         }
         // setHolder("Wrong Password")
