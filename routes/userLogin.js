@@ -70,6 +70,12 @@ router.route('/').post((req, res) => {
                         }
                     })
                 }
+                
+                else{
+                    res.json({
+                        status: "Wrong email bruh!"
+                    })
+                }
                 // if(foundUser.password==pword){
                 //     res.render("secrets")
                 // }
@@ -79,7 +85,7 @@ router.route('/').post((req, res) => {
             }
             else{
                 res.json({
-                    status: "Wrong password bruh!"
+                    status: "Wrong information bruh!"
                 })
             }
         })
