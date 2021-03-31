@@ -41,7 +41,8 @@ function Register(props){
         // console.log("register Response "+ JSON.stringify(registerResponse))
     }
     else{
-        setHolder("Wrong Password")
+        alert("wrong password")
+        // setHolder("Wrong Password")
     }
     e.preventDefault();
     // this.setState({
@@ -68,12 +69,12 @@ function Register(props){
 
                   <div className="form-label-group">
                     <label for="inputPassword">Password</label>
-                    <input type="password" id="inputPassword" className="form-control" value={user.password} onChange={handleChange} name="password" placeholder={pasHolder} required />
+                    <input type="password" id="inputPassword" className="form-control" value={user.password} onChange={handleChange} name="password" required />
                   </div>
                   
                   <div className="form-label-group">
                     <label for="inputConfirmPassword">Confirm Password</label>
-                    <input type="password" id="inputConfirmPassword" name="conPassword" value={conPassword} onChange={handleConChange} className="form-control" placeholder={pasHolder} required />
+                    <input type="password" id="inputConfirmPassword" name="conPassword" value={conPassword} onChange={handleConChange} className="form-control" required />
                   </div>
 
                   {/* <div className="custom-control custom-checkbox mb-3">
