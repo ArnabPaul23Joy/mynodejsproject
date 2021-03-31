@@ -50,16 +50,17 @@ router.route('/').post((req, res) => {
                 
         //     }
         // })
-    console.log("POST REQUEST LOGIN")
+    console.log(uName+" "+pword)
         User.findOne({email: uName},function(err,foundUser){
             if(!err){
-                
+                console.log("found user "+uName)
                 if(foundUser){
                     bcrypt.compare(pword,foundUser.password,function(err,result){
                         if (result==true){
-                            console.log("")
-                            .then(()=> res.json(foundUser.email+" "+foundUser._id))
-                            .catch(err => res.json("wrong password bro!"));
+                            res.json(foundUser.email+" "+foundUser._id)
+                        }
+                        else{
+                            res.json("wrong password bro!")
                         }
                     })
                 }
