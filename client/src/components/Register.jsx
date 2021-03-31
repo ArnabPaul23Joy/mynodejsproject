@@ -37,8 +37,8 @@ function Register(props){
       
       console.log("registerrrrrrrrr beyatch!")
       axios.post('register/', user)
-        .then(res => registerResponse=res.data);
-        console.log("register Response "+ JSON.stringify(registerResponse))
+        .then(res => console.log(res.data));
+        // console.log("register Response "+ JSON.stringify(registerResponse))
     }
     else{
         setHolder("Wrong Password")
