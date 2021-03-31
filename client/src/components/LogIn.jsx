@@ -6,7 +6,7 @@ function LogIn(props){
   }
   const [user, setUser] = useState({
     email: "",
-    pasword: ""
+    password: ""
   });
   function handleChange(event) {
     const { name, value } = event.target;
@@ -18,7 +18,6 @@ function LogIn(props){
     });
   }
   function handleSignIn(e){
-    e.preventDefault();
 
     // const user = {
     //   username: this.state.username
@@ -28,6 +27,10 @@ function LogIn(props){
 
     axios.post('login/', user)
       .then(res => console.log(res.data));
+    
+    
+    
+      e.preventDefault();
 
     // this.setState({
     //   username: ''
