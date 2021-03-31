@@ -64,7 +64,9 @@ router.route('/').post((req, res) => {
                             })
                         }
                         else{
-                            res.json("wrong password bro!")
+                            res.json({
+                                status: "Wrong password bruh!"
+                            })
                         }
                     })
                 }
@@ -76,7 +78,9 @@ router.route('/').post((req, res) => {
                 // }
             }
             else{
-                res.json("wrong email bro!")
+                res.json({
+                    status: "Wrong password bruh!"
+                })
             }
         })
 })
