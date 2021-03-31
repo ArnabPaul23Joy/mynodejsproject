@@ -58,8 +58,8 @@ router.route('/').post((req, res) => {
                     bcrypt.compare(pword,foundUser.password,function(err,result){
                         if (result==true){
                             console.log("")
-                            .then(()=> res.json(uName))
-                            .catch(err => res.status(400).json('Error: ' + err));
+                            .then(()=> res.json(foundUser.email+" "+foundUser._id))
+                            .catch(err => res.json("wrong password bro!"));
                         }
                     })
                 }
@@ -71,7 +71,7 @@ router.route('/').post((req, res) => {
                 // }
             }
             else{
-                console.log(err)
+                res.json("wrong email bro!")
             }
         })
 })
