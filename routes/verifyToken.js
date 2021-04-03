@@ -4,7 +4,8 @@ module.exports= function (req, res, next){
     const token=req.body.token
     if(!token) return res.status(401).send('Access Denied')
     try{
-        const verified=jwt.verify(token, process.env.TOKEN_SECRET)
+        var verified=jwt.verify(token, process.env.TOKEN_SECRET)
+        console.log("verifired   "+verified)
         req.user=verified
         next()
     }
