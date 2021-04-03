@@ -87,7 +87,13 @@ router.route('/').post((req, res) => {
                                 status: "Success",
                                 email: foundUser.email,
                                 u_id: foundUser._id
-                            }, process.env.TOKEN_SECRET)
+                            }, process.env.TOKEN_SECRET,{
+ issuer:  i,
+ subject:  s,
+ audience:  a,
+ expiresIn:  "12h",
+ algorithm:  ["RS256"]
+})
                             res.send(token)
                            
                     }
