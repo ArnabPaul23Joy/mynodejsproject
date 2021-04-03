@@ -32,13 +32,12 @@ function App() {
       });
     });
   }
-  var tttt
   function setToken(token){
       console.log("from APP "+token)
       axios.get('getnotes/', token,{header: {"auth-token" : token}})
-        .then(res => tttt=res.data);
+        .then(res => {console.log(res.data)});
         // setNotes(tttt.notePosts)
-  } 
+      } 
   
         // switch(logIn){
         //   case "login":
