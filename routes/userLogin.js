@@ -66,7 +66,7 @@ router.route('/').post((req, res) => {
                                 email: foundUser.email,
                                 u_id: foundUser._id
                             }, process.env.TOKEN_SECRET)
-                            res.header("auth-token",token).send(token)
+                            res.send(token)
                             // res.json({
                             //     status: "Success",
                             //     email: foundUser.email,
