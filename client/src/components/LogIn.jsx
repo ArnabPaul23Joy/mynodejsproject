@@ -31,9 +31,13 @@ function LogIn(props){
     var tttt
     axios.post('login/', user)
       .then(res => tttt=res.data);
-      if (!(tttt=="Wrong email bruh!"||tttt=="Wrong password bruh!")){
-          props.onToken(tttt)
-      }
+      console.log("login   "+tttt)
+      // if (!(tttt==="Wrong email bruh!"||tttt==="Wrong password bruh!")){
+      //   console.log(tttt)
+      // }
+      // else{
+      //     props.onToken(tttt)
+      // }
     
     
       e.preventDefault();

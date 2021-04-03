@@ -34,9 +34,10 @@ function App() {
   }
   var tttt
   function setToken(token){
+      console.log("from APP "+token)
       axios.get('getnotes/', token,{header: {"auth-token" : token}})
         .then(res => tttt=res.data);
-        setNotes(tttt.notePosts)
+        // setNotes(tttt.notePosts)
   } 
   
         // switch(logIn){

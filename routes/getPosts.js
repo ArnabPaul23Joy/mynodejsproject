@@ -36,7 +36,7 @@ const md5 =require("md5")
 
 
 
-router.route('/').post((req, res) => {
+router.route('/').get((req, res) => {
     console.log(req.body)
     console.log(req.header)
 
