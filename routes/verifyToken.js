@@ -9,7 +9,7 @@ module.exports= function (req, res, next){
         next()
     }
     catch(err){
-        res.status(400).send("Invalid Token")
+        res.send("Invalid Token")
     }
 
 }

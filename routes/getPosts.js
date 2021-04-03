@@ -38,7 +38,7 @@ const md5 =require("md5")
 
 // verify
 router.post('/',verify,(req, res) => {
-    console.log("req.body.token  "+req.user)
+    console.log("req.body.token  ")
     // console.log(req.header)
 
     // const uName=req.body.email
