@@ -38,7 +38,7 @@ const md5 =require("md5")
 
 router.route('/').get((req, res) => {
     console.log(req.body)
-    console.log(req.header)
+    // console.log(req.header)
 
     // const uName=req.body.email
     // const pword=req.body.password
