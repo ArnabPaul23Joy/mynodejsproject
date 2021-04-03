@@ -33,13 +33,13 @@ function LogIn(props){
     // var tttt
     axios.post('login/', user)
       .then(res => {
-        console.log("login    hhh"+res.data)
-        // if (!(res.data==="Wrong email bruh!"||res.data==="Wrong password bruh!")){
-        //   console.log(res.data)
-        // }
-        // else{
-        //     props.onToken(res.data)
-        // }
+        // console.log("login    hhh"+res.data)
+        if (!(res.data==="Wrong email bruh!"||res.data==="Wrong password bruh!")){
+            props.onToken(res.data)
+        }
+        else{
+          console.log(res.data)
+        }
       });
       // console.log("login   "+tttt)
       // if (!(tttt==="Wrong email bruh!"||tttt==="Wrong password bruh!")){

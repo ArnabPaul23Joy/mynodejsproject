@@ -37,10 +37,18 @@ function Register(props){
       var tttt
       console.log("registerrrrrrrrr beyatch!")
       axios.post('register/', user)
-        .then(res => tttt=res.data);
-        if (!(tttt=="user exists already you fuck!")){
-          props.onToken(tttt)
-        }
+        .then(res => {
+        // console.log("login    hhh"+res.data)
+          if (!(res.data==="user exists already you fuck!")){
+              props.onToken(res.data)
+          }
+          else{
+            console.log(res.data)
+          }
+        });
+        // if (!(tttt=="user exists already you fuck!")){
+        //   props.onToken(tttt)
+        // }
 
         // console.log("register Response "+ JSON.stringify(registerResponse))
     }
