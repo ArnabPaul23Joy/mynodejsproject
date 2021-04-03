@@ -23,11 +23,13 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
-    props.onAdd(note);
-    setNote({
-      title: "",
-      content: ""
-    });
+    if(note.title.length>0 && note.content.length>0){
+      props.onAdd(note);
+      setNote({
+        title: "",
+        content: ""
+      });
+    }
     event.preventDefault();
   }
 

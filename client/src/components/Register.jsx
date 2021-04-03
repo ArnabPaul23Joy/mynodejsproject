@@ -34,10 +34,14 @@ function Register(props){
     console.log(user);
     let registerResponse={}
     if(conPassword==user.password && user.password.length>=8){   
-      
+      var tttt
       console.log("registerrrrrrrrr beyatch!")
       axios.post('register/', user)
-        .then(res => console.log("res data  "+res.data));
+        .then(res => tttt=res.data);
+        if (!(tttt=="user exists already you fuck!")){
+          props.onToken(tttt)
+        }
+
         // console.log("register Response "+ JSON.stringify(registerResponse))
     }
     else{

@@ -83,10 +83,16 @@ router.route('/').post((req, res) => {
 
                 newUser.save(function(err){
                     if(!err){
-                        res.json(newUser._id+" "+newUser.email)
+                             const response=jwt.sign({
+                                status: "Success",
+                                email: foundUser.email,
+                                u_id: foundUser._id
+                            }, process.env.TOKEN_SECRET)
+                            res.header("auth-token",token).send(token)
+                           
                     }
                     else{
-                        res.json("user exists already")
+                        res.send("user exists already you fuck!")
                     }
                 })
                 // .then(()=> res.json('User added Successfully'))

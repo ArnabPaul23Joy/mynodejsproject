@@ -28,9 +28,12 @@ function LogIn(props){
     // if (user.password.length<8){
     //   alert("too short password!")
     // }
+    var tttt
     axios.post('login/', user)
-      .then(res => console.log(res.data));
-    
+      .then(res => tttt=res.data);
+      if (!(tttt=="Wrong email bruh!"||tttt=="Wrong password bruh!")){
+          props.onToken(tttt)
+      }
     
     
       e.preventDefault();

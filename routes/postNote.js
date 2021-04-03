@@ -72,16 +72,19 @@ router.route('/').post((req, res) => {
                             //     email: foundUser.email,
                             //     u_id: foundUser._id
                             // })
-                            // res.json()
                         }
                         else{
-                            res.send("Wrong password bruh!")
+                            res.json({
+                                status: "Wrong password bruh!"
+                            })
                         }
                     })
                 }
                 
                 else{
-                    res.send("Wrong email bruh!")
+                    res.json({
+                        status: "Wrong email bruh!"
+                    })
                 }
                 // if(foundUser.password==pword){
                 //     res.render("secrets")
@@ -91,7 +94,9 @@ router.route('/').post((req, res) => {
                 // }
             }
             else{
-                    res.send("Wrong email bruh!")
+                res.json({
+                    status: "Wrong information bruh!"
+                })
             }
         })
 })
