@@ -4,6 +4,8 @@ function LogIn(props){
   function handleClick() {
     props.onLoggIn("register");
   }
+  // const [tttt, setTTTT] = useState("");
+
   const [user, setUser] = useState({
     email: "",
     password: ""
@@ -28,10 +30,18 @@ function LogIn(props){
     // if (user.password.length<8){
     //   alert("too short password!")
     // }
-    var tttt
+    // var tttt
     axios.post('login/', user)
-      .then(res => tttt=res.data);
-      console.log("login   "+tttt)
+      .then(res => {
+        console.log("login    hhh"+res.data)
+        // if (!(res.data==="Wrong email bruh!"||res.data==="Wrong password bruh!")){
+        //   console.log(res.data)
+        // }
+        // else{
+        //     props.onToken(res.data)
+        // }
+      });
+      // console.log("login   "+tttt)
       // if (!(tttt==="Wrong email bruh!"||tttt==="Wrong password bruh!")){
       //   console.log(tttt)
       // }
