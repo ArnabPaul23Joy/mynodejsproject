@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const jwt=require("jsonwebtoken")
+const  verify=require("./verifyToken")
 
 // require("dotenv").config()
 // const express=require("express")
@@ -35,9 +36,9 @@ const md5 =require("md5")
 
 
 
-
-router.route('/').get((req, res) => {
-    console.log("req.body.token  "+req.body.token)
+// verify
+router.post('/',verify,((req, res) => {
+    console.log("req.body.token  "+req.user)
     // console.log(req.header)
 
     // const uName=req.body.email
