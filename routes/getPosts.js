@@ -36,8 +36,8 @@ const md5 =require("md5")
 
 
 
-router.route('/').get((req, res) => {
-    console.log("req.body  ")
+router.route('/').post((req, res) => {
+    console.log("req.body  "+req.body)
     // console.log(req.header)
 
     // const uName=req.body.email
