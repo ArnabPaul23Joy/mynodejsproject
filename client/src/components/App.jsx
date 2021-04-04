@@ -72,8 +72,8 @@ function App() {
               <Note
                 key={index}
                 id={index}
-                title={noteItem.title}
-                content={noteItem.content}
+                title={noteItem.postTitle}
+                content={noteItem.postContent}
                 onDelete={deleteNote}
               />
             );
