@@ -17,11 +17,11 @@ function App() {
   const [notes, setNotes] = useState([]);
   
   function addNote(newNote) {
-    console.log("from app"+newNote)
+    console.log("from app"+newNote.title)
     setNotes((prevNotes) => {
       return [...prevNotes, newNote];
     });
-      axios.post('post/', {token: globToken, note: newNote})
+      axios.post('post/', {token: globToken, title: newNote.title, content: newNote.content})
         .then(res => console.log("Note added successfully bruh! "+res.data));
     
   }

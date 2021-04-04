@@ -46,8 +46,8 @@ router.post('/',verify,(req, res) => {
         const newNote=new PostNote({
                         u_id: req.user.u_id,
                         email: req.user.email,
-                        title: req.body.note.title,
-                        content : req.body.note.content
+                        title: req.body.title,
+                        content : req.body.content
                     })
         PostNote.save(function(err){
                     if(!err){
