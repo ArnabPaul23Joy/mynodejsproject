@@ -88,6 +88,7 @@ router.route('/').post((req, res) => {
                                 email: foundUser.email,
                                 u_id: foundUser._id
                             }, process.env.TOKEN_SECRET)
+                            console.log("userRegister   "+token)
                             res.send(token)
                             
                     }

@@ -30,8 +30,8 @@ function Register(props){
     //   username: this.state.username
     // }
 
-    console.log(conPassword);
-    console.log(user);
+    // console.log(conPassword);
+    // console.log(user);
     let registerResponse={}
     if(conPassword==user.password && user.password.length>=8){   
       var tttt
