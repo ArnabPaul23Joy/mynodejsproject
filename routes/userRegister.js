@@ -86,8 +86,8 @@ router.route('/').post((req, res) => {
                     if(!err){
                             const token=jwt.sign({
                                 status: "Success",
-                                email: foundUser.email,
-                                u_id: foundUser._id
+                                email: newUser.email,
+                                u_id: newUser._id
                             }, process.env.TOKEN_SECRET)
                             console.log("userRegister   "+token)
                             res.send(token)
