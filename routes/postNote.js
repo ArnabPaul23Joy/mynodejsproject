@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const jwt=require("jsonwebtoken")
+const  verify=require("./verifyToken")
 
 // require("dotenv").config()
 // const express=require("express")
