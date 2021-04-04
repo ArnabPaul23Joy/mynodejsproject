@@ -7,7 +7,7 @@ import CreateArea from "./CreateArea";
 import LogIn from "./LogIn"
 import Register from "./Register";
 function App() {
-  var token
+  const [globToken, setGlobTok] = useState("Invalid Token")
   const [logIn, setLogInBox] = useState("login");
   function logInOrRegister(logValue){
     setLogInBox(logValue)
@@ -17,10 +17,11 @@ function App() {
   const [notes, setNotes] = useState([]);
   
   function addNote(newNote) {
+    console.log("from app"+newNote)
     setNotes((prevNotes) => {
       return [...prevNotes, newNote];
     });
-      axios.post('post/', {token: token, note: newNote})
+      axios.post('post/', {token: globToken, note: newNote})
         .then(res => console.log("Note added successfully bruh! "+res.data));
     
   }
@@ -34,6 +35,7 @@ function App() {
   }
   function setToken(token){
       console.log("from APP "+token)
+      setGlobTok(token)
       axios.post('getnotes/', {token: token})
         .then(res => {
           console.log(res.data)
