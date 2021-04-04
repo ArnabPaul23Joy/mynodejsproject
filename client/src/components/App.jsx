@@ -21,7 +21,7 @@ function App() {
       return [...prevNotes, newNote];
     });
       axios.post('post/', {token: token, note: newNote})
-        .then(res => console.log("res data  "+res.data));
+        .then(res => console.log("Note added successfully bruh! "+res.data));
     
   }
 

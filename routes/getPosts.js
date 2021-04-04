@@ -40,15 +40,24 @@ const md5 =require("md5")
 // verify
 router.post('/',verify,(req, res) => {
     console.log("req.body.token  ")
-    console.log(req.user)
-    PostNote.find({u_id: req.user.u_id}, function(err, notes) {
-      if (err) { 
-          res.send("no data found")
-       }
-      else{
-          res.send(notes)
-      };
-    });
+    if (req.user.status==="Invalid Token"){
+        res.send(req.user.status)
+    }
+    else{
+        PostNote.find({u_id: req.user.u_id}, function(err, notes) {
+        if (err) { 
+            res.send("no data found")
+        }
+        else{
+            if(notes.length==0){
+                res.send("no data found")
+            }
+            else{
+                res.send(notes)
+            }
+        };
+        });
+    }
     // const uName=req.body.email
     // const pword=req.body.password
     // const user=new User({
