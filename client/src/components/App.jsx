@@ -35,7 +35,10 @@ function App() {
   function setToken(token){
       console.log("from APP "+token)
       axios.post('getnotes/', {token: token})
-        .then(res => {console.log(res.data)});
+        .then(res => {
+          console.log(res.data)
+          setLogInBox("home")
+        });
         // setNotes(tttt.notePosts)
       } 
   
