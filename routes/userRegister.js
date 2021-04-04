@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const jwt=require("jsonwebtoken")
 let User = require("../models/userModel.js");
 console.log("register beyatch!")
 // require("dotenv").config()
