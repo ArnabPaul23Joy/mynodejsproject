@@ -83,13 +83,13 @@ router.route('/').post((req, res) => {
 
                 newUser.save(function(err){
                     if(!err){
-                             const response=jwt.sign({
+                            const token=jwt.sign({
                                 status: "Success",
                                 email: foundUser.email,
                                 u_id: foundUser._id
                             }, process.env.TOKEN_SECRET)
                             res.send(token)
-                           
+                            
                     }
                     else{
                         res.send("user exists already you fuck!")
