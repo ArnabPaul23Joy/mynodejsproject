@@ -15,7 +15,9 @@ function App() {
 
 
   const [notes, setNotes] = useState([]);
-  
+  // function initializeNote(allNotes){
+  //   setNotes(allNotes)
+  // }
   function addNote(newNote) {
     console.log("from app"+newNote.title)
     setNotes((prevNotes) => {
@@ -38,6 +40,7 @@ function App() {
       setGlobTok(token)
       axios.post('getnotes/', {token: token})
         .then(res => {
+          setNotes(res.data)
           console.log(res.data)
           setLogInBox("home")
         });

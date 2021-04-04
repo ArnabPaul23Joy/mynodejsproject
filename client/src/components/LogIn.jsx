@@ -39,6 +39,7 @@ function LogIn(props){
         }
         else{
           console.log(res.data)
+          // props.onNote(res.data)
         }
       });
       // console.log("login   "+tttt)
