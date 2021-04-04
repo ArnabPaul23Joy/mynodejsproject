@@ -5,13 +5,12 @@ module.exports= function (req, res){
     const token=req.body.token
     console.log("hghghgh  "+token)
     if(!token) return res.status(401).send('Access Denied')
-    jwt.verify(token, process.env.TOKEN_SECRET, function(err, decoded) {
-        
-        console.log("decoded   ")
-        console.log(decoded)
-        // req.user=verified
-        // next()
-
-    })
+    try{
+        const decoded=jwt.verify(token, process.env.TOKEN_SECRET)
+        return decoded
+    }
+    catch(err){
+        return {status: "Invalid Token"};       
+    }
 
 }
