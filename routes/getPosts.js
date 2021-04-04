@@ -13,6 +13,7 @@ const bcrypt=require("bcrypt")
 
 
 let User = require("../models/userModel.js");
+let PostNote = require("../models/postModel.js");
 //const passport=require("passport")
 // const passportLocalMongoose=require("passport-local-mongoose")
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -40,7 +41,14 @@ const md5 =require("md5")
 router.post('/',verify,(req, res) => {
     console.log("req.body.token  ")
     console.log(req.user)
-
+    PostNote.find({u_id: req.user.u_id}, function(err, notes) {
+      if (err) { 
+          res.send("no data found")
+       }
+      else{
+          res.send(notes)
+      };
+    });
     // const uName=req.body.email
     // const pword=req.body.password
     // const user=new User({
