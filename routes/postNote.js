@@ -49,7 +49,7 @@ router.post('/',verify,(req, res) => {
                         postTitle: req.body.title,
                         postContent : req.body.content
                     })
-        PostNote.save(function(err){
+        newNote.save(function(err){
                     if(!err){
                             // const response=jwt.sign({
                             //     status: "Success",
