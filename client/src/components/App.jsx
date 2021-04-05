@@ -65,6 +65,12 @@ function App() {
             setNotes(res.data.notes)
             setLogInBox("home")
           }
+          else if(res.data.status="no data found"){
+            setLogInBox("home")
+          }
+          else{
+            window.alert("Failed to register bruh!")
+          }
           console.log(res.data)
         });
         // logInOrRegister("home")

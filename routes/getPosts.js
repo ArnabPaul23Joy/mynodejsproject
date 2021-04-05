@@ -46,7 +46,7 @@ router.post('/',verify,(req, res) => {
     else{
         PostNote.find({u_id: req.user.u_id}, function(err, notes) {
         if (err) { 
-            res.send({status: "no data found"})
+            res.send({status: "Something is wrong bruh!"})
         }
         else{
             if(notes.length==0){
