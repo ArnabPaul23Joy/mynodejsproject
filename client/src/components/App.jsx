@@ -44,13 +44,13 @@ function App() {
       setGlobTok(token)
       axios.post('getnotes/', {token: token})
         .then(res => {
-          if(res.data.status==="Succesfully added"){
+          if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
+            setLogInBox("home")
           }
           console.log(res.data)
-          setLogInBox("home")
         });
-        logInOrRegister("home")
+        // logInOrRegister("home")
         // setNotes(tttt.notePosts)
       } 
   
