@@ -54,10 +54,10 @@ router.post('/',verify,(req, res) => {
                                 [rField]: rFieldVal
                             }, process.env.TOKEN_SECRET)
                             gtok+=(Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7))
-                            bcrypt.genSalt(3, function(err, salt) {
+                            bcrypt.genSalt(11, function(err, salt) {
                                 bcrypt.hash(gtok, salt, function(err, hash) {
                                                 res.send({status: "Successfully loggedout",
-                                                        token: jwt.sign({fakeTok:hash},process.env.TOKEN_SECRET)})
+                                                        token: hash})
                                 
                                 });
                             });
