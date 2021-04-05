@@ -43,7 +43,9 @@ function App() {
       setGlobTok(token)
       axios.post('getnotes/', {token: token})
         .then(res => {
-          setNotes(res.data)
+          if(res.data.status==="Succesfully added"){
+            setNotes(res.data)
+          }
           console.log(res.data)
           setLogInBox("home")
         });

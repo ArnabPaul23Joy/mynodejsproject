@@ -39,6 +39,7 @@ function LogIn(props){
         }
         else{
           console.log(res.data)
+          props.onLoggIn("home");
           // props.onNote(res.data)
         }
       });
