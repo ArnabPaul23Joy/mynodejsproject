@@ -36,10 +36,10 @@ function LogIn(props){
         // console.log("login    hhh"+res.data)
         if (!(res.data==="Wrong email bruh!"||res.data==="Wrong password bruh!")){
             props.onToken(res.data)
+            //props.onLoggIn("home");
         }
         else{
           console.log(res.data)
-          props.onLoggIn("home");
           // props.onNote(res.data)
         }
       });
