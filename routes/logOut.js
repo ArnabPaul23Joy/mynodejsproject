@@ -38,16 +38,16 @@ const md5 =require("md5")
 
 
 router.post('/',verify,(req, res) => {
-    console.log("req.body.title  "+req.body.title)
-    console.log("req.body.content  "+req.body.content)
+    // console.log("req.body.title  "+req.body.title)
+    // console.log("req.body.content  "+req.body.content)
     // console.log(req.user)
     if (req.user.status==="Invalid Token"){
-        res.send(req.user.status)
+        res.send({status: req.user.status})
     }
     else{   
                         var rField=Math.random().toString(36).substring(7)
                         var rFieldVal=Math.random().toString(36).substring(7)
-        const gtok=jwt.sign({
+        vars gtok=jwt.sign({
                                 status: "Success",
                                 email: req.user.email,
                                 u_id: req.user.u_id,
