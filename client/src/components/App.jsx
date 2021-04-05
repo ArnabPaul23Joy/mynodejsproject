@@ -20,12 +20,28 @@ function App() {
   //   setNotes(allNotes)
   // }
   function addNote(newNote) {
-    console.log("from app"+newNote.title)
-    setNotes((prevNotes) => {
-      return [...prevNotes, newNote];
-    });
+    // console.log("from app"+newNote.title)
+    // setNotes((prevNotes) => {
+    //   return [...prevNotes, newNote];
+    // });
       axios.post('post/', {token: globToken, title: newNote.title, content: newNote.content})
-        .then(res => console.log("App's post butt res "+res.data));
+        .then(res => {
+          console.log("App's post butt res "+res.data)
+          if(res.data.status==="Failed to save the note bruh!"){
+            window.alert("failed to add post bro!")
+          }
+          else{
+            setNotes((prevNotes) => {
+              return [...prevNotes, newNote];
+            });
+            setLogInBox("home")
+          }
+        
+        
+        });
+          
+          // setLogInBox("home")
+    
       
     
   }

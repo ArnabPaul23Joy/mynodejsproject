@@ -57,11 +57,12 @@ router.post('/',verify,(req, res) => {
                             //     email: foundUser.email,
                             //     u_id: foundUser._id
                             // }, process.env.TOKEN_SECRET)
-                            res.send(req.body.token)
+                            res.send({status: "Successfully added",
+                                    token: req.body.token})
                            
                     }
                     else{
-                        res.send("Failed to save the note bruh!")
+                        res.send({status:"Failed to save the note bruh!"})
                     }
                 })
     }
