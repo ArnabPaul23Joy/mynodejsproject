@@ -9,7 +9,27 @@ import Register from "./Register";
 
 function App() {
   const [globToken, setGlobTok] = useState("Invalid Token")
-  const [logIn, setLogInBox] = useState("login");
+  const [logIn, setLogInBox] = useState("reload");
+  if(logIn==="reload"){
+      axios.post('getnotes/', {token: globToken})
+        .then(res => {
+          // if(res.data.status==="Invalid Token"){
+
+          // }
+          setGlobTok(res.data.token)
+          if(res.data.status==="Found bruh!"){
+            setNotes(res.data.notes)
+            setLogInBox("home")
+          }
+          else if(res.data.status==="no data found"){
+            setLogInBox("home")
+          }
+          else{
+            setLogInBox("login")
+          }
+          console.log(res.data)
+        });
+  }
   function logInOrRegister(logValue){
     setLogInBox(logValue)
   }
@@ -81,11 +101,11 @@ function App() {
             setNotes(res.data.notes)
             setLogInBox("home")
           }
-          else if(res.data.status="no data found"){
+          else if(res.data.status==="no data found"){
             setLogInBox("home")
           }
           else{
-            window.alert("Failed to register bruh!")
+            window.alert("Failed to get in bruh!")
           }
           console.log(res.data)
         });
