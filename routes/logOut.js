@@ -47,7 +47,7 @@ router.post('/',verify,(req, res) => {
     else{   
                         var rField=Math.random().toString(36).substring(7)
                         var rFieldVal=Math.random().toString(36).substring(7)
-        vars gtok=jwt.sign({
+        var gtok=jwt.sign({
                                 status: "Success",
                                 email: req.user.email,
                                 u_id: req.user.u_id,
