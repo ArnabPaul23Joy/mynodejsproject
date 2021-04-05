@@ -62,7 +62,7 @@ router.route('/').post((req, res) => {
                 if(foundUser){
                     bcrypt.compare(pword,foundUser.password,function(err,result){
                         
-                        var rField=crypto.randomBytes(20).toString('hex')
+                        // var rField=crypto.randomBytes(20).toString('hex')
                         if (result==true){
                         var rField=Math.random().toString(36).substring(7)
                         var rFieldVal=Math.random().toString(36).substring(7)
