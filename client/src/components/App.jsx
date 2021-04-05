@@ -26,6 +26,7 @@ function App() {
     });
       axios.post('post/', {token: globToken, title: newNote.title, content: newNote.content})
         .then(res => console.log("App's post butt res "+res.data));
+      
     
   }
 
@@ -44,7 +45,7 @@ function App() {
       axios.post('getnotes/', {token: token})
         .then(res => {
           if(res.data.status==="Succesfully added"){
-            setNotes(res.data)
+            setNotes(res.data.notes)
           }
           console.log(res.data)
           setLogInBox("home")

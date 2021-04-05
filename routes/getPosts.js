@@ -53,7 +53,7 @@ router.post('/',verify,(req, res) => {
                 res.send({status: "no data found"})
             }
             else{
-                res.send({status: "Succesfully added", notes:notes})
+                res.send({status: "Found bruh!", notes:notes})
             }
         };
         });
