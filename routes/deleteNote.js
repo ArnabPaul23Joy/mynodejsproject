@@ -11,6 +11,7 @@ const mongoose =require("mongoose")
 const bcrypt=require("bcrypt")
 // const session=require("express-session")
 
+var crypto = require("crypto");
 
 let User = require("../models/userModel.js");
 
@@ -45,10 +46,18 @@ router.post('/',verify,(req, res) => {
     else{   
         PostNote.deleteOne({_id: request.body.note._id}, function(err, obj) {
             if (err) {
-                res.send("Delete failed");
+                res.send({status: "Delete failed", token: req.body.token});
             }
             else {
-                res.send(req.body.token)
+                var rField=crypto.randomBytes(20).toString('hex')
+                            const gtok=jwt.sign({
+                                status: "Success",
+                                email: foundUser.email,
+                                u_id: foundUser._id,
+                                randField: rField
+                            }, process.env.TOKEN_SECRET)
+                res.send({status: "Delete Succeeded",token: gtok})
+                
             }
             
         });

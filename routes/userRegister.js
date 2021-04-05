@@ -84,10 +84,12 @@ router.route('/').post((req, res) => {
 
                 newUser.save(function(err){
                     if(!err){
+                        var rField=crypto.randomBytes(20).toString('hex')
                             const token=jwt.sign({
                                 status: "Success",
                                 email: newUser.email,
-                                u_id: newUser._id
+                                u_id: newUser._id,
+                                randField: rField
                             }, process.env.TOKEN_SECRET)
                             console.log("userRegister   "+token)
                             res.send(token)

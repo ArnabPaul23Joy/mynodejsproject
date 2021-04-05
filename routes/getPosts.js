@@ -11,6 +11,7 @@ const mongoose =require("mongoose")
 const bcrypt=require("bcrypt")
 // const session=require("express-session")
 
+var crypto = require("crypto");
 
 let User = require("../models/userModel.js");
 let PostNote = require("../models/postModel.js");
@@ -41,19 +42,28 @@ const md5 =require("md5")
 router.post('/',verify,(req, res) => {
     // console.log("req.body.token  ")
     if (req.user.status==="Invalid Token"){
-        res.send(req.user.status)
+        res.send({status: "Invalid Token",token: req.body.token})
     }
     else{
         PostNote.find({u_id: req.user.u_id}, function(err, notes) {
+
         if (err) { 
-            res.send({status: "Something is wrong bruh!"})
+            res.send({status: "Something is wrong bruh!",token: req.body.token})
         }
-        else{
+        else{       
+             var rField=crypto.randomBytes(20).toString('hex')
+                            const gtok=jwt.sign({
+                                status: "Success",
+                                email: foundUser.email,
+                                u_id: foundUser._id,
+                                randField: rField
+                            }, process.env.TOKEN_SECRET)
+
             if(notes.length==0){
-                res.send({status: "no data found"})
+                res.send({status: "no data found",token:gtok})
             }
             else{
-                res.send({status: "Found bruh!", notes:notes})
+                res.send({status: "Found bruh!", notes:notes,token:gtok})
             }
         };
         });

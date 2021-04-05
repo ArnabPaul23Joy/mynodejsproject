@@ -52,13 +52,15 @@ router.post('/',verify,(req, res) => {
                     })
         newNote.save(function(err){
                     if(!err){
-                            // const response=jwt.sign({
-                            //     status: "Success",
-                            //     email: foundUser.email,
-                            //     u_id: foundUser._id
-                            // }, process.env.TOKEN_SECRET)
+                        var rField=crypto.randomBytes(20).toString('hex')
+                            const gtok=jwt.sign({
+                                status: "Success",
+                                email: foundUser.email,
+                                u_id: foundUser._id,
+                                randField: rField
+                            }, process.env.TOKEN_SECRET)
                             res.send({status: "Successfully added",
-                                    token: req.body.token,
+                                    token: gtok,
                                     noteNew: newNote})
                            
                     }

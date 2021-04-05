@@ -6,6 +6,7 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 import LogIn from "./LogIn"
 import Register from "./Register";
+
 function App() {
   const [globToken, setGlobTok] = useState("Invalid Token")
   const [logIn, setLogInBox] = useState("login");
@@ -48,19 +49,34 @@ function App() {
   }
 
   function deleteNote(id) {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((noteItem, index) => {
-        return index !== id;
-      });
-    });
+    
     axios.post('deletenote/', {token: globToken, note: notes[id]})
-      .then(res => console.log("App's delete butt res "+res.data));
+      .then(res => {
+        if(res.data.status==="Delete Succeeded"){
+          setNotes((prevNotes) => {
+            return prevNotes.filter((noteItem, index) => {
+              return index !== id;
+            });
+          });
+          setGlobTok(res.data.token)
+          setLogInBox("home")
+        }
+        else{
+          setGlobTok(res.data.token)
+          window.alert("Failed to Delete bruh!")
+        }
+        console.log("App's delete butt res")
+        console.log(res.data)});
   }
   function setToken(token){
       console.log("from APP "+token)
       setGlobTok(token)
       axios.post('getnotes/', {token: token})
         .then(res => {
+          // if(res.data.status==="Invalid Token"){
+
+          // }
+          setGlobTok(res.data.token)
           if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
             setLogInBox("home")
