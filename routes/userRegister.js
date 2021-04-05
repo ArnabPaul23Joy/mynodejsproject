@@ -10,6 +10,7 @@ console.log("register beyatch!")
 // const app=express()
 const mongoose =require("mongoose")
 const bcrypt=require("bcrypt")
+// var crypto = require("crypto");
 // const session=require("express-session")
 
 
@@ -84,12 +85,13 @@ router.route('/').post((req, res) => {
 
                 newUser.save(function(err){
                     if(!err){
-                        var rField=crypto.randomBytes(20).toString('hex')
+                        var rField=Math.random().toString(36).substring(7)
+                        var rFieldVal=Math.random().toString(36).substring(7)
                             const token=jwt.sign({
                                 status: "Success",
                                 email: newUser.email,
                                 u_id: newUser._id,
-                                randField: rField
+                                [rField]: rFieldVal
                             }, process.env.TOKEN_SECRET)
                             console.log("userRegister   "+token)
                             res.send(token)

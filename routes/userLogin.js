@@ -9,7 +9,7 @@ const jwt=require("jsonwebtoken")
 const mongoose =require("mongoose")
 const bcrypt=require("bcrypt")
 // const session=require("express-session")
-var crypto = require("crypto");
+// var crypto = require("crypto");
 
 
 let User = require("../models/userModel.js");
@@ -61,13 +61,16 @@ router.route('/').post((req, res) => {
                 console.log("found user "+uName)
                 if(foundUser){
                     bcrypt.compare(pword,foundUser.password,function(err,result){
+                        
                         var rField=crypto.randomBytes(20).toString('hex')
                         if (result==true){
+                        var rField=Math.random().toString(36).substring(7)
+                        var rFieldVal=Math.random().toString(36).substring(7)
                             const token=jwt.sign({
                                 status: "Success",
-                                email: foundUser.email,
-                                u_id: foundUser._id,
-                                randField: rField
+                                email: newUser.email,
+                                u_id: newUser._id,
+                                [rField]: rFieldVal
                             }, process.env.TOKEN_SECRET)
                             res.send(token)
                             // res.json({
