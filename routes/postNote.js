@@ -60,7 +60,7 @@ router.post('/',verify,(req, res) => {
                            
                     }
                     else{
-                        res.send("Failed to save the note bruh!)
+                        res.send("Failed to save the note bruh!")
                     }
                 })
     }
