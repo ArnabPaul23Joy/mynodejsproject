@@ -128,6 +128,8 @@ function App() {
           // if(res.data.status==="Invalid Token"){
 
           // }
+          
+          setCookie("keeeppperrr", res.data.token, 100)
           setGlobTok(res.data.token)
           if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
@@ -143,7 +145,34 @@ function App() {
         });
         // logInOrRegister("home")
         // setNotes(tttt.notePosts)
-      } 
+      }
+  function logOut(){
+    
+      axios.post('logout/', {token: globToken})
+        .then(res => {
+          if(res.data.status==="Invalid Token"){
+              window.alert("failed to logout!")
+          }
+          else{
+              setGlobTok(res.data.token)
+              setCookie("keeeppperrr", globToken, 100)
+              setLogInBox("reload")
+          }
+          
+          // if(res.data.status==="Found bruh!"){
+          //   setNotes(res.data.notes)
+          //   setLogInBox("home")
+          // }
+          // else if(res.data.status==="no data found"){
+          //   setLogInBox("home")
+          // }
+          // else{
+          //   window.alert("Failed to get in bruh!")
+          // }
+          // console.log(res.data)
+        });
+
+  }
   
         // switch(logIn){
         //   case "login":
@@ -154,7 +183,7 @@ function App() {
         //   case "home":
   return (
     <div>
-      <Header />
+      <Header onLogout={logOut} />
       {
         logIn==="login"?
         (<LogIn onLoggIn={logInOrRegister} onToken={setToken}/>) : (<></>)
