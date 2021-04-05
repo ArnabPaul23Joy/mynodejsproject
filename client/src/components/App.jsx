@@ -26,13 +26,14 @@ function App() {
     // });
       axios.post('post/', {token: globToken, title: newNote.title, content: newNote.content})
         .then(res => {
-          console.log("App's post butt res "+res.data.status)
+          // console.log("App's post butt res "+res.data.status)
+          console.log(res.data)
           if(res.data.status==="Failed to save the note bruh!"){
             window.alert("failed to add note bro!")
           }
           else{
             setNotes((prevNotes) => {
-              return [...prevNotes, newNote];
+              return [...prevNotes, res.data.noteNew];
             });
             setLogInBox("home")
           }

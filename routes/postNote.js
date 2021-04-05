@@ -58,7 +58,8 @@ router.post('/',verify,(req, res) => {
                             //     u_id: foundUser._id
                             // }, process.env.TOKEN_SECRET)
                             res.send({status: "Successfully added",
-                                    token: req.body.token})
+                                    token: req.body.token,
+                                    noteNew: newNote})
                            
                     }
                     else{
