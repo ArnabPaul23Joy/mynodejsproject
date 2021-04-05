@@ -26,9 +26,9 @@ function App() {
     // });
       axios.post('post/', {token: globToken, title: newNote.title, content: newNote.content})
         .then(res => {
-          console.log("App's post butt res "+res.data)
+          console.log("App's post butt res "+res.data.status)
           if(res.data.status==="Failed to save the note bruh!"){
-            window.alert("failed to add post bro!")
+            window.alert("failed to add note bro!")
           }
           else{
             setNotes((prevNotes) => {
