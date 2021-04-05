@@ -57,7 +57,7 @@ router.post('/',verify,(req, res) => {
                             bcrypt.genSalt(3, function(err, salt) {
                                 bcrypt.hash(gtok, salt, function(err, hash) {
                                                 res.send({status: "Successfully loggedout",
-                                                        token: jwt.sign({fakeTok:hash})})
+                                                        token: jwt.sign({fakeTok:hash},process.env.TOKEN_SECRET)})
                                 
                                 });
                             });
