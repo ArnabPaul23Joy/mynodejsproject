@@ -50,6 +50,7 @@ function App() {
           console.log(res.data)
           setLogInBox("home")
         });
+        logInOrRegister("home")
         // setNotes(tttt.notePosts)
       } 
   
