@@ -57,8 +57,8 @@ router.post('/',verify,(req, res) => {
                         var rFieldVal=Math.random().toString(36).substring(7)
                             const gtok=jwt.sign({
                                 status: "Success",
-                                email: newUser.email,
-                                u_id: newUser._id,
+                                email: req.user.email,
+                                u_id: req.user.u_id,
                                 [rField]: rFieldVal
                             }, process.env.TOKEN_SECRET)
              

@@ -68,8 +68,8 @@ router.route('/').post((req, res) => {
                         var rFieldVal=Math.random().toString(36).substring(7)
                             const token=jwt.sign({
                                 status: "Success",
-                                email: newUser.email,
-                                u_id: newUser._id,
+                                email: foundUser.email,
+                                u_id: foundUser._id,
                                 [rField]: rFieldVal
                             }, process.env.TOKEN_SECRET)
                             res.send(token)
