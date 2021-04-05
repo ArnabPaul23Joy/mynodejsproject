@@ -44,7 +44,7 @@ router.post('/',verify,(req, res) => {
         res.send(req.user.status)
     }
     else{   
-        PostNote.deleteOne({_id: request.body.note._id}, function(err, obj) {
+        PostNote.deleteOne({_id: req.body.note._id}, function(err, obj) {
             if (err) {
                 res.send({status: "Delete failed", token: req.body.token});
             }
