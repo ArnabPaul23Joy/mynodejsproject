@@ -38,6 +38,7 @@ function App() {
 
 
   if(logIn==="reload"){
+    setGlobTok(getCookie("keeeppperrr"))
       axios.post('getnotes/', {token: globToken})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
@@ -155,7 +156,7 @@ function App() {
           }
           else{
               setGlobTok(res.data.token)
-              setCookie("keeeppperrr", globToken, 100)
+              setCookie("keeeppperrr", res.data.token, 100)
               setLogInBox("reload")
           }
           
