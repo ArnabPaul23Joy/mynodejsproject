@@ -43,26 +43,35 @@ router.post('/',verify,(req, res) => {
         res.send(req.user.status)
     }
     else{   
-        const newNote=new PostNote({
-                        u_id: req.user.u_id,
-                        email: req.user.email,
-                        postTitle: req.body.title,
-                        postContent : req.body.content
-                    })
-        newNote.save(function(err){
-                    if(!err){
-                            // const response=jwt.sign({
-                            //     status: "Success",
-                            //     email: foundUser.email,
-                            //     u_id: foundUser._id
-                            // }, process.env.TOKEN_SECRET)
-                            res.send(req.body.token)
+        PostNote.deleteOne({_id: request.body.note._id}, function(err, obj) {
+            if (err) {
+                res.send("Delete failed");
+            }
+            else {
+                res.send(req.body.token)
+            }
+            
+        });
+        // const newNote=new PostNote({
+        //                 u_id: req.user.u_id,
+        //                 email: req.user.email,
+        //                 postTitle: req.body.title,
+        //                 postContent : req.body.content
+        //             })
+        // newNote.save(function(err){
+        //             if(!err){
+        //                     // const response=jwt.sign({
+        //                     //     status: "Success",
+        //                     //     email: foundUser.email,
+        //                     //     u_id: foundUser._id
+        //                     // }, process.env.TOKEN_SECRET)
+        //                     res.send(req.body.token)
                            
-                    }
-                    else{
-                        res.send("Failed to save the note bruh!)
-                    }
-                })
+        //             }
+        //             else{
+        //                 res.send({status: "Failed to save the note bruh!"})
+        //             }
+        //         })
     }
     // const uName=req.body.email
     // const pword=req.body.password

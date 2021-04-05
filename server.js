@@ -26,12 +26,14 @@ const userLogin = require('./routes/userLogin');
 const userRegister = require('./routes/userRegister');
 const getPosts = require('./routes/getPosts');
 const postNote = require('./routes/postNote');
+const deleteNote = require('./routes/deleteNote');
 // app.use('/exercises', exercisesRouter);
 
 app.use('/login', userLogin);
 app.use('/register', userRegister);
 app.use('/getnotes', getPosts);
 app.use('/post', postNote);
+app.use('/deletenote', deleteNote);
 
 // app.get('/*', function (req, res) {
 //    res.sendFile(path.join(__dirname, 'build', 'index.html'));

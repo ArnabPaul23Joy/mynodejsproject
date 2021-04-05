@@ -15,6 +15,7 @@ function App() {
 
 
   const [notes, setNotes] = useState([]);
+  // const [delBut, setDeleteBut] = useState(false);
   // function initializeNote(allNotes){
   //   setNotes(allNotes)
   // }
@@ -24,7 +25,7 @@ function App() {
       return [...prevNotes, newNote];
     });
       axios.post('post/', {token: globToken, title: newNote.title, content: newNote.content})
-        .then(res => console.log("Note added successfully bruh! "+res.data));
+        .then(res => console.log("App's post butt res "+res.data));
     
   }
 
@@ -34,6 +35,8 @@ function App() {
         return index !== id;
       });
     });
+    axios.post('deletenote/', {token: globToken, note: notes[id]})
+      .then(res => console.log("App's delete butt res "+res.data));
   }
   function setToken(token){
       console.log("from APP "+token)
