@@ -8,8 +8,35 @@ import LogIn from "./LogIn"
 import Register from "./Register";
 
 function App() {
-  const [globToken, setGlobTok] = useState("Invalid Token")
+
+  
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "Invalid Token";
+  }
+
+  const [globToken, setGlobTok] = useState(getCookie("keeeppperrr"))
   const [logIn, setLogInBox] = useState("reload");
+  function setCookie(cname, globToken, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + globToken + ";" + expires + ";path=/";
+  }
+
+
+
   if(logIn==="reload"){
       axios.post('getnotes/', {token: globToken})
         .then(res => {
@@ -57,6 +84,8 @@ function App() {
               return [...prevNotes, res.data.noteNew];
             });
             setLogInBox("home")
+            setGlobTok(res.data.token)
+            setCookie("keeeppperrr", globToken, 100)
           }
         
         
@@ -79,10 +108,12 @@ function App() {
             });
           });
           setGlobTok(res.data.token)
+          setCookie("keeeppperrr", globToken, 100)
           setLogInBox("home")
         }
         else{
           setGlobTok(res.data.token)
+          setCookie("keeeppperrr", globToken, 100)
           window.alert("Failed to Delete bruh!")
         }
         console.log("App's delete butt res")
@@ -91,6 +122,7 @@ function App() {
   function setToken(token){
       console.log("from APP "+token)
       setGlobTok(token)
+      setCookie("keeeppperrr", globToken, 100)
       axios.post('getnotes/', {token: token})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
