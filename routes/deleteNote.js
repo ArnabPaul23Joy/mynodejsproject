@@ -49,13 +49,15 @@ router.post('/',verify,(req, res) => {
                 res.send({status: "Delete failed", token: req.body.token});
             }
             else {
-                var rField=crypto.randomBytes(20).toString('hex')
+                var rField=Math.random().toString(36).substring(7)
+                        var rFieldVal=Math.random().toString(36).substring(7)
                             const gtok=jwt.sign({
                                 status: "Success",
-                                email: foundUser.email,
-                                u_id: foundUser._id,
-                                randField: rField
+                                email: newUser.email,
+                                u_id: newUser._id,
+                                [rField]: rFieldVal
                             }, process.env.TOKEN_SECRET)
+             
                 res.send({status: "Delete Succeeded",token: gtok})
                 
             }

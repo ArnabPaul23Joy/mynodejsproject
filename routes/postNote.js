@@ -14,6 +14,7 @@ const bcrypt=require("bcrypt")
 
 let User = require("../models/userModel.js");
 
+// var crypto = require("crypto");
 let PostNote = require("../models/postModel.js");
 //const passport=require("passport")
 // const passportLocalMongoose=require("passport-local-mongoose")
@@ -52,13 +53,15 @@ router.post('/',verify,(req, res) => {
                     })
         newNote.save(function(err){
                     if(!err){
-                        var rField=crypto.randomBytes(20).toString('hex')
+                        var rField=Math.random().toString(36).substring(7)
+                        var rFieldVal=Math.random().toString(36).substring(7)
                             const gtok=jwt.sign({
                                 status: "Success",
-                                email: foundUser.email,
-                                u_id: foundUser._id,
-                                randField: rField
+                                email: newUser.email,
+                                u_id: newUser._id,
+                                [rField]: rFieldVal
                             }, process.env.TOKEN_SECRET)
+             
                             res.send({status: "Successfully added",
                                     token: gtok,
                                     noteNew: newNote})
