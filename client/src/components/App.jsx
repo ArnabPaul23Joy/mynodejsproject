@@ -39,7 +39,7 @@ function App() {
 
   if(logIn==="reload"){
     console.log(getCookie("keeeppperrr"))
-    // setGlobTok(getCookie("keeeppperrr"))
+    setGlobTok(getCookie("keeeppperrr"))
       axios.post('getnotes/', {token: globToken})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
@@ -129,6 +129,7 @@ function App() {
           
           
           setGlobTok(res.data.token)
+          setCookie("keeeppperrr", globToken, 100)
           if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
             setLogInBox("home")
@@ -153,6 +154,7 @@ function App() {
           }
           else{
               setGlobTok(res.data.token)
+              setCookie("keeeppperrr", globToken, 100)
               
               setLogInBox("reload")
           }
