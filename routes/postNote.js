@@ -37,7 +37,8 @@ const md5 =require("md5")
 
 
 router.post('/',verify,(req, res) => {
-    // console.log("req.body.token  ")
+    console.log("req.body.title  "+req.body.title)
+    console.log("req.body.content  "+req.body.content)
     // console.log(req.user)
     if (req.user.status==="Invalid Token"){
         res.send(req.user.status)
