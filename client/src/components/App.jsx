@@ -74,6 +74,7 @@ function App() {
     // setNotes((prevNotes) => {
     //   return [...prevNotes, newNote];
     // });
+
       axios.post('post/', {token: globToken, title: newNote.title, content: newNote.content})
         .then(res => {
           // console.log("App's post butt res "+res.data.status)
@@ -91,6 +92,8 @@ function App() {
         
         
         });
+        setCookie("keeeppperrr","ajsdjfasdvf bsdfn ",1)
+        console.log(getCookie("keeeppperrr"))
           
           // setLogInBox("home")
     
