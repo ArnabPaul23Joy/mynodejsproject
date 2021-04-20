@@ -57,8 +57,8 @@ function App() {
           }
           else{
             setLogInBox("login")
-          }
           console.log("ggg    "+res.data.status)
+          }
         });
   }
   function logInOrRegister(logValue){
