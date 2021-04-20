@@ -47,7 +47,8 @@ function App() {
 
           // }
           setGlobTok(res.data.token)
-                if(res.data.status==="Found bruh!"){
+          // console.log()
+          if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
             setLogInBox("home")
           }
@@ -57,7 +58,7 @@ function App() {
           else{
             setLogInBox("login")
           }
-          console.log("ggg    "+res.data)
+          console.log("ggg    "+res.data.status)
         });
   }
   function logInOrRegister(logValue){
