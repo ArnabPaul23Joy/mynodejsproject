@@ -6,6 +6,7 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 import LogIn from "./LogIn"
 import Register from "./Register";
+import { set } from "mongoose";
 
 function App() {
 
@@ -34,12 +35,11 @@ function App() {
     var expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + globToken + ";" + expires + ";path=/";
   }
-
-
-
+  // setGlobTok(getCookie("keeeppperrr"))
   if(logIn==="reload"){
     // console.log(getCookie("keeeppperrr"))
-    // setGlobTok(getCookie("keeeppperrr"))
+    console.log(getCookie("keeeppperrr"))
+    setGlobTok(getCookie("keeeppperrr"))
       axios.post('getnotes/', {token: globToken})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
@@ -56,7 +56,7 @@ function App() {
           else{
             setLogInBox("login")
           }
-          console.log(res.data)
+          console.log("ggg    "+res.data)
         });
   }
   function logInOrRegister(logValue){
@@ -88,12 +88,12 @@ function App() {
             });
             setLogInBox("home")
             setGlobTok(res.data.token)
-                  }
+          }
         
         
         });
-        setCookie("keeeppperrr","ajsdjfasdvf bsdfn ",1)
-        console.log(getCookie("keeeppperrr"))
+        // setCookie("keeeppperrr","ajsdjfasdvf bsdfn ",1)
+        // console.log(getCookie("keeeppperrr"))
           
           // setLogInBox("home")
     
@@ -113,6 +113,7 @@ function App() {
           });
           setGlobTok(res.data.token)
                 setLogInBox("home")
+                setCookie(keeeppperrr, res.data.token, 30) 
         }
         else{
           setGlobTok(res.data.token)
@@ -132,13 +133,20 @@ function App() {
           
           
           setGlobTok(res.data.token)
+          // setCookie("keeeppperrr", globToken, 30)
           // setCookie("keeeppperrr", globToken, 100)
           if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
-            setLogInBox("home")
+            // setLogInBox("home")
+          setGlobTok(res.data.token)
+                setLogInBox("home")
+                setCookie(keeeppperrr, res.data.token, 30) 
           }
           else if(res.data.status==="no data found"){
-            setLogInBox("home")
+            // setLogInBox("home")
+          setGlobTok(res.data.token)
+                setLogInBox("home")
+                setCookie(keeeppperrr, res.data.token, 30) 
           }
           else{
             window.alert("Failed to get in bruh!")
