@@ -28,6 +28,7 @@ const getPosts = require('./routes/getPosts');
 const postNote = require('./routes/postNote');
 const deleteNote = require('./routes/deleteNote');
 const logOut = require('./routes/logOut');
+const userLoginWithToken = require('./routes/userLoginWithToken');
 // app.use('/exercises', exercisesRouter);
 
 app.use('/login', userLogin);
@@ -36,6 +37,7 @@ app.use('/getnotes', getPosts);
 app.use('/post', postNote);
 app.use('/deletenote', deleteNote);
 app.use('/logout', logOut);
+app.use('/loginWithToken',userLoginWithToken)
 
 // app.get('/*', function (req, res) {
 //    res.sendFile(path.join(__dirname, 'build', 'index.html'));

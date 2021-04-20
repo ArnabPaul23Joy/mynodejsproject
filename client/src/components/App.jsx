@@ -11,24 +11,10 @@ import { set } from "mongoose";
 function App() {
 
   
-  function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "Invalid Token";
-  }
+  
 
   const [globToken, setGlobTok] = useState("InvalidToken")
-  const [logIn, setLogInBox] = useState("reload");
+  const [logIn, setLogInBox] = useState("login");
   function setCookie(cname, globToken, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -40,31 +26,8 @@ function App() {
     setLogInBox(logValue)
   }
   // setGlobTok(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
-  if(logIn==="reload"){
-    console.log("hey!!!!!")
-    // console.log(getCookie("keeeppperrr"))
-    console.log(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
-    setGlobTok(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
-      axios.post('getnotes/', {token: globToken})
-        .then(res => {
-          // if(res.data.status==="Invalid Token"){
-
-          // }
-          setGlobTok(res.data.token)
-          // console.log()
-          if(res.data.status==="Found bruh!"){
-            setNotes(res.data.notes)
-            logInOrRegister("home")
-          }
-          else if(res.data.status==="no data found"){
-            logInOrRegister("home")
-          }
-          else{
-            logInOrRegister("login")
-          console.log("ggg    "+res.data.status)
-          }
-        });
-  }
+  // if(logIn==="reload"){
+  // }
 
 
   const [notes, setNotes] = useState([]);
