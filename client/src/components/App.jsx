@@ -113,7 +113,7 @@ function App() {
           });
           setGlobTok(res.data.token)
                 setLogInBox("home")
-                setCookie(keeeppperrr, res.data.token, 30) 
+                setCookie("keeeppperrr", res.data.token, 30) 
         }
         else{
           setGlobTok(res.data.token)
@@ -140,13 +140,13 @@ function App() {
             // setLogInBox("home")
           setGlobTok(res.data.token)
                 setLogInBox("home")
-                setCookie(keeeppperrr, res.data.token, 30) 
+                setCookie("keeeppperrr", res.data.token, 30) 
           }
           else if(res.data.status==="no data found"){
             // setLogInBox("home")
           setGlobTok(res.data.token)
                 setLogInBox("home")
-                setCookie(keeeppperrr, res.data.token, 30) 
+                setCookie("keeeppperrr", res.data.token, 30) 
           }
           else{
             window.alert("Failed to get in bruh!")
