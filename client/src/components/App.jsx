@@ -37,6 +37,7 @@ function App() {
   }
   // setGlobTok(getCookie("keeeppperrr"))
   if(logIn==="reload"){
+    console.log("hey!!!!!")
     // console.log(getCookie("keeeppperrr"))
     console.log(getCookie("keeeppperrr"))
     setGlobTok(getCookie("keeeppperrr"))
