@@ -35,12 +35,16 @@ function App() {
     var expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + globToken + ";" + expires + ";path=/";
   }
-  // setGlobTok(getCookie("keeeppperrr"))
+  
+  function logInOrRegister(logValue){
+    setLogInBox(logValue)
+  }
+  // setGlobTok(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
   if(logIn==="reload"){
     console.log("hey!!!!!")
     // console.log(getCookie("keeeppperrr"))
-    console.log(getCookie("keeeppperrr"))
-    setGlobTok(getCookie("keeeppperrr"))
+    console.log(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
+    setGlobTok(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
       axios.post('getnotes/', {token: globToken})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
@@ -50,19 +54,16 @@ function App() {
           // console.log()
           if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
-            setLogInBox("home")
+            logInOrRegister("home")
           }
           else if(res.data.status==="no data found"){
-            setLogInBox("home")
+            logInOrRegister("home")
           }
           else{
-            setLogInBox("login")
+            logInOrRegister("login")
           console.log("ggg    "+res.data.status)
           }
         });
-  }
-  function logInOrRegister(logValue){
-    setLogInBox(logValue)
   }
 
 
@@ -88,14 +89,14 @@ function App() {
             setNotes((prevNotes) => {
               return [...prevNotes, res.data.noteNew];
             });
-            setLogInBox("home")
+            logInOrRegister("home")
             setGlobTok(res.data.token)
           }
         
         
         });
-        // setCookie("keeeppperrr","ajsdjfasdvf bsdfn ",1)
-        // console.log(getCookie("keeeppperrr"))
+        // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper","ajsdjfasdvf bsdfn ",1)
+        // console.log(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
           
           // setLogInBox("home")
     
@@ -114,8 +115,8 @@ function App() {
             });
           });
           setGlobTok(res.data.token)
-                setLogInBox("home")
-                setCookie("keeeppperrr", res.data.token, 30) 
+                logInOrRegister("home")
+                setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
         }
         else{
           setGlobTok(res.data.token)
@@ -135,20 +136,20 @@ function App() {
           
           
           setGlobTok(res.data.token)
-          // setCookie("keeeppperrr", globToken, 30)
-          // setCookie("keeeppperrr", globToken, 100)
+          // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
+          // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
           if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
             // setLogInBox("home")
           setGlobTok(res.data.token)
-                setLogInBox("home")
-                setCookie("keeeppperrr", res.data.token, 30) 
+                logInOrRegister("home")
+                setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
           }
           else if(res.data.status==="no data found"){
             // setLogInBox("home")
           setGlobTok(res.data.token)
-                setLogInBox("home")
-                setCookie("keeeppperrr", res.data.token, 30) 
+                logInOrRegister("home")
+                setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
           }
           else{
             window.alert("Failed to get in bruh!")
@@ -167,9 +168,9 @@ function App() {
           }
           else{
               setGlobTok(res.data.token)
-              // setCookie("keeeppperrr", globToken, 100)
+              // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
               
-              setLogInBox("reload")
+              logInOrRegister("reload")
           }
           
           // if(res.data.status==="Found bruh!"){
