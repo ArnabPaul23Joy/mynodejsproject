@@ -1,6 +1,7 @@
 
 const jwt=require("jsonwebtoken")
 
+const bcrypt=require("bcrypt")
 let randNumber = require("../models/randomNumber.js");
 module.exports= function (req, res, next){
     // const token=req.header('auth-token')
@@ -14,7 +15,7 @@ module.exports= function (req, res, next){
                                 })
                                     
                             })
-        randNumber.findOne({u_idHash: u_iid},function(err,foundRandom){
+        randNumber.find({u_idHash: u_iid},function(err,foundRandom){
             if(!err){
                 if(token===foundRandom.jToken){
                     try{
