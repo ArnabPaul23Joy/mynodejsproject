@@ -15,6 +15,8 @@ const bcrypt=require("bcrypt")
 
 let User = require("../models/userModel.js");
 let PostNote = require("../models/postModel.js");
+
+let randNumber = require("../models/randomNumber.js");
 //const passport=require("passport")
 // const passportLocalMongoose=require("passport-local-mongoose")
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -50,16 +52,35 @@ router.post('/',verify,(req, res) => {
         if (err) { 
             res.send({status: "Something is wrong bruh!",token: req.body.token})
         }
-        else{       
-             var rField=Math.random().toString(36).substring(7)
-                        var rFieldVal=Math.random().toString(36).substring(7)
+        else{
+            
+            var u_iid=""
+            bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(req.user.u_id, salt, function(err, hash) {
+                 u_iid=hash
+                })
+                    
+            })
+                
+            //  var rField=Math.random().toString(36).substring(7)
+                        var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+                        bcrypt.genSalt(10, function(err, salt) {
+                            bcrypt.hash(rFieldVal, salt, function(err, hash) {
+                                rFieldVal=hash
+                                })
+                                    
+                            })
+                        
                             const gtok=jwt.sign({
                                 status: "Success",
                                 email: req.user.email,
                                 u_id: req.user.u_id,
-                                [rField]: rFieldVal
+                                [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
-                        
+                        randNumber.updateOne({u_idHash: u_iid}, {u_idHash: u_iid,jToken: token}, {upsert: true}, function (err) {
+                                res.send("Update Failed")
+                            });
+                            
 
             if(notes.length==0){
                 res.send({status: "no data found",token:gtok})

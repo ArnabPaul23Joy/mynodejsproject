@@ -133,7 +133,7 @@ function App() {
               setGlobTok(res.data.token)
               // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
               
-              logInOrRegister("reload")
+              logInOrRegister("login")
           }
           
           // if(res.data.status==="Found bruh!"){

@@ -14,6 +14,7 @@ const bcrypt=require("bcrypt")
 
 let User = require("../models/userModel.js");
 
+let randNumber = require("../models/randomNumber.js");
 // var crypto = require("crypto");
 let PostNote = require("../models/postModel.js");
 //const passport=require("passport")
@@ -45,22 +46,43 @@ router.post('/',verify,(req, res) => {
         res.send({status: req.user.status})
     }
     else{   
-                        var rField=Math.random().toString(36).substring(7)
-                        var rFieldVal=Math.random().toString(36).substring(7)
-        var gtok=jwt.sign({
+        
+
+
+                            var u_iid=""
+                            bcrypt.genSalt(10, function(err, salt) {
+                            bcrypt.hash(req.user.u_id, salt, function(err, hash) {
+                                u_iid=hash
+                                })
+                                    
+                            })
+
+                            var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+                                            bcrypt.genSalt(10, function(err, salt) {
+                                                bcrypt.hash(rFieldVal, salt, function(err, hash) {
+                                                    rFieldVal=hash
+                                                    })
+                                                        
+                                                })
+                            var gtok=jwt.sign({
                                 status: "Success",
                                 email: req.user.email,
                                 u_id: req.user.u_id,
-                                [rField]: rFieldVal
+                                [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
-                            gtok+=(Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7))
-                            bcrypt.genSalt(11, function(err, salt) {
-                                bcrypt.hash(gtok, salt, function(err, hash) {
-                                                res.send({status: "Successfully loggedout",
-                                                        token: hash})
-                                
-                                });
+                            randNumber.updateOne({u_idHash: u_iid}, {u_idHash: u_iid,jToken: token}, {upsert: true}, function (err) {
+                                res.send("Update Failed")
                             });
+                            
+                            res.send("Logged out bitch!")
+                            // gtok+=(Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7))
+                            // bcrypt.genSalt(11, function(err, salt) {
+                            //     bcrypt.hash(gtok, salt, function(err, hash) {
+                            //                     res.send({status: "Successfully loggedout",
+                            //                             token: hash})
+                                
+                            //     });
+                            // });
 
         // const newNote=new PostNote({
         //                 u_id: req.user.u_id,

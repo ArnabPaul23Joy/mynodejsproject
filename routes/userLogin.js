@@ -13,6 +13,7 @@ const bcrypt=require("bcrypt")
 
 
 let User = require("../models/userModel.js");
+let randNumber = require("../models/randomNumber.js");
 //const passport=require("passport")
 // const passportLocalMongoose=require("passport-local-mongoose")
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -64,15 +65,34 @@ router.route('/').post((req, res) => {
                         
                         // var rField=crypto.randomBytes(20).toString('hex')
                         if (result==true){
-                        var rField=Math.random().toString(36).substring(7)
-                        var rFieldVal=Math.random().toString(36).substring(7)
+                        
+                
+                            var u_iid=""
+                            bcrypt.genSalt(10, function(err, salt) {
+                            bcrypt.hash(foundUser._id, salt, function(err, hash) {
+                                u_iid=hash
+                                })
+                                    
+                            })
+                        // var rField=Math.random().toString(36).substring(7)
+                        var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+                        bcrypt.genSalt(10, function(err, salt) {
+                            bcrypt.hash(rFieldVal, salt, function(err, hash) {
+                                rFieldVal=hash
+                                })
+                                    
+                            })
                             const token=jwt.sign({
                                 status: "Success",
                                 email: foundUser.email,
                                 u_id: foundUser._id,
-                                [rField]: rFieldVal
+                                [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
+                            randNumber.updateOne({u_idHash: u_iid}, {u_idHash: u_iid,jToken: token}, {upsert: true}, function (err) {
+                                res.send("Update Failed")
+                            });
                             res.send(token)
+                            
                             // res.json({
                             //     status: "Success",
                             //     email: foundUser.email,
