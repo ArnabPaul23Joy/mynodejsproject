@@ -89,7 +89,7 @@ router.route('/').post((req, res) => {
                         
                             var u_iid=""
                             bcrypt.genSalt(10, function(err, salt) {
-                            bcrypt.hash(newUser._id.toString(), salt, function(err, hash) {
+                            bcrypt.hash(newUser.email, salt, function(err, hash) {
                                 u_iid=hash
                                 })
                                     

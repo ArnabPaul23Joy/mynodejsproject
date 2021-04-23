@@ -12,7 +12,7 @@ module.exports= function (req, res, next){
         req.user=decoded
         var u_iid=""
                             bcrypt.genSalt(10, function(err, salt) {
-                            bcrypt.hash(req.user.u_id, salt, function(err, hash) {
+                            bcrypt.hash(req.user.email, salt, function(err, hash) {
                                 u_iid=hash
                                 })
                                     

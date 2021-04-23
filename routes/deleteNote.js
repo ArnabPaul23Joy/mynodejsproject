@@ -53,7 +53,7 @@ router.post('/',verify,(req, res) => {
             else {
                 var u_iid=""
             bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(req.user.u_id, salt, function(err, hash) {
+            bcrypt.hash(req.user.email, salt, function(err, hash) {
                  u_iid=hash
                 })
                     
