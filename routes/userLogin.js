@@ -88,6 +88,7 @@ router.route('/').post((req, res) => {
                                 u_id: foundUser._id,
                                 [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
+                            console.log("u_iid   "+u_iid)
                             randNumber.updateOne({u_idHash: u_iid}, {u_idHash: u_iid,jToken: token}, {upsert: true}, function (err) {
                                 res.send("Update Failed")
                             });
