@@ -8,6 +8,7 @@ const jwt=require("jsonwebtoken")
 // const app=express()
 const mongoose =require("mongoose")
 let bcrypt=require("bcrypt")
+let bcrypt2=require("bcrypt")
 // const session=require("express-session")
 // var crypto = require("crypto");
 
@@ -69,8 +70,8 @@ router.route('/').post((req, res) => {
                 
                             var u_iid=foundUser.email
                             // console.log(foundUser._id.toString())
-                            bcrypt.genSalt(10, function(err, salt) {
-                            bcrypt.hash(foundUser.email, salt, function(err, hash) {
+                            bcrypt2.genSalt(10, function(err, salt) {
+                            bcrypt2.hash(foundUser.email, salt, function(err, hash) {
                                 if(!err){
                                      u_iid+=hash
                                     console.log("u_iid   "+u_iid)
@@ -84,8 +85,8 @@ router.route('/').post((req, res) => {
                             })
                         // var rField=Math.random().toString(36).substring(7)
                         var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-                        bcrypt.genSalt(10, function(err, salt) {
-                            bcrypt.hash(rFieldVal, salt, function(err, hash) {
+                        bcrypt2.genSalt(10, function(err, salt) {
+                            bcrypt2.hash(rFieldVal, salt, function(err, hash) {
                                 if(!err){
                                      rFieldVal=hash
                                     
