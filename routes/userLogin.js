@@ -7,6 +7,7 @@ const jwt=require("jsonwebtoken")
 // const ejs=require("ejs")
 // const app=express()
 const mongoose =require("mongoose")
+var crypto = require('crypto');
 let bcrypt=require("bcrypt")
 let bcrypt2=require("bcrypt")
 // const session=require("express-session")
@@ -68,36 +69,38 @@ router.route('/').post((req, res) => {
                         if (result==true){
                         
                 
-                            var u_iid=foundUser.email
                             // console.log(foundUser._id.toString())
-                            bcrypt2.genSalt(10, function(err, salt) {
-                            bcrypt2.hash(foundUser.email, salt, function(err, hash) {
-                                if(!err){
-                                     u_iid+=hash
-                                    console.log("u_iid   "+u_iid)
+                            var u_iid = crypto.createHash('md5').update(foundUser.email).digest('hex');
+                            // bcrypt2.genSalt(10, function(err, salt) {
+
+                            // bcrypt2.hash(foundUser.email, salt, function(err, hash) {
+                            //     if(!err){
+                            //          u_iid+=hash
+                            //         console.log("u_iid   "+u_iid)
                                     
-                                }
-                                else{
-                                    console.log("errrrrrrrrrrrrrrrrrrrr")
-                                }
-                                })
+                            //     }
+                            //     else{
+                            //         console.log("errrrrrrrrrrrrrrrrrrrr")
+                            //     }
+                            //     })
                                     
-                            })
+                            // })
                         // var rField=Math.random().toString(36).substring(7)
                         var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-                        bcrypt2.genSalt(10, function(err, salt) {
-                            bcrypt2.hash(rFieldVal, salt, function(err, hash) {
-                                if(!err){
-                                     rFieldVal=hash
+                        rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
+                        // bcrypt2.genSalt(10, function(err, salt) {
+                        //     bcrypt2.hash(rFieldVal, salt, function(err, hash) {
+                        //         if(!err){
+                        //              rFieldVal=hash
                                     
-                                }
-                                else{
-                                    console.log(err)
-                                }
+                        //         }
+                        //         else{
+                        //             console.log(err)
+                        //         }
                                 
-                                })
+                        //         })
                                     
-                            })
+                        //     })
                             const token=jwt.sign({
                                 status: "Success",
                                 email: foundUser.email,
