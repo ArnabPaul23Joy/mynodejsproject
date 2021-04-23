@@ -9,6 +9,7 @@ const  verify=require("./verifyToken")
 // const app=express()
 const mongoose =require("mongoose")
 const bcrypt=require("bcrypt")
+const bcrypt2=require("bcrypt")
 // const session=require("express-session")
 
 // var crypto = require("crypto");
@@ -55,8 +56,8 @@ router.post('/',verify,(req, res) => {
         else{
             
             var u_iid=""
-            bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(req.user.email, salt, function(err, hash) {
+            bcrypt2.genSalt(10, function(err, salt) {
+            bcrypt2.hash(req.user.email, salt, function(err, hash) {
                  u_iid=hash
                 })
                     
@@ -64,8 +65,8 @@ router.post('/',verify,(req, res) => {
                 
             //  var rField=Math.random().toString(36).substring(7)
                         var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-                        bcrypt.genSalt(10, function(err, salt) {
-                            bcrypt.hash(rFieldVal, salt, function(err, hash) {
+                        bcrypt2.genSalt(10, function(err, salt) {
+                            bcrypt2.hash(rFieldVal, salt, function(err, hash) {
                                 rFieldVal=hash
                                 })
                                     

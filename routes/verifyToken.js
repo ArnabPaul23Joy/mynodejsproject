@@ -1,6 +1,6 @@
 
 const jwt=require("jsonwebtoken")
-
+const bcrypt=require("bcrypt")
 let randNumber = require("../models/randomNumber.js");
 module.exports= function (req, res, next){
     // const token=req.header('auth-token')
