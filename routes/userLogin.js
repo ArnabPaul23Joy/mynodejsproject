@@ -67,8 +67,8 @@ router.route('/').post((req, res) => {
                         if (result==true){
                         
                 
-                            var u_iid=""
-                            console.log(foundUser._id.toString())
+                            var u_iid=foundUser.email
+                            // console.log(foundUser._id.toString())
                             bcrypt.genSalt(10, function(err, salt) {
                             bcrypt.hash(foundUser.email, salt, function(err, hash) {
                                 if(!err){
@@ -104,6 +104,7 @@ router.route('/').post((req, res) => {
                                 [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
                             console.log("u_iid   "+u_iid)
+                        console.log("rFieldVal    "+rFieldVal)
                             randNumber.updateOne({u_idHash: u_iid}, {u_idHash: u_iid,jToken: token}, {upsert: true}, function (err) {
                                 res.send("Update Failed")
                             });
