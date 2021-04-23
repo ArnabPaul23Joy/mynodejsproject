@@ -68,10 +68,12 @@ router.route('/').post((req, res) => {
                         
                 
                             var u_iid=""
+                            console.log(foundUser._id.toString())
                             bcrypt.genSalt(10, function(err, salt) {
                             bcrypt.hash(foundUser._id.toString(), salt, function(err, hash) {
                                 if(!err){
-                                     u_iid=hash
+                                     u_iid+=hash
+                                    console.log("u_iid   "+u_iid)
                                     
                                 }
                                 else{
