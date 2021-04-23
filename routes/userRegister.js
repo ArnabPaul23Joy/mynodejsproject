@@ -4,6 +4,7 @@ const jwt=require("jsonwebtoken")
 let User = require("../models/userModel.js");
 let randNumber = require("../models/randomNumber.js");
 console.log("register beyatch!")
+var crypto = require('crypto');
 // require("dotenv").config()
 // const express=require("express")
 // const bodyParser=require("body-parser")
@@ -87,22 +88,25 @@ router.route('/').post((req, res) => {
                 newUser.save(function(err){
                     if(!err){
                         
-                            var u_iid=""
-                            bcrypt.genSalt(10, function(err, salt) {
-                            bcrypt.hash(newUser.email, salt, function(err, hash) {
-                                u_iid=hash
-                                })
+                        //     var u_iid=""
+                        //     bcrypt.genSalt(10, function(err, salt) {
+                        //     bcrypt.hash(newUser.email, salt, function(err, hash) {
+                        //         u_iid=hash
+                        //         })
                                     
-                            })
-                        // var rField=Math.random().toString(36).substring(7)
-                        var rFieldVal=+u_iid+Math.random().toString(36).substring(7)+u_iid
-                         bcrypt.genSalt(10, function(err, salt) {
-                            bcrypt.hash(rFieldVal, salt, function(err, hash) {
-                                rFieldVal=hash
-                                })
+                        //     })
+                        // // var rField=Math.random().toString(36).substring(7)
+                        // var rFieldVal=+u_iid+Math.random().toString(36).substring(7)+u_iid
+                        //  bcrypt.genSalt(10, function(err, salt) {
+                        //     bcrypt.hash(rFieldVal, salt, function(err, hash) {
+                        //         rFieldVal=hash
+                        //         })
                                     
-                            })
+                        //     })
                        
+                        var u_iid = crypto.createHash('md5').update(newUser.email).digest('hex');
+                        var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+                        rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
                             const token=jwt.sign({
                                 status: "Success",
                                 email: newUser.email,

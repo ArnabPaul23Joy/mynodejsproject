@@ -70,7 +70,6 @@ router.route('/').post((req, res) => {
                         
                 
                             // console.log(foundUser._id.toString())
-                            var u_iid = crypto.createHash('md5').update(foundUser.email).digest('hex');
                             // bcrypt2.genSalt(10, function(err, salt) {
 
                             // bcrypt2.hash(foundUser.email, salt, function(err, hash) {
@@ -86,6 +85,7 @@ router.route('/').post((req, res) => {
                                     
                             // })
                         // var rField=Math.random().toString(36).substring(7)
+                        var u_iid = crypto.createHash('md5').update(foundUser.email).digest('hex');
                         var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
                         rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
                         // bcrypt2.genSalt(10, function(err, salt) {
