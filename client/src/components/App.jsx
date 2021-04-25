@@ -88,9 +88,9 @@ function App() {
         console.log("App's delete butt res")
         console.log(res.data)});
   }
-  function setToken(token){
-      console.log("from APP "+token)
-      var gT=token
+  function setToken(tokn){
+      console.log("from APP "+tokn)
+      var gT=tokn
       // setGlobTok(token)
       console.log("from logP "+gT)
         axios.post('getnotes/', {token: gT})
