@@ -91,7 +91,7 @@ function App() {
   function setToken(token){
       console.log("from APP "+token)
       setGlobTok(token)
-        axios.post('getnotes/', {token: token})
+        axios.post('getnotes/', {token: globToken})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
 

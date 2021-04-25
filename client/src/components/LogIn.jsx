@@ -23,7 +23,7 @@ function LogIn(props){
     console.log(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
     const globToken=getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper")
     // setGlobTok(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
-      axios.post('loginWithToken/', {token: globToken})
+      axios.post('login/', {token: globToken})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
           if (!(res.data==="Invalid Token")){
