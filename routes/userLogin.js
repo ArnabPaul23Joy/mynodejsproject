@@ -111,13 +111,19 @@ router.route('/').post( async (req, res) => {
                         console.log("rFieldVal    "+rFieldVal)
                             await randNumber.updateOne({u_idHash: u_iid}, {jToken: token}, {upsert: true}, function (err) {
                                 console.log("errrrrrrrrrrrrrr")
+                                if(!err){
+                                    var gttt=""
+                                    gttt+=token
+                                    console.log("token from the login  "+gttt)
+                                    // res.header("auth-token", token).send(token)
+                                    res.send({status:"Successful", token: gttt})
+
+                                }
+                                else{
                                 res.send({status:"eroor"})
+
+                                }
                             });
-                            // var gttt=""
-                            // gttt+=token
-                            console.log("token from the login  "+token)
-                            res.header("auth-token", token).send(token)
-                            res.send({status:"Successful", token: gttt})
                             
                             // res.json({
                             //     status: "Success",
