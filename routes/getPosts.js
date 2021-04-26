@@ -72,7 +72,8 @@ router.post('/',verify, async (req, res) => {
             //                     })
                                     
             //                 })
-                        const email=req.user.email
+                        var email=""
+                        email+=req.user.email
                         
                         var u_iid = crypto.createHash('md5').update(email).digest('hex');
                         var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
