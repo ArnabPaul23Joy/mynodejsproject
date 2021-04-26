@@ -72,10 +72,13 @@ router.post('/',verify,(req, res) => {
             //                     })
                                     
             //                 })
-            
                         var u_iid = crypto.createHash('md5').update(req.user.email).digest('hex');
                         var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
                         rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
+                        console.log("get posts u_iid   "+u_iid)
+                        // var u_iid = crypto.createHash('md5').update().digest('hex');
+                        // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+                        // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
                         
                             const gtok=jwt.sign({
                                 status: "Success",
