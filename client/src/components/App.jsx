@@ -101,7 +101,7 @@ function App() {
           
           
           setGlobTok(res.data.token)
-          consoles,log("from getnotes  "+ globToken)
+          console.log("from getnotes  "+ globToken)
 
           // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
           // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
