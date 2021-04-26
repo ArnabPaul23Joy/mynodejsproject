@@ -43,13 +43,13 @@ const md5 =require("md5")
 
 
 // verify
-router.post('/',verify,async (req, res) => {
+router.post('/',verify, async (req, res) => {
     console.log("req.user.status   "+req.user.status)
     if (req.user.status==="Invalid Token"){
         res.send({status: "Invalid Token",token: req.body.token})
     }
     else{
-        PostNote.find({u_id: req.user.u_id}, function(err, notes) {
+        PostNote.find({u_id: req.user.u_id}, async function(err, notes) {
 
         if (err) { 
             res.send({status: "Something is wrong bruh!",token: req.body.token})

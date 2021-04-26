@@ -40,7 +40,7 @@ const md5 =require("md5")
 
 
 
-router.route('/').post(async (req, res) => {
+router.route('/').post( async (req, res) => {
     const uName=req.body.email
     const pword=req.body.password
     // const user=new User({
@@ -59,7 +59,7 @@ router.route('/').post(async (req, res) => {
     //         }
     //     })
     // console.log(uName+" "+pword)
-        User.findOne({email: uName},function(err,foundUser){
+        User.findOne({email: uName}, async function(err,foundUser){
             if(!err){
                 console.log("found user "+uName)
                 if(foundUser){
