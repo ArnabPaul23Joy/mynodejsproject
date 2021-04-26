@@ -87,17 +87,22 @@ router.post('/',verify, async (req, res) => {
                                 [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
                             console.log("gdgdgdgg")
-                        await randNumber.updateOne({u_idHash: u_iid}, {jToken: token}, {upsert: true}, function (err) {
-                                res.send("Update Failed")
+                        await randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
+                                if(!err){
+                                        if(notes.length==0){
+                                            res.send({status: "no data found",token:gtok})
+                                        }
+                                        else{
+                                            res.send({status: "Found bruh!", notes:notes,token:gtok})
+                                        }
+                                }
+                                else{
+                                    res.send({status: "Something is wrong bruh!",token: req.body.token})
+                                }
                             });
                             
 
-            if(notes.length==0){
-                res.send({status: "no data found",token:gtok})
-            }
-            else{
-                res.send({status: "Found bruh!", notes:notes,token:gtok})
-            }
+            
         };
         });
     }
