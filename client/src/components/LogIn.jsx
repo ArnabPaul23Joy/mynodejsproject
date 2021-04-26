@@ -23,15 +23,15 @@ function LogIn(props){
     console.log(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
     const globToken=getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper")
     // setGlobTok(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
-      axios.post('login/', {token: globToken})
+      axios.post('loginWithToken/', {token: globToken})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
-          if (!(res.data==="Invalid Token")){
-            props.onToken(res.data)
+          if (!(res.data.status==="Invalid Token")){
+            props.onToken(res.data.token)
             //props.onLoggIn("home");
           }
           else{
-            console.log(res.data)
+            console.log(res.data.token)
             // props.onNote(res.data)
           }
           // }

@@ -8,6 +8,7 @@ const jwt=require("jsonwebtoken")
 // const app=express()
 const mongoose =require("mongoose")
 const bcrypt=require("bcrypt")
+var crypto = require('crypto');
 // const session=require("express-session")
 // var crypto = require("crypto");
 
@@ -41,18 +42,19 @@ const md5 =require("md5")
 
 router.post('/',verify,(req, res) => {
     if (req.user.status==="Invalid Token"){
-        res.send("Invalid Token")
+        res.send({status:"Invalid Token"})
     }
     else{
-                     var rField=Math.random().toString(36).substring(7)
-                        var rFieldVal=Math.random().toString(36).substring(7)
+                        var u_iid = crypto.createHash('md5').update(req.user.email).digest('hex');
+                        var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+                        rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
                             const gtok=jwt.sign({
                                 status: "Success",
                                 email: req.user.email,
                                 u_id: req.user.u_id,
-                                [rField]: rFieldVal
+                                [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
-                            res.send(gtok)
+                            res.send({staus:"Success",token:gtok})
 
 
     }
