@@ -113,10 +113,10 @@ router.route('/').post( async (req, res) => {
                                 console.log("errrrrrrrrrrrrrr")
                                 res.send({status:"eroor"})
                             });
-                            var gttt=""
-                            gttt+=token
-                            console.log("token from the login  "+gttt)
-                            // res.header("auth-token", token).send(token)
+                            // var gttt=""
+                            // gttt+=token
+                            console.log("token from the login  "+token)
+                            res.header("auth-token", token).send(token)
                             res.send({status:"Successful", token: gttt})
                             
                             // res.json({
