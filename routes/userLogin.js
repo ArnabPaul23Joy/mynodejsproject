@@ -40,7 +40,7 @@ const md5 =require("md5")
 
 
 
-router.route('/').post((req, res) => {
+router.route('/').post(async (req, res) => {
     const uName=req.body.email
     const pword=req.body.password
     // const user=new User({
