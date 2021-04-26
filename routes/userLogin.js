@@ -63,7 +63,7 @@ router.route('/').post( async (req, res) => {
             if(!err){
                 console.log("found user "+uName)
                 if(foundUser){
-                    bcrypt.compare(pword,foundUser.password,function(err,result){
+                    bcrypt.compare(pword,foundUser.password,async function(err,result){
                         
                         // var rField=crypto.randomBytes(20).toString('hex')
                         if (result==true){
