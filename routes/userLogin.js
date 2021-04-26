@@ -110,8 +110,11 @@ router.route('/').post( async (req, res) => {
                             console.log("u_iid   "+u_iid)
                         console.log("rFieldVal    "+rFieldVal)
                             await randNumber.updateOne({u_idHash: u_iid}, {jToken: token}, {upsert: true}, function (err) {
+                                console.log("errrrrrrrrrrrrrr")
                                 res.send(err)
                             });
+                            console.log("token from the login  "+token)
+
                             res.send(token)
                             
                             // res.json({
