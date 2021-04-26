@@ -111,11 +111,11 @@ router.route('/').post( async (req, res) => {
                         console.log("rFieldVal    "+rFieldVal)
                             await randNumber.updateOne({u_idHash: u_iid}, {jToken: token}, {upsert: true}, function (err) {
                                 console.log("errrrrrrrrrrrrrr")
-                                res.send(err)
+                                res.send({status:"eroor"})
                             });
                             console.log("token from the login  "+token)
 
-                            res.send(token)
+                            res.send({status:"Successful", token: token})
                             
                             // res.json({
                             //     status: "Success",
@@ -125,13 +125,13 @@ router.route('/').post( async (req, res) => {
                             // res.json()
                         }
                         else{
-                            res.send("Wrong password bruh!")
+                            res.send({status:"Wrong password bruh!"})
                         }
                     })
                 }
                 
                 else{
-                    res.send("Wrong email bruh!")
+                    res.send({status:"Wrong email bruh!"})
                 }
                 // if(foundUser.password==pword){
                 //     res.render("secrets")
@@ -141,7 +141,7 @@ router.route('/').post( async (req, res) => {
                 // }
             }
             else{
-                    res.send("Wrong email bruh!")
+                    res.send({status: "Wrong email bruh!"})
             }
         })
 })

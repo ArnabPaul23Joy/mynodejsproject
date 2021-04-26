@@ -85,8 +85,8 @@ function LogIn(props){
     axios.post('login/', user)
       .then(res => {
         // console.log("login    hhh"+res.data)
-        if (!(res.data==="Wrong email bruh!"||res.data==="Wrong password bruh!")){
-            props.onToken(res.data)
+        if (!(res.data.status==="Wrong email bruh!"||res.data.status==="Wrong password bruh!")){
+            props.onToken(res.data.token)
             //props.onLoggIn("home");
         }
         else{
