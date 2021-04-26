@@ -82,7 +82,7 @@ router.post('/',verify, async (req, res) => {
                         // var u_iid = crypto.createHash('md5').update().digest('hex');
                         // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
                         // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
-                        
+                        var allNotes=notes
                             const gtok=jwt.sign({
                                 status: "Success",
                                 email: req.user.email,
@@ -92,11 +92,11 @@ router.post('/',verify, async (req, res) => {
                             console.log("gdgdgdgg")
                         await randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
                                 if(!err){
-                                        if(notes.length==0){
-                                            res.send({status: "no data found",token:gtok})
+                                        if(allNotes.length==0){
+                                            res.send({status: "no data found",notes: [], token:gtok})
                                         }
                                         else{
-                                            res.send({status: "Found bruh!", notes:notes,token:gtok})
+                                            res.send({status: "Found bruh!", notes: allNotes, token:gtok})
                                         }
                                 }
                                 else{
