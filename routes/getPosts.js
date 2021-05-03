@@ -45,6 +45,7 @@ const md5 =require("md5")
 // verify
 router.post('/',verify, async (req, res) => {
     console.log("req.user.status   "+req.user.status)
+    var allNotes=[]
     if (req.user.status==="Invalid Token"){
         res.send({status: "Invalid Token",token: req.body.token})
     }
@@ -54,29 +55,30 @@ router.post('/',verify, async (req, res) => {
         if (err) { 
             res.send({status: "Something is wrong bruh!",token: req.body.token})
         }
-        // else{
+        else{
+            allNotes=notes
             
-        //     // var u_iid=""
-        //     // bcrypt2.genSalt(10, function(err, salt) {
-        //     // bcrypt2.hash(req.user.email, salt, function(err, hash) {
-        //     //      u_iid=hash
-        //     //     })
+            // var u_iid=""
+            // bcrypt2.genSalt(10, function(err, salt) {
+            // bcrypt2.hash(req.user.email, salt, function(err, hash) {
+            //      u_iid=hash
+            //     })
                     
-        //     // })
+            // })
                 
-        //     // //  var rField=Math.random().toString(36).substring(7)
-        //     //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-        //     //             bcrypt2.genSalt(10, function(err, salt) {
-        //     //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
-        //     //                     rFieldVal=hash
-        //     //                     })
+            // //  var rField=Math.random().toString(36).substring(7)
+            //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+            //             bcrypt2.genSalt(10, function(err, salt) {
+            //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
+            //                     rFieldVal=hash
+            //                     })
                                     
-        //     //                 })
+            //                 })
                         
                             
 
             
-        // };
+        };
         });
 
         var email=""
@@ -89,7 +91,7 @@ router.post('/',verify, async (req, res) => {
                         // var u_iid = crypto.createHash('md5').update().digest('hex');
                         // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
                         // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
-                        var allNotes=notes
+                            // allNotes=notes
                             var gtok=jwt.sign({
                                 status: "Success",
                                 email: req.user.email,
