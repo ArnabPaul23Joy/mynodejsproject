@@ -33,7 +33,7 @@ const userLoginWithToken = require('./routes/userLoginWithToken');
 
 app.use('/login', userLogin);
 app.use('/register', userRegister);
-app.use('/getnotes', getPosts);
+app.use('/getnotes/', getPosts);
 app.use('/post', postNote);
 app.use('/deletenote', deleteNote);
 app.use('/logout', logOut);
