@@ -50,7 +50,7 @@ router.post('/',verify, async (req, res) => {
         res.json({status: "Invalid Token",token: req.body.token})
     }
     else{
-        PostNote.find({u_id: req.user.u_id}, async function(err, notes) {
+        await PostNote.find({u_id: req.user.u_id}, async function(err, notes) {
 
         if (err) { 
             res.json({status: "Something is wrong bruh!",token: req.body.token})
