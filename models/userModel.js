@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+mongoose.connect("mongodb://localhost:27017/ListingAppTodo",{useNewUrlParser:true})
 const userSchema=new mongoose.Schema({
   userName: String,
   email: {
