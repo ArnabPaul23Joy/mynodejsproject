@@ -43,7 +43,7 @@ const md5 =require("md5")
 
 
 // verify
-router.post('/',verify, async (req, res) => {
+router.get('/',verify, async (req, res) => {
     console.log("req.user.status   "+req.user.status)
     var allNotes=[]
     if (req.user.status==="Invalid Token"){

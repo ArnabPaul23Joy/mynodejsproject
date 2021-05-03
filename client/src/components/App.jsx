@@ -93,7 +93,7 @@ function App() {
       var gT=tokn
       // setGlobTok(token)
       console.log("from logP "+gT)
-        axios.post('getnotes/', {token: gT})
+        axios.get('getnotes/', {token: gT})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
 
