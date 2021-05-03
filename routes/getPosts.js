@@ -86,11 +86,11 @@ router.post('/',verify, async (req, res) => {
                             // console.log(gtok)
                             // var tkn=""
                             // tkn+=gtok
-                        randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
+                       await randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
                                 if(!err){
                                         if(allNotes.length==0){
                                             try{
-                                                res.status(200).json({status: "no data found",notes: [], token:gtok})
+                                                res.status(200).json({status: "no data found", token:gtok})
                                             }
                                             catch(error){
                                                 console.log("gdgdgdgg")
