@@ -47,13 +47,13 @@ router.post('/',verify, async (req, res) => {
     console.log("req.user.status   "+req.user.status)
     var allNotes=[]
     if (req.user.status==="Invalid Token"){
-        res.send({status: "Invalid Token",token: req.body.token})
+        res.json({status: "Invalid Token",token: req.body.token})
     }
     else{
         PostNote.find({u_id: req.user.u_id}, async function(err, notes) {
 
         if (err) { 
-            res.send({status: "Something is wrong bruh!",token: req.body.token})
+            res.json({status: "Something is wrong bruh!",token: req.body.token})
         }
         else{
             allNotes=notes
@@ -99,19 +99,20 @@ router.post('/',verify, async (req, res) => {
                                 [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
                             console.log("gdgdgdgg")
+                            console.log(gtok)
                             var tkn=""
                             tkn+=gtok
                         await randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
                                 if(!err){
                                         if(allNotes.length==0){
-                                            res.status(200).send({status: "no data found",notes: [], token:tkn})
+                                            res.status(200).json({status: "no data found",notes: [], token:tkn})
                                         }
                                         else{
-                                            res.send({status: "Found bruh!", notes: allNotes, token:tkn})
+                                            res.json({status: "Found bruh!", notes: allNotes, token:tkn})
                                         }
                                 }
                                 else{
-                                    res.send({status: "Something is wrong bruh!",token: req.body.token})
+                                    res.json({status: "Something is wrong bruh!",token: req.body.token})
                                 }
                             });
     }
