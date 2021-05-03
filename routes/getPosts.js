@@ -105,7 +105,12 @@ router.post('/',verify, async (req, res) => {
                         await randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
                                 if(!err){
                                         if(allNotes.length==0){
-                                            res.status(200).json({status: "no data found",notes: [], token:tkn})
+                                            try{
+                                                res.status(200).json({status: "no data found",notes: [], token:tkn})
+                                            }
+                                            catch(error){
+                                                console.log(error)
+                                            }
                                         }
                                         else{
                                             res.json({status: "Found bruh!", notes: allNotes, token:tkn})
