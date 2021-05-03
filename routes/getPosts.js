@@ -66,21 +66,6 @@ router.post('/',verify, async (req, res) => {
                     
             // })
                 
-            // //  var rField=Math.random().toString(36).substring(7)
-            //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-            //             bcrypt2.genSalt(10, function(err, salt) {
-            //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
-            //                     rFieldVal=hash
-            //                     })
-                                    
-            //                 })
-                        
-                            
-
-            
-        };
-        });
-
         var email=""
                         email+=req.user.email
                         
@@ -121,6 +106,21 @@ router.post('/',verify, async (req, res) => {
                                     res.json({status: "Something is wrong bruh!",token: req.body.token})
                                 }
                             });
+            // //  var rField=Math.random().toString(36).substring(7)
+            //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+            //             bcrypt2.genSalt(10, function(err, salt) {
+            //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
+            //                     rFieldVal=hash
+            //                     })
+                                    
+            //                 })
+                        
+                            
+
+            
+        };
+        });
+
     }
     // const uName=req.body.email
     // const pword=req.body.password
