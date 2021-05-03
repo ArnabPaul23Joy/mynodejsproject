@@ -98,17 +98,18 @@ router.post('/',verify, async (req, res) => {
                                 u_id: req.user.u_id,
                                 [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
-                            console.log("gdgdgdgg")
-                            console.log(gtok)
-                            var tkn=""
-                            tkn+=gtok
-                        await randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
+                            // console.log(gtok)
+                            // var tkn=""
+                            // tkn+=gtok
+                        randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
                                 if(!err){
                                         if(allNotes.length==0){
                                             try{
-                                                res.status(200).json({status: "no data found",notes: [], token:tkn})
+                                                res.status(200).json({status: "no data found",notes: [], token:gtok})
                                             }
                                             catch(error){
+                                                console.log("gdgdgdgg")
+                                                console.log(gtok)
                                                 console.log(error)
                                             }
                                         }
