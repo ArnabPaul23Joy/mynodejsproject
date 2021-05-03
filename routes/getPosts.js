@@ -54,25 +54,32 @@ router.post('/',verify, async (req, res) => {
         if (err) { 
             res.send({status: "Something is wrong bruh!",token: req.body.token})
         }
-        else{
+        // else{
             
-            // var u_iid=""
-            // bcrypt2.genSalt(10, function(err, salt) {
-            // bcrypt2.hash(req.user.email, salt, function(err, hash) {
-            //      u_iid=hash
-            //     })
+        //     // var u_iid=""
+        //     // bcrypt2.genSalt(10, function(err, salt) {
+        //     // bcrypt2.hash(req.user.email, salt, function(err, hash) {
+        //     //      u_iid=hash
+        //     //     })
                     
-            // })
+        //     // })
                 
-            // //  var rField=Math.random().toString(36).substring(7)
-            //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-            //             bcrypt2.genSalt(10, function(err, salt) {
-            //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
-            //                     rFieldVal=hash
-            //                     })
+        //     // //  var rField=Math.random().toString(36).substring(7)
+        //     //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+        //     //             bcrypt2.genSalt(10, function(err, salt) {
+        //     //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
+        //     //                     rFieldVal=hash
+        //     //                     })
                                     
-            //                 })
-                        var email=""
+        //     //                 })
+                        
+                            
+
+            
+        // };
+        });
+
+        var email=""
                         email+=req.user.email
                         
                         var u_iid = crypto.createHash('md5').update(email).digest('hex');
@@ -105,11 +112,6 @@ router.post('/',verify, async (req, res) => {
                                     res.send({status: "Something is wrong bruh!",token: req.body.token})
                                 }
                             });
-                            
-
-            
-        };
-        });
     }
     // const uName=req.body.email
     // const pword=req.body.password
