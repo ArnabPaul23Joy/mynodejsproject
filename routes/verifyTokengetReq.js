@@ -5,7 +5,7 @@ var crypto = require('crypto');
 let randNumber = require("../models/randomNumber.js");
 module.exports= function (req, res, next){
     // const token=req.header('auth-token')
-    const token=req.data.token
+    const token=req.token
     console.log("hghghgh  "+token)
     if(!token) return res.send('Access Denied')
     try{
