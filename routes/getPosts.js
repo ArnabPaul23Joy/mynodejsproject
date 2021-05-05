@@ -88,19 +88,19 @@ router.get('/',verifyTokengetReq, async (req, res) => {
                             // tkn+=gtok
                        await randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
                                 if(!err){
-                                        if(allNotes.length==0){
+                                        // if(allNotes.length==0){
                                             try{
-                                                res.json({status: "no data found",notes: [], token:gtok})
+                                                res.json({status: "Found bruh!",notes: allNotes, token:gtok})
                                             }
                                             catch(error){
                                                 console.log("gdgdgdgg")
                                                 console.log(gtok)
                                                 console.log(error)
                                             }
-                                        }
-                                        else{
-                                            res.json({status: "no data found",notes: allNotes, token:gtok})
-                                        }
+                                        // }
+                                        // else{
+                                        //     res.json({status: "no data found",notes: allNotes, token:gtok})
+                                        // }
                                 }
                                 else{
                                     res.json({status: "Something is wrong bruh!", token:gtok})

@@ -112,12 +112,13 @@ function App() {
                 logInOrRegister("home")
                 setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
           }
-          else if(res.data.status==="no data found"){
-            // setLogInBox("home")
-          setGlobTok(res.data.token)
-                logInOrRegister("home")
-                setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
-          }
+          // else if(res.data.status==="no data found"){
+          //   setNotes(res.data.notes)
+          //   // setLogInBox("home")
+          // setGlobTok(res.data.token)
+          //       logInOrRegister("home")
+          //       setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
+          // }
           else{
             window.alert("Failed to get in bruh!")
           }
