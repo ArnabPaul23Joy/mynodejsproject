@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const jwt=require("jsonwebtoken")
-const  verify=require("./verifyToken")
+const  verify=require("./verifyTokengetReq")
 
 // require("dotenv").config()
 // const express=require("express")
@@ -43,7 +43,7 @@ const md5 =require("md5")
 
 
 // verify
-router.post('/',verifyTokengetReq, async (req, res) => {
+router.get('/',verifyTokengetReq, async (req, res) => {
     console.log("req.user.status   "+req.user.status)
     var allNotes=[]
     if (req.user.status==="Invalid Token"){
