@@ -108,9 +108,9 @@ function App() {
           if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
             // setLogInBox("home")
-          setGlobTok(res.header('auth-token'))
+          setGlobTok(res.data.token)
                 logInOrRegister("home")
-                setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.header('auth-token'), 30) 
+                setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
           }
           else if(res.data.status==="no data found"){
             // setLogInBox("home")
