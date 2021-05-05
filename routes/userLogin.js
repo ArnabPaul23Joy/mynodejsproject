@@ -116,7 +116,7 @@ router.route('/').post( async (req, res) => {
                                     gttt+=token
                                     console.log("token from the login  "+gttt)
                                     // res.header("auth-token", token).send(token)
-                                    res.send({status:"Successful", token: gttt})
+                                    res.header('auth-token',gttt).send({status:"Successful"})
 
                                 }
                                 else{

@@ -100,7 +100,7 @@ function App() {
           // }
           
           
-          setGlobTok(res.data.token)
+          // setGlobTok(res.data.token)
           console.log("from getnotes  "+ globToken)
 
           // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
@@ -108,9 +108,9 @@ function App() {
           if(res.data.status==="Found bruh!"){
             setNotes(res.data.notes)
             // setLogInBox("home")
-          setGlobTok(res.data.token)
+          setGlobTok(res.header('auth-token'))
                 logInOrRegister("home")
-                setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
+                setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.header('auth-token'), 30) 
           }
           else if(res.data.status==="no data found"){
             // setLogInBox("home")
