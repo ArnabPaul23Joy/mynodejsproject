@@ -47,13 +47,13 @@ router.get('/',verifyTokengetReq, async (req, res) => {
     console.log("req.user.status   "+req.user.status)
     var allNotes=[]
     if (req.user.status==="Invalid Token"){
-        res.header('auth-token',req.body.token).json({status: "Invalid Token"})
+        res.json({status: "Invalid Token", token:req.body.token})
     }
     else{
         await PostNote.find({u_id: req.user.u_id}, async function(err, notes) {
 
         if (err) { 
-            res.header('auth-token',req.body.token).json({status: "Something is wrong bruh!"})
+            res.json({status: "Something is wrong bruh!", token:req.body.token})
         }
         else{
             allNotes=notes
@@ -90,7 +90,7 @@ router.get('/',verifyTokengetReq, async (req, res) => {
                                 if(!err){
                                         if(allNotes.length==0){
                                             try{
-                                                res.header('auth-token',gtok).json({status: "no data found",notes: []})
+                                                res.json({status: "no data found",notes: [], token:gtok})
                                             }
                                             catch(error){
                                                 console.log("gdgdgdgg")
@@ -99,11 +99,11 @@ router.get('/',verifyTokengetReq, async (req, res) => {
                                             }
                                         }
                                         else{
-                                            res.header('auth-token',gtok).json({status: "no data found",notes: allNotes})
+                                            res.json({status: "no data found",notes: allNotes, token:gtok})
                                         }
                                 }
                                 else{
-                                    res.header('auth-token',gtok).json({status: "Something is wrong bruh!"})
+                                    res.json({status: "Something is wrong bruh!", token:gtok})
                                 }
                             });
             // //  var rField=Math.random().toString(36).substring(7)
