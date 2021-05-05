@@ -87,8 +87,8 @@ function LogIn(props){
         // console.log("login    hhh"+res.data)
         if (!(res.data.status==="Wrong email bruh!"||res.data.status==="Wrong password bruh!")){
           console.log("from login")
-          console.log(res.header('auth-token'))
-            props.onToken(res.header('auth-token'))
+          console.log(res.data.token)
+            props.onToken(res.data.token)
             //props.onLoggIn("home");
         }
         else{
