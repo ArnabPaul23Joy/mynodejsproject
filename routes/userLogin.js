@@ -40,7 +40,7 @@ const md5 =require("md5")
 
 
 
-router.route('/').post( (req, res) => {
+router.route('/').post( async (req, res) => {
     const uName=req.body.email
     const pword=req.body.password
     // const user=new User({
@@ -59,11 +59,11 @@ router.route('/').post( (req, res) => {
     //         }
     //     })
     // console.log(uName+" "+pword)
-        User.findOne({email: uName},  function(err,foundUser){
+        await User.findOne({email: uName}, async function(err,foundUser){
             if(!err){
                 console.log("found user "+uName)
                 if(foundUser){
-                    bcrypt.compare(pword,foundUser.password, function(err,result){
+                    bcrypt.compare(pword,foundUser.password,async function(err,result){
                         
                         // var rField=crypto.randomBytes(20).toString('hex')
                         if (result==true){
@@ -109,7 +109,7 @@ router.route('/').post( (req, res) => {
                             }, process.env.TOKEN_SECRET)
                             console.log("u_iid   "+u_iid)
                         console.log("rFieldVal    "+rFieldVal)
-                             randNumber.updateOne({u_idHash: u_iid}, {jToken: token}, {upsert: true}, function (err) {
+                            await randNumber.updateOne({u_idHash: u_iid}, {jToken: token}, {upsert: true}, function (err) {
                                 console.log("errrrrrrrrrrrrrr")
                                 if(!err){
                                     var gttt=""
