@@ -76,10 +76,10 @@ router.post('/',verify,(req, res) => {
                                 [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
                             randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
-                                res.send("Update Failed")
+                                res.send({status: "Update Failed"})
                             });
                             
-                            res.send("Logged out bitch!")
+                            res.send({status: "Logged out bitch!"})
                             // gtok+=(Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7))
                             // bcrypt.genSalt(11, function(err, salt) {
                             //     bcrypt.hash(gtok, salt, function(err, hash) {
