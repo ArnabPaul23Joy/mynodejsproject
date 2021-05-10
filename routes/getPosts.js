@@ -43,14 +43,14 @@ const md5 =require("md5")
 
 
 // verify
-router.get('/',verifyTokengetReq, async (req, res) => {
+router.get('/',verifyTokengetReq,  (req, res) => {
     console.log("req.user.status   "+req.user.status)
     var allNotes=[]
     if (req.user.status==="Invalid Token"){
         res.json({status: "Invalid Token", token:req.body.token})
     }
     else{
-        await PostNote.find({u_id: req.user.u_id}, async function(err, notes) {
+         PostNote.find({u_id: req.user.u_id},  function(err, notes) {
 
         if (err) { 
             res.json({status: "Something is wrong bruh!", token:req.body.token})
@@ -100,7 +100,7 @@ router.get('/',verifyTokengetReq, async (req, res) => {
                             // console.log(gtok)
                             // var tkn=""
                             // tkn+=gtok
-                       await randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
+                        randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
                                 if(!err){
                                         // if(allNotes.length==0){
                                             
