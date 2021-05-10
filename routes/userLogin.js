@@ -116,11 +116,11 @@ router.route('/').post(  (req, res) => {
                                     gttt+=token
                                     console.log("token from the login  "+gttt)
                                     // res.header("auth-token", token).send(token)
-                                    res.send({status:"Successful", token:gttt})
+                                    return res.send({status:"Successful", token:gttt})
 
                                 }
                                 else{
-                                    res.send({status:"eroor"})
+                                    return res.send({status:"eroor"})
 
                                 }
                             });
@@ -133,13 +133,13 @@ router.route('/').post(  (req, res) => {
                             // res.json()
                         }
                         else{
-                            res.send({status:"Wrong password bruh!"})
+                            return res.send({status:"Wrong password bruh!"})
                         }
                     })
                 }
                 
                 else{
-                    res.send({status:"Wrong email bruh!"})
+                    return res.send({status:"Wrong email bruh!"})
                 }
                 // if(foundUser.password==pword){
                 //     res.render("secrets")
@@ -149,7 +149,7 @@ router.route('/').post(  (req, res) => {
                 // }
             }
             else{
-                res.send({status: "Wrong email bruh!"})
+                return res.send({status: "Wrong email bruh!"})
             }
         })
 })
