@@ -47,13 +47,13 @@ router.get('/',verifyTokengetReq,  (req, res) => {
     console.log("req.user.status   "+req.user.status)
     var allNotes=[]
     if (req.user.status==="Invalid Token"){
-        res.json({status: "Invalid Token", token:req.body.token})
+        return res.json({status: "Invalid Token", token:req.body.token})
     }
     else{
          PostNote.find({u_id: req.user.u_id},  function(err, notes) {
 
         if (err) { 
-            res.json({status: "Something is wrong bruh!", token:req.body.token})
+            return res.json({status: "Something is wrong bruh!", token:req.body.token})
         }
         else{
             allNotes=notes
@@ -103,18 +103,8 @@ router.get('/',verifyTokengetReq,  (req, res) => {
                         randNumber.updateOne({u_idHash: u_iid}, {jToken: gtok}, {upsert: true}, function (err) {
                                 if(!err){
                                         // if(allNotes.length==0){
-                                            
-                                        // }
-                                        // else{
-                                        //     res.json({status: "no data found",notes: allNotes, token:gtok})
-                                        // }
-                                }
-                                else{
-                                    res.json({status: "Something is wrong bruh!", token:gtok})
-                                }
-                            });
-                            try{
-                                res.json({status: "Found bruh!",notes: allNotes, token:gtok})
+                                            try{
+                                return res.json({status: "Found bruh!",notes: allNotes, token:gtok})
                             }
                                             catch(error){
                                                 console.log("gdgdgdgg")
@@ -122,6 +112,16 @@ router.get('/',verifyTokengetReq,  (req, res) => {
                                                 console.log(error)
                                             }
         
+                                        // }
+                                        // else{
+                                        //     res.json({status: "no data found",notes: allNotes, token:gtok})
+                                        // }
+                                }
+                                else{
+                                    return res.json({status: "Something is wrong bruh!", token:gtok})
+                                }
+                            });
+                            
 
     }
     // const uName=req.body.email
