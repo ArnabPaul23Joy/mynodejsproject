@@ -66,6 +66,20 @@ router.get('/',verifyTokengetReq, async (req, res) => {
                     
             // })
                 
+            // //  var rField=Math.random().toString(36).substring(7)
+            //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+            //             bcrypt2.genSalt(10, function(err, salt) {
+            //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
+            //                     rFieldVal=hash
+            //                     })
+                                    
+            //                 })
+                        
+                            
+
+            
+            };
+        });
         var email=""
                         email+=req.user.email
                         
@@ -106,20 +120,7 @@ router.get('/',verifyTokengetReq, async (req, res) => {
                                     res.json({status: "Something is wrong bruh!", token:gtok})
                                 }
                             });
-            // //  var rField=Math.random().toString(36).substring(7)
-            //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-            //             bcrypt2.genSalt(10, function(err, salt) {
-            //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
-            //                     rFieldVal=hash
-            //                     })
-                                    
-            //                 })
-                        
-                            
-
-            
-        };
-        });
+        
 
     }
     // const uName=req.body.email

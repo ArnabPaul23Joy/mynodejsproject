@@ -120,7 +120,7 @@ router.route('/').post( async (req, res) => {
 
                                 }
                                 else{
-                                res.send({status:"eroor"})
+                                    res.send({status:"eroor"})
 
                                 }
                             });
@@ -149,7 +149,7 @@ router.route('/').post( async (req, res) => {
                 // }
             }
             else{
-                    res.send({status: "Wrong email bruh!"})
+                res.send({status: "Wrong email bruh!"})
             }
         })
 })
