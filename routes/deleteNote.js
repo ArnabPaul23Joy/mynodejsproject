@@ -83,7 +83,7 @@ router.post("/", verify, (req, res) => {
         );
         randNumber.updateOne(
           { u_idHash: u_iid },
-          { u_idHash: u_iid, jToken: token },
+          {jToken: token },
           { upsert: true },
           function (err) {
             return res.send({ status: "Update Failed" });
