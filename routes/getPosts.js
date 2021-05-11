@@ -45,7 +45,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-    allNotes = PostNote.find({ u_id: req.user.u_id }, function (err, posts) {
+    PostNote.find({ u_id: req.user.u_id }, function (err, posts) {
       if (!err) {
         Array.prototype.push.apply(allNotes, posts);
         console.log(allNotes);
