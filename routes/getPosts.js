@@ -111,6 +111,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
             console.log("gdgdgdgg");
             console.log(gtok);
             console.log(error);
+            return res.send({status: "Invalid Token"});
           }
 
           // }

@@ -95,7 +95,7 @@ router.post("/", verify, (req, res) => {
                 return res.send({
                 status: "Successfully added",
                 token: gtok,
-                noteNew: newNote,
+                noteNew: newNote
                 });
             }
           }
