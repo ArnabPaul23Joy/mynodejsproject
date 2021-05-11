@@ -45,33 +45,34 @@ router.get("/", verifyTokengetReq, (req, res) => {
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-    PostNote.find({ u_id: req.user.u_id }, function (err, posts) {
+    allNotes=PostNote.find({ u_id: req.user.u_id }, function (err) {
       if (err) {
         return res.send({
           status: "Something is wrong bruh!",
           token: req.body.token,
         });
-      } else {
-        Array.prototype.push.apply(allNotes, posts);
-        console.log(allNotes);
-
-        // var u_iid=""
-        // bcrypt2.genSalt(10, function(err, salt) {
-        // bcrypt2.hash(req.user.email, salt, function(err, hash) {
-        //      u_iid=hash
-        //     })
-
-        // })
-
-        // //  var rField=Math.random().toString(36).substring(7)
-        //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-        //             bcrypt2.genSalt(10, function(err, salt) {
-        //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
-        //                     rFieldVal=hash
-        //                     })
-
-        //                 })
       }
+    //    else {
+    //     Array.prototype.push.apply(allNotes, posts);
+    //     console.log(allNotes);
+
+    //     // var u_iid=""
+    //     // bcrypt2.genSalt(10, function(err, salt) {
+    //     // bcrypt2.hash(req.user.email, salt, function(err, hash) {
+    //     //      u_iid=hash
+    //     //     })
+
+    //     // })
+
+    //     // //  var rField=Math.random().toString(36).substring(7)
+    //     //             var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+    //     //             bcrypt2.genSalt(10, function(err, salt) {
+    //     //                 bcrypt2.hash(rFieldVal, salt, function(err, hash) {
+    //     //                     rFieldVal=hash
+    //     //                     })
+
+    //     //                 })
+    //   }
     });
     var email = "";
     email += req.user.email;
