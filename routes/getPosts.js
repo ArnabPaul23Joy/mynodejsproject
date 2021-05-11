@@ -39,7 +39,7 @@ const md5 = require("md5");
 
 // verify
 
-// var allNotes = [];
+let allNotes = [];
 router.get("/", verifyTokengetReq, (req, res) => {
   console.log("req.user.status   " + req.user.status);
   if (req.user.status === "Invalid Token") {
@@ -52,61 +52,9 @@ router.get("/", verifyTokengetReq, (req, res) => {
           token: req.body.token,
         });
       } else {
-        // Array.prototype.push.apply(allNotes, posts);
+        Array.prototype.push.apply(allNotes, posts);
         
-        var email = "";
-        email += req.user.email;
 
-        var u_iid = crypto.createHash("md5").update(email).digest("hex");
-        var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
-        rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
-        console.log("get posts u_iid   " + u_iid);
-        // var u_iid = crypto.createHash('md5').update().digest('hex');
-        // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-        // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
-        // allNotes=notes
-        var gtok = jwt.sign(
-          {
-            status: "Success",
-            email: req.user.email,
-            u_id: req.user.u_id,
-            [u_iid]: rFieldVal,
-          },
-          process.env.TOKEN_SECRET
-        );
-        // console.log(gtok)
-        // var tkn=""
-        // tkn+=gtok
-        // return res.json({ status: "just checking", token: gtok });
-        var errorExists = "";
-        randNumber.updateOne(
-          { u_idHash: u_iid },
-          { jToken: gtok },
-          { upsert: true }
-        );
-        // ,
-        //   function (errors) {
-        //     console.log(errors)
-        //     if (!errors) {
-        //         errorExists="Valid Token"
-        //       // if(allNotes.length==0){
-
-        //       // }
-        //       // else{
-        //       //     res.send({status: "no data found",notes: allNotes, token:gtok})
-        //       // }
-        //     } else {
-        //       errorExists="Invalid Token"
-        //     //   return res.send({ status: "Something is wrong bruh!", token: gtok });
-        //     }
-        //   }
-        console.log(posts);
-        return res.send({
-          status: "Found bruh!",
-          notes: posts,
-          token: gtok,
-        });
-    
         // var u_iid=""
         // bcrypt2.genSalt(10, function(err, salt) {
         // bcrypt2.hash(req.user.email, salt, function(err, hash) {
@@ -124,6 +72,59 @@ router.get("/", verifyTokengetReq, (req, res) => {
 
         //                 })
       }
+    });
+    var email = "";
+    email += req.user.email;
+
+    var u_iid = crypto.createHash("md5").update(email).digest("hex");
+    var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
+    rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
+    console.log("get posts u_iid   " + u_iid);
+    // var u_iid = crypto.createHash('md5').update().digest('hex');
+    // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+    // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
+    // allNotes=notes
+    var gtok = jwt.sign(
+      {
+        status: "Success",
+        email: req.user.email,
+        u_id: req.user.u_id,
+        [u_iid]: rFieldVal,
+      },
+      process.env.TOKEN_SECRET
+    );
+    // console.log(gtok)
+    // var tkn=""
+    // tkn+=gtok
+    // return res.json({ status: "just checking", token: gtok });
+    var errorExists=""
+    randNumber.updateOne(
+      { u_idHash: u_iid },
+      { jToken: gtok },
+      { upsert: true }
+    );
+    // ,
+    //   function (errors) {
+    //     console.log(errors)
+    //     if (!errors) {
+    //         errorExists="Valid Token"
+    //       // if(allNotes.length==0){
+          
+
+    //       // }
+    //       // else{
+    //       //     res.send({status: "no data found",notes: allNotes, token:gtok})
+    //       // }
+    //     } else {
+    //       errorExists="Invalid Token"
+    //     //   return res.send({ status: "Something is wrong bruh!", token: gtok });
+    //     }
+    //   }
+    console.log(allNotes);
+    return res.send({
+      status: "Found bruh!",
+      notes: allNotes,
+      token: gtok
     });
     // if (errorExists == "Valid Token"){
         
