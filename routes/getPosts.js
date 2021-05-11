@@ -98,8 +98,8 @@ router.get("/", verifyTokengetReq, (req, res) => {
       { u_idHash: u_iid },
       { jToken: gtok },
       { upsert: true },
-      function (err) {
-        if (!err) {
+      function (errors) {
+        if (!errors) {
           // if(allNotes.length==0){
           try {
             return res.send({
