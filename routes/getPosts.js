@@ -126,11 +126,17 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     //     }
     //   }
     console.log(allNotes);
-    return res.send({
-      status: "Found bruh!",
-      notes: allNotes,
-      token: gtok,
-    });
+    try{
+        return res.send({
+        status: "Found bruh!",
+        notes: allNotes,
+        token: gtok,
+        });
+
+    }
+    catch(err){
+        console.log(err)
+    }
     // if (errorExists == "Valid Token"){
 
     // }
