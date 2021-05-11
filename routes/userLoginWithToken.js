@@ -13,7 +13,7 @@ var crypto = require("crypto");
 // var crypto = require("crypto");
 
 // const jwt=require("jsonwebtoken")
-const verifyTokengetReq = require("./verifyTokengetReq");
+const verify = require("./verifyToken");
 
 let User = require("../models/userModel.js");
 //const passport=require("passport")
@@ -34,7 +34,7 @@ const md5 = require("md5");
 // app.use(passport.initialize())
 // app.use(passport.session())
 
-router.post("/", verifyTokengetReq, (req, res) => {
+router.post("/", verify, (req, res) => {
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token" });
   } else {
