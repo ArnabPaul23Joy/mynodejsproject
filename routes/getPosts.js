@@ -45,13 +45,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-    allNotes=PostNote.find({ u_id: req.user.u_id }, function (err) {
-      if (err) {
-        return res.send({
-          status: "Something is wrong bruh!",
-          token: req.body.token,
-        });
-      }
+    allNotes=PostNote.find({ u_id: req.user.u_id })
     //    else {
     //     Array.prototype.push.apply(allNotes, posts);
     //     console.log(allNotes);
@@ -73,7 +67,6 @@ router.get("/", verifyTokengetReq, (req, res) => {
 
     //     //                 })
     //   }
-    });
     var email = "";
     email += req.user.email;
 
