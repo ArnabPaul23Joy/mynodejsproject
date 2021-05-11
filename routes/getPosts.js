@@ -38,20 +38,20 @@ const md5 = require("md5");
 // app.use(passport.session())
 
 // verify
-router.get("/", verifyTokengetReq, async (req, res) => {
+router.get("/", verifyTokengetReq, (req, res) => {
   console.log("req.user.status   " + req.user.status);
   var allNotes = [];
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-    await PostNote.find({ u_id: req.user.u_id }, function (err, posts) {
+    PostNote.find({ u_id: req.user.u_id }, function (err, posts) {
       if (err) {
         return res.send({
           status: "Something is wrong bruh!",
           token: req.body.token,
         });
       } else {
-        allNotes = posts;
+        Array.prototype.push.apply(allNotes, posts);
         console.log(allNotes)
 
         // var u_iid=""
@@ -83,7 +83,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
     // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
     // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
     // allNotes=notes
-    var gtok = await jwt.sign(
+    var gtok = jwt.sign(
       {
         status: "Success",
         email: req.user.email,
@@ -97,7 +97,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
     // tkn+=gtok
     // return res.json({ status: "just checking", token: gtok });
     var errorExists=""
-    await randNumber.updateOne(
+    randNumber.updateOne(
       { u_idHash: u_iid },
       { jToken: gtok },
       { upsert: true }
