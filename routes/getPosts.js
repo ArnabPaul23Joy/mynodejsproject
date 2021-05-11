@@ -105,7 +105,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
             return res.json({
               status: "Found bruh!",
               notes: allNotes,
-              token: gtok,
+              token: gtok
             });
           } catch (error) {
             console.log("gdgdgdgg");
