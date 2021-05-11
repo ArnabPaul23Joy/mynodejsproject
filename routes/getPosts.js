@@ -94,6 +94,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
     // console.log(gtok)
     // var tkn=""
     // tkn+=gtok
+    return res.json({status:"just checking"})
     randNumber.updateOne(
       { u_idHash: u_iid },
       { jToken: gtok },

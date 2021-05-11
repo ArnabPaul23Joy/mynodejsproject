@@ -98,20 +98,20 @@ function App() {
           // if(res.data.status==="Invalid Token"){
 
           // }
+          console.log(res.data)
           
-          
-          // setGlobTok(res.data.token)
-          console.log("from getnotes  "+ globToken)
+          // // setGlobTok(res.data.token)
+          // console.log("from getnotes  "+ globToken)
 
-          // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
-          // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
-          if(res.data.status==="Found bruh!"){
-            setNotes(res.data.notes)
-            // setLogInBox("home")
-          setGlobTok(res.data.token)
-                logInOrRegister("home")
-                setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
-          }
+          // // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
+          // // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
+          // if(res.data.status==="Found bruh!"){
+          //   setNotes(res.data.notes)
+          //   // setLogInBox("home")
+          // setGlobTok(res.data.token)
+          //       logInOrRegister("home")
+          //       setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
+          // }
           // else if(res.data.status==="no data found"){
           //   setNotes(res.data.notes)
           //   // setLogInBox("home")
@@ -119,10 +119,10 @@ function App() {
           //       logInOrRegister("home")
           //       setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
           // }
-          else{
-            window.alert("Failed to get in bruh!")
-          }
-          console.log(res.data)
+          // else{
+          //   window.alert("Failed to get in bruh!")
+          // }
+          // console.log(res.data)
         });
         // logInOrRegister("home")
         // setNotes(tttt.notePosts)
