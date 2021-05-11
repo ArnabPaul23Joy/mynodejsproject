@@ -102,8 +102,8 @@ router.get("/", verifyTokengetReq, (req, res) => {
       { upsert: true },
       function (errors) {
         console.log(errors)
-        if (errors) {
-            errorExists="Ivalid Token"
+        if (!errors) {
+            errorExists="Valid Token"
           // if(allNotes.length==0){
           
 
@@ -112,7 +112,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
           //     res.send({status: "no data found",notes: allNotes, token:gtok})
           // }
         } else {
-          errorExists="Valid Token"
+          errorExists="Invalid Token"
         //   return res.send({ status: "Something is wrong bruh!", token: gtok });
         }
       }
