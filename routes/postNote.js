@@ -45,7 +45,7 @@ router.post('/',verify,(req, res) => {
     console.log("req.body.content  "+req.body.content)
     // console.log(req.user)
     if (req.user.status==="Invalid Token"){
-        res.send(req.user.status)
+        return res.send(req.user.status)
     }
     else{   
         const newNote=new PostNote({
@@ -88,7 +88,7 @@ router.post('/',verify,(req, res) => {
                             }, process.env.TOKEN_SECRET)
                             
                             randNumber.updateOne({u_idHash: u_iid}, {u_idHash: u_iid,jToken: token}, {upsert: true}, function (err) {
-                                res.send({status:"Update Failed"})
+                                return res.send({ status: "Update Failed" });
                             });
                             res.send({status: "Successfully added",
                                     token: gtok,
@@ -96,7 +96,9 @@ router.post('/',verify,(req, res) => {
                            
                     }
                     else{
-                        res.send({status:"Failed to save the note bruh!"})
+                        return res.send({
+                          status: "Failed to save the note bruh!",
+                        });
                     }
                 })
     }

@@ -44,12 +44,15 @@ router.post('/',verify,(req, res) => {
     // console.log("req.body.token  ")
     // console.log(req.user)
     if (req.user.status==="Invalid Token"){
-        res.send(req.user.status)
+        return res.send(req.user.status)
     }
     else{   
         PostNote.deleteOne({_id: req.body.note._id}, function(err, obj) {
             if (err) {
-                res.send({status: "Delete failed", token: req.body.token});
+                return res.send({
+                  status: "Delete failed",
+                  token: req.body.token,
+                });
             }
             else {
             //     var u_iid=""
@@ -81,10 +84,10 @@ router.post('/',verify,(req, res) => {
                                 [u_iid]: rFieldVal
                             }, process.env.TOKEN_SECRET)
              randNumber.updateOne({u_idHash: u_iid}, {u_idHash: u_iid,jToken: token}, {upsert: true}, function (err) {
-                                res.send("Update Failed")
+                                return res.send({status: "Update Failed"});
                             });
                             
-                res.send({status: "Delete Succeeded",token: gtok})
+                return res.send({ status: "Delete Succeeded", token: gtok });
                 
             }
             

@@ -1,21 +1,19 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const jwt=require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 let User = require("../models/userModel.js");
 let randNumber = require("../models/randomNumber.js");
-console.log("register beyatch!")
-var crypto = require('crypto');
+console.log("register beyatch!");
+var crypto = require("crypto");
 // require("dotenv").config()
 // const express=require("express")
 // const bodyParser=require("body-parser")
 // const ejs=require("ejs")
 // const app=express()
-const mongoose =require("mongoose")
-const bcrypt=require("bcrypt")
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 // var crypto = require("crypto");
 // const session=require("express-session")
-
-
 
 // let User = require("../models/userModel.js");
 // // const passport=require("passport")
@@ -60,101 +58,107 @@ const bcrypt=require("bcrypt")
 // // userSchema.plugin(passportLocalMongoose)
 // userSchema.plugin(findOrCreate)
 
-
 // const User=mongoose.model("User",userSchema)
 
+router.route("/").post((req, res) => {
+  // const uName=req.body.email
+  // const pword=req.body.password
 
-router.route('/').post((req, res) => {
+  // req.login(user,function(err){
+  //     if(err){
+  //         () => res.status(400).json('Error: ' + err);
+  //     }
+  //     else{
 
-        // const uName=req.body.email
-        // const pword=req.body.password
-       
-        // req.login(user,function(err){
-        //     if(err){
-        //         () => res.status(400).json('Error: ' + err);
-        //     }
-        //     else{
-                
-        //     }
-        // })
-        bcrypt.genSalt(3, function(err, salt) {
-            bcrypt.hash(req.body.password, salt, function(err, hash) {
-                const newUser=new User({
-                    userName: req.body.uName,
-                    email: req.body.email,
-                    password: hash
-                })
+  //     }
+  // })
+  bcrypt.genSalt(3, function (err, salt) {
+    bcrypt.hash(req.body.password, salt, function (err, hash) {
+      const newUser = new User({
+        userName: req.body.uName,
+        email: req.body.email,
+        password: hash,
+      });
 
-                newUser.save(function(err){
-                    if(!err){
-                        
-                        //     var u_iid=""
-                        //     bcrypt.genSalt(10, function(err, salt) {
-                        //     bcrypt.hash(newUser.email, salt, function(err, hash) {
-                        //         u_iid=hash
-                        //         })
-                                    
-                        //     })
-                        // // var rField=Math.random().toString(36).substring(7)
-                        // var rFieldVal=+u_iid+Math.random().toString(36).substring(7)+u_iid
-                        //  bcrypt.genSalt(10, function(err, salt) {
-                        //     bcrypt.hash(rFieldVal, salt, function(err, hash) {
-                        //         rFieldVal=hash
-                        //         })
-                                    
-                        //     })
-                       
-                        var u_iid = crypto.createHash('md5').update(newUser.email).digest('hex');
-                        var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-                        rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
-                            const token=jwt.sign({
-                                status: "Success",
-                                email: newUser.email,
-                                u_id: newUser._id,
-                                [u_iid]: rFieldVal
-                            }, process.env.TOKEN_SECRET)
-                            console.log("userRegister   "+token)
-                            randNumber.updateOne({u_idHash: u_iid}, {u_idHash: u_iid,jToken: token}, {upsert: true}, function (err) {
-                                res.send("Update Failed")
-                            });
-                            
-                            res.send(token)
-                            
-                    }
-                    else{
-                        res.send("user exists already you fuck!")
-                    }
-                })
-                // .then(()=> res.json('User added Successfully'))
-                // .catch(err => res.status(400).json('Error: ' + err));
-        
-                // Store hash in your password DB.
-            });
-        });
-        // user.save()
-        // User.findOne({email: uName},function(err,foundUser){
-        //     if(!err){
-                
-        //         if(foundUser){
-        //             bcrypt.compare(pword,foundUser.password,function(err,result){
-        //                 if (result==true){
-        //                     console.log("")
-        //                     .then(()=> res.json(user.uName))
-        //                     .catch(err => res.status(400).json('Error: ' + err));
-        //                 }
-        //             })
-        //         }
-        //         if(foundUser.password==pword){
-        //             res.render("secrets")
-        //         }
-        //         else{
-        //             res.send("wrong pasword")
-        //         }
-        //     }
-        //     else{
-        //         console.log(err)
-        //     }
-        // })
-    })
+      newUser.save(function (err) {
+        if (!err) {
+          //     var u_iid=""
+          //     bcrypt.genSalt(10, function(err, salt) {
+          //     bcrypt.hash(newUser.email, salt, function(err, hash) {
+          //         u_iid=hash
+          //         })
+
+          //     })
+          // // var rField=Math.random().toString(36).substring(7)
+          // var rFieldVal=+u_iid+Math.random().toString(36).substring(7)+u_iid
+          //  bcrypt.genSalt(10, function(err, salt) {
+          //     bcrypt.hash(rFieldVal, salt, function(err, hash) {
+          //         rFieldVal=hash
+          //         })
+
+          //     })
+
+          var u_iid = crypto
+            .createHash("md5")
+            .update(newUser.email)
+            .digest("hex");
+          var rFieldVal =
+            u_iid + Math.random().toString(36).substring(7) + u_iid;
+          rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
+          const token = jwt.sign(
+            {
+              status: "Success",
+              email: newUser.email,
+              u_id: newUser._id,
+              [u_iid]: rFieldVal,
+            },
+            process.env.TOKEN_SECRET
+          );
+          console.log("userRegister   " + token);
+          randNumber.updateOne(
+            { u_idHash: u_iid },
+            { u_idHash: u_iid, jToken: token },
+            { upsert: true },
+            function (err) {
+              return res.send("Update Failed");
+            }
+          );
+
+          return res.send(token);
+        } else {
+          return res.send("user exists already you fuck!");
+        }
+      });
+      // .then(()=> res.json('User added Successfully'))
+      // .catch(err => res.status(400).json('Error: ' + err));
+
+      // Store hash in your password DB.
+    });
+  });
+  // user.save()
+  // User.findOne({email: uName},function(err,foundUser){
+  //     if(!err){
+
+  //         if(foundUser){
+  //             bcrypt.compare(pword,foundUser.password,function(err,result){
+  //                 if (result==true){
+  //                     console.log("")
+  //                     .then(()=> res.json(user.uName))
+  //                     .catch(err => res.status(400).json('Error: ' + err));
+  //                 }
+  //             })
+  //         }
+  //         if(foundUser.password==pword){
+  //             res.render("secrets")
+  //         }
+  //         else{
+  //             res.send("wrong pasword")
+  //         }
+  //     }
+  //     else{
+  //         console.log(err)
+  //     }
+  // })
+});
 
 module.exports = router;
