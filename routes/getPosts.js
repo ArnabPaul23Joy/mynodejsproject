@@ -99,35 +99,37 @@ router.get("/", verifyTokengetReq, (req, res) => {
     randNumber.updateOne(
       { u_idHash: u_iid },
       { jToken: gtok },
-      { upsert: true },
-      function (errors) {
-        console.log(errors)
-        if (!errors) {
-            errorExists="Valid Token"
-          // if(allNotes.length==0){
+      { upsert: true }
+    );
+    // ,
+    //   function (errors) {
+    //     console.log(errors)
+    //     if (!errors) {
+    //         errorExists="Valid Token"
+    //       // if(allNotes.length==0){
           
 
-          // }
-          // else{
-          //     res.send({status: "no data found",notes: allNotes, token:gtok})
-          // }
-        } else {
-          errorExists="Invalid Token"
-        //   return res.send({ status: "Something is wrong bruh!", token: gtok });
-        }
-      }
-    );
-    if (errorExists == "Valid Token"){
-        return res.send({
-          status: "Found bruh!",
-          notes: allNotes,
-          token: gtok,
-        });
-    }
+    //       // }
+    //       // else{
+    //       //     res.send({status: "no data found",notes: allNotes, token:gtok})
+    //       // }
+    //     } else {
+    //       errorExists="Invalid Token"
+    //     //   return res.send({ status: "Something is wrong bruh!", token: gtok });
+    //     }
+    //   }
+    return res.send({
+      status: "Found bruh!",
+      notes: allNotes,
+      token: gtok
+    });
+    // if (errorExists == "Valid Token"){
+        
+    // }
       
-    else{
-        return res.send({ status: "Something is wrong bruh!", token: gtok });
-    }
+    // else{
+    //     return res.send({ status: "Something is wrong bruh!", token: gtok });
+    // }
     // catch (error) {
     //     console.log("gdgdgdgg");
     //     console.log(gtok);
