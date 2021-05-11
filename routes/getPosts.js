@@ -39,23 +39,25 @@ const md5 = require("md5");
 
 // verify
 
-let allNotes = [];
-router.get("/", verifyTokengetReq, (req, res) => {
+
+router.get("/", verifyTokengetReq,async (req, res) => {
+  var allNotes = [];
   console.log("req.user.status   " + req.user.status);
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-    PostNote.find({ u_id: req.user.u_id }, function (err, posts) {
-      if (!err) {
-        Array.prototype.push.apply(allNotes, posts);
-        console.log(allNotes);
-      } else {
-        return res.send({
-          status: "Something is wrong bruh!",
-          token: req.body.token,
-        });
-      }
-    });
+        allNotes = await PostNote.find({ u_id: req.user.u_id });
+    //     , function (err, posts) {
+    //   if (!err) {
+    //     Array.prototype.push.apply(allNotes, posts);
+    //     console.log(allNotes);
+    //   } else {
+    //     return res.send({
+    //       status: "Something is wrong bruh!",
+    //       token: req.body.token,
+    //     });
+    //   }
+    // }
     //    else {
     //     Array.prototype.push.apply(allNotes, posts);
     //     console.log(allNotes);
@@ -80,15 +82,15 @@ router.get("/", verifyTokengetReq, (req, res) => {
     var email = "";
     email += req.user.email;
 
-    var u_iid = crypto.createHash("md5").update(email).digest("hex");
-    var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
-    rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
+    var u_iid = await crypto.createHash("md5").update(email).digest("hex");
+    var rFieldVal =await (u_iid + Math.random().toString(36).substring(7) + u_iid)
+    rFieldVal = await crypto.createHash("md5").update(rFieldVal).digest("hex");
     console.log("get posts u_iid   " + u_iid);
     // var u_iid = crypto.createHash('md5').update().digest('hex');
     // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
     // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
     // allNotes=notes
-    var gtok = jwt.sign(
+    var gtok = await jwt.sign(
       {
         status: "Success",
         email: req.user.email,
@@ -102,7 +104,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
     // tkn+=gtok
     // return res.json({ status: "just checking", token: gtok });
     var errorExists = "";
-    randNumber.updateOne(
+    await randNumber.updateOne(
       { u_idHash: u_iid },
       { jToken: gtok },
       { upsert: true }
