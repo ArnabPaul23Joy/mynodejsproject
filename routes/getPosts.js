@@ -53,7 +53,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
         });
       } else {
         Array.prototype.push.apply(allNotes, posts);
-        
+        console.log(allNotes);
 
         // var u_iid=""
         // bcrypt2.genSalt(10, function(err, salt) {
