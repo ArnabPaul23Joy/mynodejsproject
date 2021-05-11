@@ -42,11 +42,11 @@ router.get("/", verifyTokengetReq, (req, res) => {
   console.log("req.user.status   " + req.user.status);
   var allNotes = [];
   if (req.user.status === "Invalid Token") {
-    return res.json({ status: "Invalid Token", token: req.body.token });
+    return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
     PostNote.find({ u_id: req.user.u_id }, function (err, posts) {
       if (err) {
-        return res.json({
+        return res.send({
           status: "Something is wrong bruh!",
           token: req.body.token,
         });
@@ -102,7 +102,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
         if (!err) {
           // if(allNotes.length==0){
           try {
-            return res.json({
+            return res.send({
               status: "Found bruh!",
               notes: allNotes,
               token: gtok
@@ -115,10 +115,10 @@ router.get("/", verifyTokengetReq, (req, res) => {
 
           // }
           // else{
-          //     res.json({status: "no data found",notes: allNotes, token:gtok})
+          //     res.send({status: "no data found",notes: allNotes, token:gtok})
           // }
         } else {
-          return res.json({ status: "Something is wrong bruh!", token: gtok });
+          return res.send({ status: "Something is wrong bruh!", token: gtok });
         }
       }
     );
@@ -131,7 +131,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
   //     })
   //     req.login(user,function(err){
   //         if(err){
-  //             res.json({
+  //             res.send({
   //                 status: "Wrong password bruh!"
   //         })
   //         }else{
@@ -153,14 +153,14 @@ router.get("/", verifyTokengetReq, (req, res) => {
   //                         u_id: foundUser._id
   //                     }, process.env.TOKEN_SECRET)
   //                     res.header("auth-token",token).send(token)
-  //                     // res.json({
+  //                     // res.send({
   //                     //     status: "Success",
   //                     //     email: foundUser.email,
   //                     //     u_id: foundUser._id
   //                     // })
   //                 }
   //                 else{
-  //                     res.json({
+  //                     res.send({
   //                         status: "Wrong password bruh!"
   //                     })
   //                 }
@@ -168,7 +168,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
   //         }
 
   //         else{
-  //             res.json({
+  //             res.send({
   //                 status: "Wrong email bruh!"
   //             })
   //         }
@@ -180,7 +180,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
   //         // }
   //     }
   //     else{
-  //         res.json({
+  //         res.send({
   //             status: "Wrong information bruh!"
   //         })
   //     }
