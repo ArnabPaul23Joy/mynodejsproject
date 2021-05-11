@@ -45,7 +45,17 @@ router.get("/", verifyTokengetReq, (req, res) => {
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-    allNotes=PostNote.find({ u_id: req.user.u_id })
+    allNotes = PostNote.find({ u_id: req.user.u_id }, function (err, posts) {
+      if (!err) {
+        Array.prototype.push.apply(allNotes, posts);
+        console.log(allNotes);
+      } else {
+        return res.send({
+          status: "Something is wrong bruh!",
+          token: req.body.token,
+        });
+      }
+    });
     //    else {
     //     Array.prototype.push.apply(allNotes, posts);
     //     console.log(allNotes);
@@ -91,7 +101,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
     // var tkn=""
     // tkn+=gtok
     // return res.json({ status: "just checking", token: gtok });
-    var errorExists=""
+    var errorExists = "";
     randNumber.updateOne(
       { u_idHash: u_iid },
       { jToken: gtok },
@@ -103,7 +113,6 @@ router.get("/", verifyTokengetReq, (req, res) => {
     //     if (!errors) {
     //         errorExists="Valid Token"
     //       // if(allNotes.length==0){
-          
 
     //       // }
     //       // else{
@@ -118,12 +127,12 @@ router.get("/", verifyTokengetReq, (req, res) => {
     return res.send({
       status: "Found bruh!",
       notes: allNotes,
-      token: gtok
+      token: gtok,
     });
     // if (errorExists == "Valid Token"){
-        
+
     // }
-      
+
     // else{
     //     return res.send({ status: "Something is wrong bruh!", token: gtok });
     // }
