@@ -128,9 +128,9 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     console.log(allNotes);
     try{
         return res.send({
-        status: "Found bruh!",
-        notes: allNotes,
-        token: gtok
+          status: "Found bruh!",
+          notes: JSON.stringify(allNotes),
+          token: gtok,
         });
 
     }
