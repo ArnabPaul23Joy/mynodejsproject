@@ -130,7 +130,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
         return res.send({
         status: "Found bruh!",
         notes: allNotes,
-        token: gtok,
+        token: gtok
         });
 
     }
