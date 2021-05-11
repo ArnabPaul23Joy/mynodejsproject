@@ -38,9 +38,10 @@ const md5 = require("md5");
 // app.use(passport.session())
 
 // verify
+
+var allNotes = [];
 router.get("/", verifyTokengetReq, (req, res) => {
   console.log("req.user.status   " + req.user.status);
-  var allNotes = [];
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
@@ -52,7 +53,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
         });
       } else {
         Array.prototype.push.apply(allNotes, posts);
-        console.log(allNotes)
+        
 
         // var u_iid=""
         // bcrypt2.genSalt(10, function(err, salt) {
@@ -119,6 +120,7 @@ router.get("/", verifyTokengetReq, (req, res) => {
     //     //   return res.send({ status: "Something is wrong bruh!", token: gtok });
     //     }
     //   }
+    console.log(allNotes);
     return res.send({
       status: "Found bruh!",
       notes: allNotes,
