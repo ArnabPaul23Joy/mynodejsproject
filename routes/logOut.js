@@ -78,13 +78,14 @@ router.post("/", verify, async (req, res) => {
     await randNumber.updateOne(
       { u_idHash: u_iid },
       { jToken: gtok },
-      { upsert: true },
+      { upsert: true }
+      ,
       function (err, docs) {
         if (err) {
           console.log(err);
+          res.send({ status: "Update Failed" });
         } else {
           console.log("Original Doc : ", docs);
-          res.send({ status: "Update Failed" });
           // return
         }
       }

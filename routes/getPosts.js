@@ -113,16 +113,16 @@ router.get("/", verifyTokengetReq, async (req, res) => {
       { u_idHash: u_iid },
       { jToken: gtok },
       { upsert: true }
-    //   ,
-    //   function (err, docs) {
-    //     if (err) {
-    //       console.log(err);
-    //     } else {
-    //       console.log("Original Doc : ", docs);
-    //       res.send({ status: "Update Failed" });
-    //       // return
-    //     }
-    //   }
+      ,
+      function (err, docs) {
+        if (err) {
+          console.log(err);
+          res.send({ status: "Update Failed" });
+        } else {
+          console.log("Original Doc : ", docs);
+          // return
+        }
+      }
     );
     
     return "";
