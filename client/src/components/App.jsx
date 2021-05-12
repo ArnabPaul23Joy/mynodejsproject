@@ -62,7 +62,7 @@ function App() {
   }, []);
 
   const [globToken, setGlobTok] = useState("InvalidToken");
-  const [logIn, setLogInBox] = useState("login");
+  const [logIn, setLogInBox] = useState("default");
   function setCookie(cname, gTokn, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
@@ -166,6 +166,7 @@ function App() {
         logInOrRegister("home");
       } else {
         window.alert("Failed to get in bruh!");
+        logInOrRegister("login");
       }
       // console.log(res.data)
     });
