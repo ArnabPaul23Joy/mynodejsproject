@@ -50,7 +50,7 @@ router.post("/", verify, async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
-    return res.send({ staus: "Success", token: gtok });
+    return res.send({ status: "Success", token: gtok });
   }
   // const uName=req.body.email
   // const pword=req.body.password
