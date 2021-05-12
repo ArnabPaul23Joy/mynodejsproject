@@ -35,17 +35,23 @@ module.exports = async function (req, res, next) {
           req.user = decoded;
           next();
         } else {
+          console.log("11111");
           req.user = { status: "Invalid Token" };
           next();
         }
       } else {
+        console.log("222222222222");
         req.user = { status: "Invalid Token" };
         next();
       }
     });
+    console.log("3333333333333333");
+          
     console.log(req.user);
     next();
   } catch (err) {
+    console.log("44444444444444");
+          
     req.user = { status: "Invalid Token" };
     next();
   }

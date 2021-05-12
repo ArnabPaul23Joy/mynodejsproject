@@ -36,6 +36,8 @@ const md5 = require("md5");
 
 router.post("/", verify, async (req, res) => {
   if (req.user.status === "Invalid Token") {
+    console.log("6666666666666");
+          
     return res.send({ status: "Invalid Token" });
   } else {
     var u_iid = crypto.createHash("md5").update(req.user.email).digest("hex");
