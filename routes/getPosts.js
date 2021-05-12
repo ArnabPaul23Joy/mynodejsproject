@@ -99,16 +99,28 @@ router.get("/", verifyTokengetReq,async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
+    console.log(allNotes);
+    try {
+      return res.send({
+        status: "Found bruh!",
+        notes: JSON.stringify(allNotes),
+        token: gtok,
+      });
+    } catch (err) {
+      console.log(err);
+    }
     // console.log(gtok)
     // var tkn=""
     // tkn+=gtok
     // return res.json({ status: "just checking", token: gtok });
-    var errorExists = "";
-    await randNumber.updateOne(
-      { u_idHash: u_iid },
-      { jToken: gtok },
-      { upsert: true }
-    );
+
+    // var errorExists = "";
+    // await randNumber.updateOne(
+    //   { u_idHash: u_iid },
+    //   { jToken: gtok },
+    //   { upsert: true }
+    // );
+    
     // ,
     //   function (errors) {
     //     console.log(errors)
@@ -125,17 +137,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     //     //   return res.send({ status: "Something is wrong bruh!", token: gtok });
     //     }
     //   }
-    console.log(allNotes);
-    try{
-        return res.send({
-          status: "Found bruh!",
-          token: gtok,
-        });
-
-    }
-    catch(err){
-        console.log(err)
-    }
+    
     // if (errorExists == "Valid Token"){
 
     // }
