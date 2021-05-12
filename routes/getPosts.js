@@ -108,7 +108,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
       { u_idHash: u_iid },
       { jToken: gtok },
       { upsert: true },
-      function (err) {
+      async function (err) {
         if (!err) {
           return res.send({
             status: "Found bruh!",
