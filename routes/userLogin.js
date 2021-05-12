@@ -126,7 +126,7 @@ router.route("/").post((req, res) => {
                 }
               }
             );
-            return "";
+            // return "";
             // randNumber.updateOne(
             //   { upsert: true },
             //   function (err) {

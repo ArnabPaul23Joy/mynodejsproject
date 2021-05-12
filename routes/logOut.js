@@ -90,7 +90,7 @@ router.post("/", verify, async (req, res) => {
         }
       }
     );
-    return ""
+    // return ""
     // randNumber.updateOne(
     //   { upsert: true },
     //   function (err) {

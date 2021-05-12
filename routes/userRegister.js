@@ -140,7 +140,7 @@ router.route("/").post(async (req, res) => {
         //     }
         //   );
 
-          return "";
+        //   return "";
         } else {
           return res.send("user exists already you fuck!");
         }

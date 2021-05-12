@@ -125,7 +125,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
       }
     );
     
-    return "";
+    // return "";
     // .updateOne(
     //   { u_idHash: u_iid },
     //   { jToken: gtok },
