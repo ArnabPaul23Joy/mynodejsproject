@@ -35,10 +35,12 @@ module.exports = async function (req, res, next) {
           req.user = decoded;
           next();
         } else {
+          console.log("problem 1")
           req.user = { status: "Invalid Token" };
           next();
         }
       } else {
+        console.log("problem 2");
         req.user = { status: "Invalid Token" };
         next();
       }
@@ -46,6 +48,7 @@ module.exports = async function (req, res, next) {
     console.log(req.user);
     next();
   } catch (err) {
+    console.log("problem 3");
     req.user = { status: "Invalid Token" };
     next();
   }
