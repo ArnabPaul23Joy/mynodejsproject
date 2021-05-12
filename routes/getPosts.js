@@ -44,7 +44,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
   var allNotes = [];
   console.log("req.user.status   " + req.user.status);
   if (req.user.status === "Invalid Token") {
-    res.send({ status: "Invalid Token", token: req.body.token });
+    return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
         allNotes = await PostNote.find({ u_id: req.user.u_id });
     //     , function (err, posts) {
@@ -52,7 +52,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     //     Array.prototype.push.apply(allNotes, posts);
     //     console.log(allNotes);
     //   } else {
-    //     res.send({
+    //     return res.send({
     //       status: "Something is wrong bruh!",
     //       token: req.body.token,
     //     });
@@ -102,7 +102,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     // console.log(gtok)
     // var tkn=""
     // tkn+=gtok
-    // res.json({ status: "just checking", token: gtok });
+    // return res.json({ status: "just checking", token: gtok });
     var errorExists = "";
     await randNumber.updateOne(
       { u_idHash: u_iid },
@@ -122,14 +122,13 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     //       // }
     //     } else {
     //       errorExists="Invalid Token"
-    //     //   res.send({ status: "Something is wrong bruh!", token: gtok });
+    //     //   return res.send({ status: "Something is wrong bruh!", token: gtok });
     //     }
     //   }
     console.log(allNotes);
     try{
-        res.send({
+        return res.send({
           status: "Found bruh!",
-          notes: JSON.stringify(allNotes),
           token: gtok,
         });
 
@@ -142,13 +141,13 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     // }
 
     // else{
-    //     res.send({ status: "Something is wrong bruh!", token: gtok });
+    //     return res.send({ status: "Something is wrong bruh!", token: gtok });
     // }
     // catch (error) {
     //     console.log("gdgdgdgg");
     //     console.log(gtok);
     //     console.log(error);
-    //     res.send({ status: "Invalid Token" });
+    //     return res.send({ status: "Invalid Token" });
     //   }
   }
   // const uName=req.body.email
