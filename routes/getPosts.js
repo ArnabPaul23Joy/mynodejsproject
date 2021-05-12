@@ -108,7 +108,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     await randNumber.updateOne(
       { u_idHash: u_iid },
       { jToken: gtok },
-      { upsert: true }
+      { upsert: true },
     function(err){
         console.log("heyyyyyyyy!!!!!!!!!!!!!!!!!!!!!!!")
     });
