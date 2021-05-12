@@ -120,12 +120,12 @@ router.route("/").post((req, res) => {
                   console.log(err);
                 } else {
                   console.log("Original Doc : ", docs);
-                  res.send({ status: "Update Failed" });
+                  return res.send({ status: "Update Failed" });
                   // return
                 }
               }
             );
-            return "";
+            // return "";
             // randNumber.updateOne(
             //   { upsert: true },
             //   function (err) {
