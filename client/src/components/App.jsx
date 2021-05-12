@@ -95,33 +95,33 @@ function App() {
       console.log("from logP "+gT)
         axios.get('getnotes/', {params: {token: gT}})
         .then(res => {
-          // if(res.data.status==="Invalid Token"){
+          if(res.data.status==="Invalid Token"){
 
-          // }
+          }
           console.log(res.data)
           
-          // // setGlobTok(res.data.token)
-          // console.log("from getnotes  "+ globToken)
+          setGlobTok(res.data.token)
+          console.log("from getnotes  "+ globToken)
 
-          // // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
+          // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
           // // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
-          // if(res.data.status==="Found bruh!"){
-          //   setNotes(res.data.notes)
-          //   // setLogInBox("home")
-          // setGlobTok(res.data.token)
-          //       logInOrRegister("home")
-          //       setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
-          // }
-          // else if(res.data.status==="no data found"){
-          //   setNotes(res.data.notes)
-          //   // setLogInBox("home")
-          // setGlobTok(res.data.token)
-          //       logInOrRegister("home")
-          //       setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
-          // }
-          // else{
-          //   window.alert("Failed to get in bruh!")
-          // }
+          if(res.data.status==="Found bruh!"){
+              setNotes(res.data.notes)
+              // setLogInBox("home")
+              setGlobTok(res.data.token)
+              logInOrRegister("home")
+              setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
+          }
+          else if(res.data.status==="no data found"){
+            setNotes(res.data.notes)
+            // setLogInBox("home")
+            setGlobTok(res.data.token)
+            logInOrRegister("home")
+            setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30) 
+          }
+          else{
+            window.alert("Failed to get in bruh!")
+          }
           // console.log(res.data)
         });
         // logInOrRegister("home")
