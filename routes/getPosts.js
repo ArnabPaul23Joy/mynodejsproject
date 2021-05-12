@@ -39,14 +39,13 @@ const md5 = require("md5");
 
 // verify
 
-
-router.get("/", verifyTokengetReq,async (req, res) => {
+router.get("/", verifyTokengetReq, async (req, res) => {
   var allNotes = [];
   console.log("req.user.status   " + req.user.status);
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-        allNotes = await PostNote.find({ u_id: req.user.u_id });
+    allNotes = await PostNote.find({ u_id: req.user.u_id });
     //     , function (err, posts) {
     //   if (!err) {
     //     Array.prototype.push.apply(allNotes, posts);
@@ -83,7 +82,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     email += req.user.email;
 
     var u_iid = crypto.createHash("md5").update(email).digest("hex");
-    var rFieldVal =(u_iid + Math.random().toString(36).substring(7) + u_iid)
+    var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
     rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
     console.log("get posts u_iid   " + u_iid);
     // var u_iid = crypto.createHash('md5').update().digest('hex');
@@ -109,21 +108,24 @@ router.get("/", verifyTokengetReq,async (req, res) => {
       { u_idHash: u_iid },
       { jToken: gtok },
       { upsert: true },
-    function(err){
-        console.log("heyyyyyyyy!!!!!!!!!!!!!!!!!!!!!!!")
-    });
+      function (err) {
+        if (!err) {
+          return res.send({
+            status: "Found bruh!",
+            notes: allNotes,
+            token: gtok,
+          });
+        } else {
+          console.log(err);
+        }
+      }
+    );
 
-    
-    try {
-      console.log(allNotes);
-      return res.send({
-        status: "Found bruh!",
-        notes: allNotes,
-        token: gtok,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   console.log(allNotes);
+
+    // } catch (err) {
+    // }
 
     // ,
     //   function (errors) {
@@ -141,7 +143,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     //     //   return res.send({ status: "Something is wrong bruh!", token: gtok });
     //     }
     //   }
-    
+
     // if (errorExists == "Valid Token"){
 
     // }
