@@ -98,11 +98,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
-    res.send({
-      status: "Found bruh!",
-      notes: allNotes,
-      token: gtok,
-    });
+    
     // console.log(gtok)
     // var tkn=""
     // tkn+=gtok
@@ -124,6 +120,12 @@ router.get("/", verifyTokengetReq, async (req, res) => {
         }
       }
     );
+
+    res.send({
+      status: "Found bruh!",
+      notes: allNotes,
+      token: gtok,
+    });
     
     // return "";
     // .updateOne(

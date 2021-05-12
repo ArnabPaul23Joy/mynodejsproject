@@ -110,7 +110,6 @@ router.route("/").post((req, res) => {
             console.log("u_iid   " + u_iid);
             console.log("rFieldVal    " + rFieldVal);
 
-            res.send({ status: "Successful", token: token });
             await randNumber.updateOne(
               { u_idHash: u_iid },
               { jToken: token },
@@ -126,6 +125,7 @@ router.route("/").post((req, res) => {
                 }
               }
             );
+            res.send({ status: "Successful", token: token });
             // return "";
             // randNumber.updateOne(
             //   { upsert: true },
