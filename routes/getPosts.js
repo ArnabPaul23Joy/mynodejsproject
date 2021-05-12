@@ -114,8 +114,8 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     });
 
     
-    console.log(allNotes);
     try {
+      console.log(allNotes);
       return res.send({
         status: "Found bruh!",
         notes: allNotes,
