@@ -36,7 +36,7 @@ const md5 = require("md5");
 // app.use(passport.initialize())
 // app.use(passport.session())
 
-router.post("/", verify, (req, res) => {
+router.post("/", verify,async(req, res) => {
   console.log("req.body.title  " + req.body.title);
   console.log("req.body.content  " + req.body.content);
   // console.log(req.user)
@@ -49,7 +49,7 @@ router.post("/", verify, (req, res) => {
       postTitle: req.body.title,
       postContent: req.body.content,
     });
-    newNote.save(function (err) {
+    await newNote.save(async function (err) {
       if (!err) {
         // var u_iid=""
         // bcrypt.genSalt(10, function(err, salt) {
@@ -82,24 +82,43 @@ router.post("/", verify, (req, res) => {
           },
           process.env.TOKEN_SECRET
         );
+        res.send({
+            status: "Successfully added",
+            token: gtok,
+            noteNew: newNote
+        });
 
-        randNumber.updateOne(
-          { u_idHash: u_iid },
-          { jToken: gtok },
-          { upsert: true },
-          function (err) {
-            if (err) {
-              return res.send({ status: "Update Failed" });
+
+        await randNumber.findOneAndUpdate(
+            { u_idHash: u_iid },
+            { jToken: gtok },
+            null,
+            function (err, docs) {
+                if (err) {
+                console.log(err);
+                } else {
+                    console.log("Original Doc : ", docs);
+                    res.send({ status: "Update Failed" });
+                    // return 
+                }
             }
-            else{        
-                return res.send({
-                status: "Successfully added",
-                token: gtok,
-                noteNew: newNote
-                });
-            }
-          }
         );
+        return ""
+        // randNumber.updateOne(
+        //   { upsert: true },
+        //   function (err) {
+        //     if (err) {
+        //       return res.send({ status: "Update Failed" });
+        //     }
+        //     else{        
+        //         return res.send({
+        //         status: "Successfully added",
+        //         token: gtok,
+        //         noteNew: newNote
+        //         });
+        //     }
+        //   }
+        // );
       } else {
         return res.send({
           status: "Failed to save the note bruh!",

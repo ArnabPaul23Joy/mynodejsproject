@@ -60,7 +60,7 @@ const bcrypt = require("bcrypt");
 
 // const User=mongoose.model("User",userSchema)
 
-router.route("/").post((req, res) => {
+router.route("/").post(async (req, res) => {
   // const uName=req.body.email
   // const pword=req.body.password
 
@@ -72,15 +72,15 @@ router.route("/").post((req, res) => {
 
   //     }
   // })
-  bcrypt.genSalt(3, function (err, salt) {
-    bcrypt.hash(req.body.password, salt, function (err, hash) {
+  bcrypt.genSalt(3, async function (err, salt) {
+    bcrypt.hash(req.body.password, salt, async function (err, hash) {
       const newUser = new User({
         userName: req.body.uName,
         email: req.body.email,
         password: hash,
       });
 
-      newUser.save(function (err) {
+      await newUser.save(async function (err) {
         if (!err) {
           //     var u_iid=""
           //     bcrypt.genSalt(10, function(err, salt) {
@@ -115,16 +115,31 @@ router.route("/").post((req, res) => {
             process.env.TOKEN_SECRET
           );
           console.log("userRegister   " + token);
-          randNumber.updateOne(
+          res.send(token);
+          await randNumber.findOneAndUpdate(
             { u_idHash: u_iid },
-            { u_idHash: u_iid, jToken: token },
-            { upsert: true },
-            function (err) {
-              return res.send("Update Failed");
+            { jToken: token },
+            null,
+            function (err, docs) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("Original Doc : ", docs);
+                res.send({ status: "Update Failed" });
+                // return
+              }
             }
           );
+        //   await randNumber.updateOne(
+        //     { upsert: true },
+        //     function (err) {
+        //       if (err) {
+        //         res.send("Update Failed");
+        //       }
+        //     }
+        //   );
 
-          return res.send(token);
+          return "";
         } else {
           return res.send("user exists already you fuck!");
         }

@@ -34,14 +34,14 @@ const md5 = require("md5");
 // app.use(passport.initialize())
 // app.use(passport.session())
 
-router.post("/", verify, (req, res) => {
+router.post("/", verify, async (req, res) => {
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token" });
   } else {
     var u_iid = crypto.createHash("md5").update(req.user.email).digest("hex");
     var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
     rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
-    const gtok = jwt.sign(
+    const gtok = await jwt.sign(
       {
         status: "Success",
         email: req.user.email,

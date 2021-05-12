@@ -35,7 +35,7 @@ const md5 = require("md5");
 // app.use(passport.initialize())
 // app.use(passport.session())
 
-router.post("/", verify, (req, res) => {
+router.post("/", verify, async (req, res) => {
   // console.log("req.body.title  "+req.body.title)
   // console.log("req.body.content  "+req.body.content)
   // console.log(req.user)
@@ -71,16 +71,33 @@ router.post("/", verify, (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
-    randNumber.updateOne(
+
+    res.send({ status: "Logged out bitch!" });
+
+
+    await randNumber.findOneAndUpdate(
       { u_idHash: u_iid },
       { jToken: gtok },
-      { upsert: true },
-      function (err) {
-        return res.send({ status: "Update Failed" });
-      }
+        null,
+        function (err, docs) {
+            if (err) {
+            console.log(err);
+            } else {
+                console.log("Original Doc : ", docs);
+                res.send({ status: "Update Failed" });
+                // return 
+            }
+        }
     );
+    return ""
+    // randNumber.updateOne(
+    //   { upsert: true },
+    //   function (err) {
+    //     return res.send({ status: "Update Failed" });
+    //   }
+    // );
 
-    return res.send({ status: "Logged out bitch!" });
+    // return 
     // gtok+=(Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7))
     // bcrypt.genSalt(11, function(err, salt) {
     //     bcrypt.hash(gtok, salt, function(err, hash) {

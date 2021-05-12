@@ -37,19 +37,19 @@ const md5 = require("md5");
 // app.use(passport.initialize())
 // app.use(passport.session())
 
-router.post("/", verify, (req, res) => {
-  // console.log("req.body.token  ")
-  // console.log(req.user)
-  if (req.user.status === "Invalid Token") {
+router.post("/", verify, async (req, res) => {
+// console.log("req.body.token  ")
+// console.log(req.user)
+    if (req.user.status === "Invalid Token") {
     return res.send(req.user.status);
-  } else {
-    PostNote.deleteOne({ _id: req.body.note._id }, function (err, obj) {
-      if (err) {
+    } else {
+    await PostNote.deleteOne({ _id: req.body.note._id }, async function (err, obj) {
+        if (err) {
         return res.send({
-          status: "Delete failed",
-          token: req.body.token,
+            status: "Delete failed",
+            token: req.body.token,
         });
-      } else {
+        } else {
         //     var u_iid=""
         // bcrypt.genSalt(10, function(err, salt) {
         // bcrypt.hash(req.user.email, salt, function(err, hash) {
@@ -73,109 +73,127 @@ router.post("/", verify, (req, res) => {
         //     })
 
         const gtok = jwt.sign(
-          {
+            {
             status: "Success",
             email: eml,
             u_id: req.user.u_id,
             [u_iid]: rFieldVal,
-          },
-          process.env.TOKEN_SECRET
-        );
-        randNumber.updateOne(
-          { u_idHash: u_iid },
-          {jToken: token },
-          { upsert: true },
-          function (err) {
-            return res.send({ status: "Update Failed" });
-          }
+            },
+            process.env.TOKEN_SECRET
         );
 
-        return res.send({ status: "Delete Succeeded", token: gtok });
-      }
-    });
-    // const newNote=new PostNote({
-    //                 u_id: req.user.u_id,
-    //                 email: req.user.email,
-    //                 postTitle: req.body.title,
-    //                 postContent : req.body.content
-    //             })
-    // newNote.save(function(err){
-    //             if(!err){
-    //                     // const response=jwt.sign({
-    //                     //     status: "Success",
-    //                     //     email: foundUser.email,
-    //                     //     u_id: foundUser._id
-    //                     // }, process.env.TOKEN_SECRET)
-    //                     res.send(req.body.token)
 
-    //             }
-    //             else{
-    //                 res.send({status: "Failed to save the note bruh!"})
-    //             }
-    //         })
-  }
-  // const uName=req.body.email
-  // const pword=req.body.password
-  // const user=new User({
-  //         email: req.body.email,
-  //         password: req.body.password
-  //     })
-  //     req.login(user,function(err){
-  //         if(err){
-  //             res.json({
-  //                 status: "Wrong password bruh!"
-  //         })
-  //         }else{
-  //             passport.authenticate("local")(req,res,function(){
-  //                 res.render("secrets")
-  //             })
-  //         }
-  //     })
-  // console.log(uName+" "+pword)
-  // User.findOne({email: uName},function(err,foundUser){
-  //     if(!err){
-  //         console.log("found user "+uName)
-  //         if(foundUser){
-  //             bcrypt.compare(pword,foundUser.password,function(err,result){
-  //                 if (result==true){
-  //                     const token=jwt.sign({
-  //                         status: "Success",
-  //                         email: foundUser.email,
-  //                         u_id: foundUser._id
-  //                     }, process.env.TOKEN_SECRET)
-  //                     res.header("auth-token",token).send(token)
-  //                     // res.json({
-  //                     //     status: "Success",
-  //                     //     email: foundUser.email,
-  //                     //     u_id: foundUser._id
-  //                     // })
-  //                 }
-  //                 else{
-  //                     res.json({
-  //                         status: "Wrong password bruh!"
-  //                     })
-  //                 }
-  //             })
-  //         }
+        res.send({ status: "Delete Succeeded", token: gtok });
 
-  //         else{
-  //             res.json({
-  //                 status: "Wrong email bruh!"
-  //             })
-  //         }
-  //         // if(foundUser.password==pword){
-  //         //     res.render("secrets")
-  //         // }
-  //         // else{
-  //         //     res.send("wrong pasword")
-  //         // }
-  //     }
-  //     else{
-  //         res.json({
-  //             status: "Wrong information bruh!"
-  //         })
-  //     }
-  // })
+        await randNumber.findOneAndUpdate(
+            { u_idHash: u_iid },
+            {jToken: gtok },
+            null,
+            function (err, docs) {
+                if (err) {
+                console.log(err);
+                } else {
+                    console.log("Original Doc : ", docs);
+                    res.send({ status: "Update Failed" });
+                    // return 
+                }
+            }
+        );
+
+    return "";
+//     randNumber.updateOne(,
+//       { upsert: true },
+//       function (err) {
+//         return 
+//       }
+//     );
+
+    // return 
+    }
+});
+// const newNote=new PostNote({
+//                 u_id: req.user.u_id,
+//                 email: req.user.email,
+//                 postTitle: req.body.title,
+//                 postContent : req.body.content
+//             })
+// newNote.save(function(err){
+//             if(!err){
+//                     // const response=jwt.sign({
+//                     //     status: "Success",
+//                     //     email: foundUser.email,
+//                     //     u_id: foundUser._id
+//                     // }, process.env.TOKEN_SECRET)
+//                     res.send(req.body.token)
+
+//             }
+//             else{
+//                 res.send({status: "Failed to save the note bruh!"})
+//             }
+//         })
+}
+// const uName=req.body.email
+// const pword=req.body.password
+// const user=new User({
+//         email: req.body.email,
+//         password: req.body.password
+//     })
+//     req.login(user,function(err){
+//         if(err){
+//             res.json({
+//                 status: "Wrong password bruh!"
+//         })
+//         }else{
+//             passport.authenticate("local")(req,res,function(){
+//                 res.render("secrets")
+//             })
+//         }
+//     })
+// console.log(uName+" "+pword)
+// User.findOne({email: uName},function(err,foundUser){
+//     if(!err){
+//         console.log("found user "+uName)
+//         if(foundUser){
+//             bcrypt.compare(pword,foundUser.password,function(err,result){
+//                 if (result==true){
+//                     const token=jwt.sign({
+//                         status: "Success",
+//                         email: foundUser.email,
+//                         u_id: foundUser._id
+//                     }, process.env.TOKEN_SECRET)
+//                     res.header("auth-token",token).send(token)
+//                     // res.json({
+//                     //     status: "Success",
+//                     //     email: foundUser.email,
+//                     //     u_id: foundUser._id
+//                     // })
+//                 }
+//                 else{
+//                     res.json({
+//                         status: "Wrong password bruh!"
+//                     })
+//                 }
+//             })
+//         }
+
+//         else{
+//             res.json({
+//                 status: "Wrong email bruh!"
+//             })
+//         }
+//         // if(foundUser.password==pword){
+//         //     res.render("secrets")
+//         // }
+//         // else{
+//         //     res.send("wrong pasword")
+//         // }
+//     }
+//     else{
+//         res.json({
+//             status: "Wrong information bruh!"
+//         })
+//     }
+// })
 });
 
 // router.route('/').post((req, res) => {

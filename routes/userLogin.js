@@ -52,11 +52,11 @@ router.route("/").post((req, res) => {
   //         }
   //     })
   // console.log(uName+" "+pword)
-  User.findOne({ email: uName }, function (err, foundUser) {
+  User.findOne({ email: uName }, async function (err, foundUser) {
     if (!err) {
       console.log("found user " + uName);
       if (foundUser) {
-        bcrypt.compare(pword, foundUser.password, function (err, result) {
+        bcrypt.compare(pword, foundUser.password, async function (err, result) {
           // var rField=crypto.randomBytes(20).toString('hex')
           if (result == true) {
             // console.log(foundUser._id.toString())
@@ -109,23 +109,38 @@ router.route("/").post((req, res) => {
             );
             console.log("u_iid   " + u_iid);
             console.log("rFieldVal    " + rFieldVal);
-            randNumber.updateOne(
+
+            res.send({ status: "Successful", token: gttt });
+            await randNumber.findOneAndUpdate(
               { u_idHash: u_iid },
               { jToken: token },
-              { upsert: true },
-              function (err) {
-                console.log("errrrrrrrrrrrrrr");
-                if (!err) {
-                  var gttt = "";
-                  gttt += token;
-                  console.log("token from the login  " + gttt);
-                  // res.header("auth-token", token).send(token)
-                  return res.send({ status: "Successful", token: gttt });
+              null,
+              function (err, docs) {
+                if (err) {
+                  console.log(err);
                 } else {
-                  return res.send({ status: "eroor" });
+                  console.log("Original Doc : ", docs);
+                  res.send({ status: "Update Failed" });
+                  // return
                 }
               }
             );
+            return "";
+            // randNumber.updateOne(
+            //   { upsert: true },
+            //   function (err) {
+            //     console.log("errrrrrrrrrrrrrr");
+            //     if (!err) {
+            //       var gttt = "";
+            //       gttt += token;
+            //       console.log("token from the login  " + gttt);
+            //       // res.header("auth-token", token).send(token)
+            //       return
+            //     } else {
+            //       return
+            //     }
+            //   }
+            // );
 
             // res.json({
             //     status: "Success",

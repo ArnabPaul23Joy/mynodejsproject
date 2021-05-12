@@ -118,12 +118,13 @@ router.get("/", verifyTokengetReq, async (req, res) => {
             console.log(err);
             } else {
                 console.log("Original Doc : ", docs);
+                res.send({ status: "Update Failed" });
                 // return 
             }
         }
     );
     
-    
+    return "";
     // .updateOne(
     //   { u_idHash: u_iid },
     //   { jToken: gtok },
