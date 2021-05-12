@@ -104,22 +104,41 @@ router.get("/", verifyTokengetReq, async (req, res) => {
     // return res.json({ status: "just checking", token: gtok });
 
     // var errorExists = "";
-    await randNumber.updateOne(
-      { u_idHash: u_iid },
-      { jToken: gtok },
-      { upsert: true },
-      async function (err) {
-        if (!err) {
-          return res.send({
-            status: "Found bruh!",
-            notes: allNotes,
-            token: gtok,
-          });
-        } else {
-          console.log(err);
+    await randNumber.findOneAndUpdate(
+        { u_idHash: u_iid },
+        { jToken: gtok },
+        null,
+        function (err, docs) {
+            if (err) {
+            console.log(err);
+            } else {
+                console.log("Original Doc : ", docs);
+                return res.send({
+                    status: "Found bruh!",
+                    notes: allNotes,
+                    token: gtok,
+                });
+            }
         }
-      }
     );
+    
+    
+    // .updateOne(
+    //   { u_idHash: u_iid },
+    //   { jToken: gtok },
+    //   { upsert: true },
+    //   function (err) {
+    //     if (!err) {
+    //       return res.send({
+    //         status: "Found bruh!",
+    //         notes: allNotes,
+    //         token: gtok,
+    //       });
+    //     } else {
+    //       console.log(err);
+    //     }
+    //   }
+    // );
 
     // try {
     //   console.log(allNotes);
