@@ -85,7 +85,8 @@ function App() {
   }
   function setToken(tokn) {
     console.log("from APP " + tokn);
-    var gT = tokn;
+    var gT = ""
+    gT+=tokn;
     setGlobTok(gT);
     console.log("from logP " + gT);
 
@@ -95,7 +96,7 @@ function App() {
       console.log(res.data);
 
       // setGlobTok(res.data.token)
-      console.log("from getnotes  " + globToken);
+      console.log("from getnotes  " + gT);
 
       // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
       // // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
