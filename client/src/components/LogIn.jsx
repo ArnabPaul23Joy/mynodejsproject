@@ -31,7 +31,7 @@ function LogIn(props){
             //props.onLoggIn("home");
           }
           else{
-            console.log(res.data.token)
+            console.log(res.data.status)
             // props.onNote(res.data)
           }
           // }
