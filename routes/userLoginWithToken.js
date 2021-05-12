@@ -52,10 +52,24 @@ router.post("/", verify, async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
+    await randNumber.updateOne(
+      { u_idHash: u_iid },
+      { jToken: gtok },
+      { upsert: true },
+      function (err, docs) {
+        if (err) {
+          console.log(err);
+          res.send({ status: "Update Failed" });
+        } else {
+          console.log("Original Doc : ", docs);
+          // return
+        }
+      }
+    );
     
     console.log("gtok");
     console.log(gtok);
-    return res.send({ status: "Success", token: gtok });
+    res.send({ status: "Success", token: gtok });
   }
   // const uName=req.body.email
   // const pword=req.body.password
