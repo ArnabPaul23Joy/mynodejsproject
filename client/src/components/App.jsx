@@ -39,6 +39,7 @@ function App() {
         //props.onLoggIn("home");
       } else {
         console.log(res.data.status);
+        logInOrRegister("login");
 
         // props.onNote(res.data)
       }
