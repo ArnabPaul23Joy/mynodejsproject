@@ -82,15 +82,15 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     var email = "";
     email += req.user.email;
 
-    var u_iid = await crypto.createHash("md5").update(email).digest("hex");
-    var rFieldVal =await (u_iid + Math.random().toString(36).substring(7) + u_iid)
-    rFieldVal = await crypto.createHash("md5").update(rFieldVal).digest("hex");
+    var u_iid = crypto.createHash("md5").update(email).digest("hex");
+    var rFieldVal =(u_iid + Math.random().toString(36).substring(7) + u_iid)
+    rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
     console.log("get posts u_iid   " + u_iid);
     // var u_iid = crypto.createHash('md5').update().digest('hex');
     // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
     // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
     // allNotes=notes
-    var gtok = await jwt.sign(
+    var gtok = jwt.sign(
       {
         status: "Success",
         email: req.user.email,
@@ -103,7 +103,6 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     try {
       return res.send({
         status: "Found bruh!",
-        notes: JSON.stringify(allNotes),
         token: gtok,
       });
     } catch (err) {
@@ -120,7 +119,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     //   { jToken: gtok },
     //   { upsert: true }
     // );
-    
+
     // ,
     //   function (errors) {
     //     console.log(errors)
