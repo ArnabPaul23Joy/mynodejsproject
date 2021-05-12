@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -9,6 +9,58 @@ import Register from "./Register";
 import { set } from "mongoose";
 
 function App() {
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "Invalid Token";
+  }
+  useEffect(() => {
+    console.log("hey!!!!!");
+    // console.log(getCookie("keeeppperrr"))
+    console.log(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"));
+    const globToken = getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper");
+    // setGlobTok(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
+    axios.post("loginWithToken/", { token: globToken }).then((res) => {
+      // if(res.data.status==="Invalid Token"){
+      if (res.data.status === "Success") {
+        console.log();
+        setToken(res.data.token);
+        //props.onLoggIn("home");
+      } else {
+        console.log(res.data.status);
+
+        // props.onNote(res.data)
+      }
+      // }
+      // setGlobTok(res.data.token)
+      // console.log()
+      // if(res.data.status==="Found bruh!"){
+      //   // setNotes(.notes)
+      //   logInOrRegister("home")
+      //   props.onToken(res.data)
+      // }
+      // else if(res.data.status==="no data found"){
+      //   logInOrRegister("home")
+      //   props.onToken(res.data)
+      // }
+      // else{
+      //   logInOrRegister("login")
+      // console.log("ggg    "+res.data.status)
+      // }
+    });
+  }, []);
+
   const [globToken, setGlobTok] = useState("InvalidToken");
   const [logIn, setLogInBox] = useState("login");
   function setCookie(cname, gTokn, exdays) {
