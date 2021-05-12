@@ -81,6 +81,8 @@ router.post("/", verify, async (req, res) => {
             },
             process.env.TOKEN_SECRET
         );
+        console.log("gtok");
+        console.log(gtok);
 
 
         res.send({ status: "Delete Succeeded", token: gtok });

@@ -109,6 +109,9 @@ router.route("/").post((req, res) => {
             );
             console.log("u_iid   " + u_iid);
             console.log("rFieldVal    " + rFieldVal);
+            
+            console.log("gtok");
+            console.log(token);
 
             await randNumber.updateOne(
               { u_idHash: u_iid },

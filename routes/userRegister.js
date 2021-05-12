@@ -114,6 +114,7 @@ router.route("/").post(async (req, res) => {
             },
             process.env.TOKEN_SECRET
           );
+          
           console.log("userRegister   " + token);
           res.send(token);
           await randNumber.updateOne(

@@ -87,7 +87,9 @@ router.post("/", verify,async(req, res) => {
             token: gtok,
             noteNew: newNote
         });
-
+        
+        console.log("gtok");
+        console.log(gtok);
 
         await randNumber.updateOne(
             { u_idHash: u_iid },

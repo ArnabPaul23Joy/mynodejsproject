@@ -98,7 +98,8 @@ router.get("/", verifyTokengetReq, async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
-    
+    console.log("gtok");
+    console.log(gtok)
     // console.log(gtok)
     // var tkn=""
     // tkn+=gtok

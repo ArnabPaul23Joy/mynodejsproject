@@ -100,9 +100,9 @@ function App() {
       // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
       // // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
       if (res.data.status === "Found bruh!") {
+        setGlobTok(res.data.token);
         console.log("from getnotes  " + globToken);
         setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30);
-        setGlobTok(res.data.token);
         setNotes(res.data.notes);
         // setLogInBox("home")
         logInOrRegister("home");

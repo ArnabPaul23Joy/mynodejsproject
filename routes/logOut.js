@@ -71,6 +71,9 @@ router.post("/", verify, async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
+    
+    console.log("gtok");
+    console.log(gtok);
 
     res.send({ status: "Logged out bitch!" });
 

@@ -52,6 +52,9 @@ router.post("/", verify, async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
+    
+    console.log("gtok");
+    console.log(gtok);
     return res.send({ status: "Success", token: gtok });
   }
   // const uName=req.body.email
