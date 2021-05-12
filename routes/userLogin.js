@@ -110,7 +110,7 @@ router.route("/").post((req, res) => {
             console.log("u_iid   " + u_iid);
             console.log("rFieldVal    " + rFieldVal);
 
-            res.send({ status: "Successful", token: gttt });
+            res.send({ status: "Successful", token: token });
             await randNumber.findOneAndUpdate(
               { u_idHash: u_iid },
               { jToken: token },
