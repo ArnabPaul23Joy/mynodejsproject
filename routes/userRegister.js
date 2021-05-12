@@ -116,10 +116,10 @@ router.route("/").post(async (req, res) => {
           );
           console.log("userRegister   " + token);
           res.send(token);
-          await randNumber.findOneAndUpdate(
+          await randNumber.updateOne(
             { u_idHash: u_iid },
             { jToken: token },
-            null,
+            {upsert: true},
             function (err, docs) {
               if (err) {
                 console.log(err);

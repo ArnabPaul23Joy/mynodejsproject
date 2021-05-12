@@ -89,10 +89,10 @@ router.post("/", verify,async(req, res) => {
         });
 
 
-        await randNumber.findOneAndUpdate(
+        await randNumber.updateOne(
             { u_idHash: u_iid },
             { jToken: gtok },
-            null,
+            {upsert: true},
             function (err, docs) {
                 if (err) {
                 console.log(err);

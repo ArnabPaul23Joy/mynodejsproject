@@ -75,19 +75,19 @@ router.post("/", verify, async (req, res) => {
     res.send({ status: "Logged out bitch!" });
 
 
-    await randNumber.findOneAndUpdate(
+    await randNumber.updateOne(
       { u_idHash: u_iid },
       { jToken: gtok },
-        null,
-        function (err, docs) {
-            if (err) {
-            console.log(err);
-            } else {
-                console.log("Original Doc : ", docs);
-                res.send({ status: "Update Failed" });
-                // return 
-            }
+      { upsert: true },
+      function (err, docs) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Original Doc : ", docs);
+          res.send({ status: "Update Failed" });
+          // return
         }
+      }
     );
     return ""
     // randNumber.updateOne(
