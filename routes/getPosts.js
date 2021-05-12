@@ -103,6 +103,7 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     try {
       return res.send({
         status: "Found bruh!",
+        notes: allNotes,
         token: gtok,
       });
     } catch (err) {
