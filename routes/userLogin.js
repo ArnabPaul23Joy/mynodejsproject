@@ -114,18 +114,19 @@ router.route("/").post((req, res) => {
             await randNumber.updateOne(
               { u_idHash: u_iid },
               { jToken: token },
-              {upsert: true},
-              function (err, docs) {
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log("Original Doc : ", docs);
-                  return res.send({ status: "Update Failed" });
-                  // return
-                }
-              }
+              {upsert: true}
+            //   ,
+            //   function (err, docs) {
+            //     if (err) {
+            //       console.log(err);
+            //     } else {
+            //       console.log("Original Doc : ", docs);
+            //       res.send({ status: "Update Failed" });
+            //       // return
+            //     }
+            //   }
             );
-            // return "";
+            return "";
             // randNumber.updateOne(
             //   { upsert: true },
             //   function (err) {
