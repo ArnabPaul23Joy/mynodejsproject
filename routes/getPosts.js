@@ -99,6 +99,19 @@ router.get("/", verifyTokengetReq,async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
+    // console.log(gtok)
+    // var tkn=""
+    // tkn+=gtok
+    // return res.json({ status: "just checking", token: gtok });
+
+    // var errorExists = "";
+    await randNumber.updateOne(
+      { u_idHash: u_iid },
+      { jToken: gtok },
+      { upsert: true }
+    );
+
+    
     console.log(allNotes);
     try {
       return res.send({
@@ -109,17 +122,6 @@ router.get("/", verifyTokengetReq,async (req, res) => {
     } catch (err) {
       console.log(err);
     }
-    // console.log(gtok)
-    // var tkn=""
-    // tkn+=gtok
-    // return res.json({ status: "just checking", token: gtok });
-
-    // var errorExists = "";
-    // await randNumber.updateOne(
-    //   { u_idHash: u_iid },
-    //   { jToken: gtok },
-    //   { upsert: true }
-    // );
 
     // ,
     //   function (errors) {
