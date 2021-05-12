@@ -26,12 +26,13 @@ function LogIn(props){
       axios.post('loginWithToken/', {token: globToken})
         .then(res => {
           // if(res.data.status==="Invalid Token"){
-          if (!(res.data.status==="Invalid Token")){
-            props.onToken(res.data.token)
+          if (res.data.status === "Success") {
+            console.log();
+            props.onToken(res.data.token);
             //props.onLoggIn("home");
-          }
-          else{
-            console.log(res.data.status)
+          } else {
+            console.log(res.data.status);
+            
             // props.onNote(res.data)
           }
           // }
