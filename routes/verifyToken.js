@@ -14,9 +14,9 @@ var crypto = require("crypto");
 let randNumber = require("../models/randomNumber.js");
 module.exports = async function (req, res, next) {
   // const token=req.header('auth-token')
-  
-const cookieParser = require("cookie-parser");
-const path = require("path");
+ 
+  console.log("Cookies: ", req.cookies);
+  const token = req.cookies.token; 
   console.log("hghghgh  " + token);
   if (!token) return res.send("Access Denied");
   try {
