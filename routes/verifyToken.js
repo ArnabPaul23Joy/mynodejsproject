@@ -12,6 +12,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 var crypto = require("crypto");
 let randNumber = require("../models/randomNumber.js");
+
 module.exports = async function (req, res, next) {
   // const token=req.header('auth-token')
  
