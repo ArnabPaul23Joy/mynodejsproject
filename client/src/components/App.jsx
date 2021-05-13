@@ -10,32 +10,32 @@ import { set } from "mongoose";
 
 function App() {
 
-  function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(";");
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "Invalid Token";
-  }
+  // function getCookie(cname) {
+  //   var name = cname + "=";
+  //   var decodedCookie = decodeURIComponent(document.cookie);
+  //   var ca = decodedCookie.split(";");
+  //   for (var i = 0; i < ca.length; i++) {
+  //     var c = ca[i];
+  //     while (c.charAt(0) == " ") {
+  //       c = c.substring(1);
+  //     }
+  //     if (c.indexOf(name) == 0) {
+  //       return c.substring(name.length, c.length);
+  //     }
+  //   }
+  //   return "Invalid Token";
+  // }
   useEffect(() => {
     console.log("hey!!!!!");
     // console.log(getCookie("keeeppperrr"))
-    console.log(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"));
-    const globToken = getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper");
+    // console.log(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"));
+    // const globToken = getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper");
     // setGlobTok(getCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper"))
-    axios.post("loginWithToken/", { token: globToken }).then((res) => {
+    axios.post("loginWithToken/", { withCredentials: true }).then((res) => {
       // if(res.data.status==="Invalid Token"){
       if (res.data.status === "Success") {
         console.log();
-        setToken(res.data.token);
+        setToken();
         //props.onLoggIn("home");
       } else {
         console.log(res.data.status);
@@ -64,12 +64,12 @@ function App() {
 
   const [globToken, setGlobTok] = useState("InvalidToken");
   const [logIn, setLogInBox] = useState("default");
-  function setCookie(cname, gTokn, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + gTokn + ";" + expires + ";path=/";
-  }
+  // function setCookie(cname, gTokn, exdays) {
+  //   var d = new Date();
+  //   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  //   var expires = "expires=" + d.toUTCString();
+  //   document.cookie = cname + "=" + gTokn + ";" + expires + ";path=/";
+  // }
 
   function logInOrRegister(logValue) {
     setLogInBox(logValue);
@@ -91,10 +91,9 @@ function App() {
 
     axios
       .post("post/", {
-        token: globToken,
+        withCredentials: true ,
         title: newNote.title,
-        content: newNote.content,
-      })
+        content: newNote.content})
       .then((res) => {
         // console.log("App's post butt res "+res.data.status)
         console.log(res.data);
@@ -104,8 +103,8 @@ function App() {
           setNotes((prevNotes) => {
             return [...prevNotes, res.data.noteNew];
           });
-          setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30);
-          setGlobTok(res.data.token);
+          // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30);
+          // setGlobTok(res.data.token);
           logInOrRegister("home");
         }
       });
@@ -117,7 +116,7 @@ function App() {
 
   function deleteNote(id) {
     axios
-      .post("deletenote/", { token: globToken, note: notes[id] })
+      .post("deletenote/", { withCredentials: true , note: notes[id] })
       .then((res) => {
         if (res.data.status === "Delete Succeeded") {
           setNotes((prevNotes) => {
@@ -125,8 +124,8 @@ function App() {
               return index !== id;
             });
           });
-          setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30);
-          setGlobTok(res.data.token);
+          // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30);
+          // setGlobTok(res.data.token);
           logInOrRegister("home");
         } else {
           // setGlobTok(res.data.token);
@@ -136,14 +135,14 @@ function App() {
         console.log(res.data);
       });
   }
-  function setToken(tokn) {
-    console.log("from APP " + tokn);
-    var gT = ""
-    gT+=tokn;
-    setGlobTok(gT);
-    console.log("from logP " + gT);
+  function setToken() {
+    // console.log("from APP " + tokn);
+    // var gT = ""
+    // gT+=tokn;
+    // setGlobTok(gT);
+    // console.log("from logP " + gT);
 
-    axios.get("getnotes/", { params: { token: gT } }).then((res) => {
+    axios.get("getnotes/", { withCredentials: true }).then((res) => {
       if (res.data.status === "Invalid Token") {
       }
       console.log(res.data);
@@ -153,15 +152,15 @@ function App() {
       // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 30)
       // // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
       if (res.data.status === "Found bruh!") {
-        setGlobTok(res.data.token);
-        console.log("from getnotes  " + globToken);
-        setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30);
+        // setGlobTok(res.data.token);
+        // console.log("from getnotes  " + globToken);
+        // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30);
         setNotes(res.data.notes);
         // setLogInBox("home")
         logInOrRegister("home");
       } else if (res.data.status === "no data found") {
-        setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30);
-        setGlobTok(res.data.token);
+        // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", res.data.token, 30);
+        // setGlobTok(res.data.token);
         setNotes(res.data.notes);
         // setLogInBox("home")
         logInOrRegister("home");
@@ -175,7 +174,7 @@ function App() {
     // setNotes(tttt.notePosts)
   }
   function logOut() {
-    axios.post("logout/", { token: globToken }).then((res) => {
+    axios.post("logout/", { withCredentials: true }).then((res) => {
       if (res.data.status === "Invalid Token") {
         window.alert("failed to logout!");
       } else {

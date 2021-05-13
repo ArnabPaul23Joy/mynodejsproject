@@ -1,4 +1,10 @@
-const router = require("express").Router();
+const express = require("express");
+const app = express();
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
+app.use(cookieParser());
+const router = express.Router();
 
 const jwt = require("jsonwebtoken");
 let User = require("../models/userModel.js");
@@ -114,14 +120,15 @@ router.route("/").post(async (req, res) => {
             },
             process.env.TOKEN_SECRET
           );
-          
+
           console.log("userRegister   " + token);
-          res.send(token);
+
+          res.cookie("token", token, { httpOnly: true });
+          res.send({ status: "Successful", token: token });
           await randNumber.updateOne(
             { u_idHash: u_iid },
             { jToken: token },
-            {upsert: true}
-            ,
+            { upsert: true },
             function (err, docs) {
               if (err) {
                 console.log(err);
@@ -132,16 +139,16 @@ router.route("/").post(async (req, res) => {
               }
             }
           );
-        //   await randNumber.updateOne(
-        //     { upsert: true },
-        //     function (err) {
-        //       if (err) {
-        //         res.send("Update Failed");
-        //       }
-        //     }
-        //   );
+          //   await randNumber.updateOne(
+          //     { upsert: true },
+          //     function (err) {
+          //       if (err) {
+          //         res.send("Update Failed");
+          //       }
+          //     }
+          //   );
 
-        //   return "";
+          //   return "";
         } else {
           return res.send("user exists already you fuck!");
         }

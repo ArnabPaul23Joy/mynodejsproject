@@ -1,4 +1,10 @@
-const router = require("express").Router();
+const express = require("express");
+const app = express();
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
+app.use(cookieParser());
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 const verify = require("./verifyToken");
 
@@ -57,12 +63,12 @@ router.post("/", verify, async (req, res) => {
     //                         })
 
     //                     })
-    var eml=""
+    var eml = "";
     eml += req.user.email;
     var u_iid = crypto.createHash("md5").update(eml).digest("hex");
     var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
     rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
-    var gtok = jwt.sign(
+    var token = jwt.sign(
       {
         status: "Success",
         email: eml,
@@ -71,18 +77,16 @@ router.post("/", verify, async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
-    
-    console.log("gtok");
-    console.log(gtok);
+
+    console.log("token");
+    console.log(token);
 
     res.send({ status: "Logged out bitch!" });
 
-
     await randNumber.updateOne(
       { u_idHash: u_iid },
-      { jToken: gtok },
-      { upsert: true }
-      ,
+      { jToken: token },
+      { upsert: true },
       function (err, docs) {
         if (err) {
           console.log(err);
@@ -101,10 +105,10 @@ router.post("/", verify, async (req, res) => {
     //   }
     // );
 
-    // return 
-    // gtok+=(Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7))
+    // return
+    // token+=(Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7)+Math.random().toString(36).substring(7))
     // bcrypt.genSalt(11, function(err, salt) {
-    //     bcrypt.hash(gtok, salt, function(err, hash) {
+    //     bcrypt.hash(token, salt, function(err, hash) {
     //                     res.send({status: "Successfully loggedout",
     //                             token: hash})
 

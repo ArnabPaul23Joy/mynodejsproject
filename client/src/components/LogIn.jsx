@@ -38,7 +38,7 @@ function LogIn(props){
         if (!(res.data.status==="Wrong email bruh!"||res.data.status==="Wrong password bruh!")){
           console.log("from login")
           console.log(res.data.token)
-            props.onToken(res.data.token)
+            props.onToken()
             //props.onLoggIn("home");
         }
         else{

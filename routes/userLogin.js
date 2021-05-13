@@ -1,4 +1,10 @@
-const router = require("express").Router();
+const express = require("express");
+const app = express();
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
+app.use(cookieParser());
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 // require("dotenv").config()
@@ -109,15 +115,14 @@ router.route("/").post((req, res) => {
             );
             console.log("u_iid   " + u_iid);
             console.log("rFieldVal    " + rFieldVal);
-            
+
             console.log("gtok");
             console.log(token);
 
             await randNumber.updateOne(
               { u_idHash: u_iid },
               { jToken: token },
-              {upsert: true}
-              ,
+              { upsert: true },
               function (err, docs) {
                 if (err) {
                   console.log(err);
@@ -128,6 +133,7 @@ router.route("/").post((req, res) => {
                 }
               }
             );
+            res.cookie("token", token, { httpOnly: true });
             res.send({ status: "Successful", token: token });
             // return "";
             // randNumber.updateOne(

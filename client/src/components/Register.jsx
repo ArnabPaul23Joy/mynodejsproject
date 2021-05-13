@@ -40,7 +40,7 @@ function Register(props){
         .then(res => {
         // console.log("login    hhh"+res.data)
           if (!(res.data==="user exists already you fuck!")){
-              props.onToken(res.data)
+              props.onToken()
           }
           else{
             console.log(res.data)

@@ -1,4 +1,10 @@
-const router = require("express").Router();
+const express = require("express");
+const app = express();
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
+app.use(cookieParser());
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 // require("dotenv").config()
@@ -38,13 +44,13 @@ const md5 = require("md5");
 router.post("/", verify, async (req, res) => {
   if (req.user.status === "Invalid Token") {
     console.log("6666666666666");
-          
+
     return res.send({ status: "Invalid Token" });
   } else {
     var u_iid = crypto.createHash("md5").update(req.user.email).digest("hex");
     var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
     rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
-    const gtok = jwt.sign(
+    const token = jwt.sign(
       {
         status: "Success",
         email: req.user.email,
@@ -53,13 +59,14 @@ router.post("/", verify, async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
-    
-    console.log("gtok");
-    console.log(gtok);
-    res.send({ status: "Success", token: gtok });
+
+    console.log("token");
+    console.log(token);
+    res.cookie("token", token, { httpOnly: true });
+    res.send({ status: "Success", token: token });
     await randNumber.updateOne(
       { u_idHash: u_iid },
-      { jToken: gtok },
+      { jToken: token },
       { upsert: true },
       function (err, docs) {
         if (err) {
@@ -71,7 +78,6 @@ router.post("/", verify, async (req, res) => {
         }
       }
     );
-    
   }
   // const uName=req.body.email
   // const pword=req.body.password

@@ -1,10 +1,19 @@
+const express = require("express");
+const app = express();
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
+app.use(cookieParser());
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 var crypto = require("crypto");
 let randNumber = require("../models/randomNumber.js");
 module.exports = async function (req, res, next) {
   // const token=req.header('auth-token')
-  const token = req.body.token;
+  
+  console.log("Cookies: ", req.cookies);
+  const token = req.cookies.token;
   console.log("hghghgh  " + token);
   if (!token) return res.send("Access Denied");
   try {
@@ -46,12 +55,12 @@ module.exports = async function (req, res, next) {
       }
     });
     console.log("3333333333333333");
-          
+
     console.log(req.user);
     next();
   } catch (err) {
     console.log("44444444444444");
-          
+
     req.user = { status: "Invalid Token" };
     next();
   }

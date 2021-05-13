@@ -1,4 +1,10 @@
-const router = require("express").Router();
+const express = require("express");
+const app = express();
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
+app.use(cookieParser());
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 const verify = require("./verifyToken");
 
@@ -36,7 +42,7 @@ const md5 = require("md5");
 // app.use(passport.initialize())
 // app.use(passport.session())
 
-router.post("/", verify,async(req, res) => {
+router.post("/", verify, async (req, res) => {
   console.log("req.body.title  " + req.body.title);
   console.log("req.body.content  " + req.body.content);
   // console.log(req.user)
@@ -73,7 +79,7 @@ router.post("/", verify,async(req, res) => {
         var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
         rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
 
-        const gtok = jwt.sign(
+        const token = jwt.sign(
           {
             status: "Success",
             email: eemail,
@@ -82,29 +88,29 @@ router.post("/", verify,async(req, res) => {
           },
           process.env.TOKEN_SECRET
         );
+        res.cookie("token", token, { httpOnly: true });
         res.send({
-            status: "Successfully added",
-            token: gtok,
-            noteNew: newNote
+          status: "Successfully added",
+          token: token,
+          noteNew: newNote,
         });
-        
-        console.log("gtok");
-        console.log(gtok);
+
+        console.log("token");
+        console.log(token);
 
         await randNumber.updateOne(
-            { u_idHash: u_iid },
-            { jToken: gtok },
-            {upsert: true}
-            ,
-            function (err, docs) {
-                if (err) {
-                console.log(err);
-                    res.send({ status: "Update Failed" });
-                } else {
-                    console.log("Original Doc : ", docs);
-                    // return 
-                }
+          { u_idHash: u_iid },
+          { jToken: token },
+          { upsert: true },
+          function (err, docs) {
+            if (err) {
+              console.log(err);
+              res.send({ status: "Update Failed" });
+            } else {
+              console.log("Original Doc : ", docs);
+              // return
             }
+          }
         );
         // return ""
         // randNumber.updateOne(
@@ -113,10 +119,10 @@ router.post("/", verify,async(req, res) => {
         //     if (err) {
         //       return res.send({ status: "Update Failed" });
         //     }
-        //     else{        
+        //     else{
         //         return res.send({
         //         status: "Successfully added",
-        //         token: gtok,
+        //         token: token,
         //         noteNew: newNote
         //         });
         //     }

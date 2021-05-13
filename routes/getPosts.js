@@ -1,4 +1,10 @@
-const router = require("express").Router();
+const express = require("express");
+const app = express();
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
+app.use(cookieParser());
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 const verifyTokengetReq = require("./verifyTokengetReq");
 
@@ -89,7 +95,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
     // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
     // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
     // allNotes=notes
-    var gtok = jwt.sign(
+    var token = jwt.sign(
       {
         status: "Success",
         email: req.user.email,
@@ -98,25 +104,25 @@ router.get("/", verifyTokengetReq, async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
-    console.log("gtok");
-    console.log(gtok)
-    
+    console.log("token");
+    console.log(token);
+
+    res.cookie("token", token, { httpOnly: true });
     res.send({
       status: "Found bruh!",
       notes: allNotes,
-      token: gtok,
+      token: token,
     });
-    // console.log(gtok)
+    // console.log(token)
     // var tkn=""
-    // tkn+=gtok
-    // return res.json({ status: "just checking", token: gtok });
+    // tkn+=token
+    // return res.json({ status: "just checking", token: token });
 
     // var errorExists = "";
     await randNumber.updateOne(
       { u_idHash: u_iid },
-      { jToken: gtok },
-      { upsert: true }
-      ,
+      { jToken: token },
+      { upsert: true },
       function (err, docs) {
         if (err) {
           console.log(err);
@@ -128,18 +134,17 @@ router.get("/", verifyTokengetReq, async (req, res) => {
       }
     );
 
-    
     // return "";
     // .updateOne(
     //   { u_idHash: u_iid },
-    //   { jToken: gtok },
+    //   { jToken: token },
     //   { upsert: true },
     //   function (err) {
     //     if (!err) {
     //       return res.send({
     //         status: "Found bruh!",
     //         notes: allNotes,
-    //         token: gtok,
+    //         token: token,
     //       });
     //     } else {
     //       console.log(err);
@@ -162,11 +167,11 @@ router.get("/", verifyTokengetReq, async (req, res) => {
 
     //       // }
     //       // else{
-    //       //     res.send({status: "no data found",notes: allNotes, token:gtok})
+    //       //     res.send({status: "no data found",notes: allNotes, token:token})
     //       // }
     //     } else {
     //       errorExists="Invalid Token"
-    //     //   return res.send({ status: "Something is wrong bruh!", token: gtok });
+    //     //   return res.send({ status: "Something is wrong bruh!", token: token });
     //     }
     //   }
 
@@ -175,11 +180,11 @@ router.get("/", verifyTokengetReq, async (req, res) => {
     // }
 
     // else{
-    //     return res.send({ status: "Something is wrong bruh!", token: gtok });
+    //     return res.send({ status: "Something is wrong bruh!", token: token });
     // }
     // catch (error) {
     //     console.log("gdgdgdgg");
-    //     console.log(gtok);
+    //     console.log(token);
     //     console.log(error);
     //     return res.send({ status: "Invalid Token" });
     //   }
