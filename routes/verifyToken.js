@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const path = require("path");
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
@@ -12,8 +15,8 @@ let randNumber = require("../models/randomNumber.js");
 module.exports = async function (req, res, next) {
   // const token=req.header('auth-token')
   
-  console.log("Cookies: ", req.cookies);
-  const token = req.cookies.token;
+const cookieParser = require("cookie-parser");
+const path = require("path");
   console.log("hghghgh  " + token);
   if (!token) return res.send("Access Denied");
   try {
