@@ -91,9 +91,9 @@ function App() {
 
     axios
       .post("post/", {
-        withCredentials: true ,
         title: newNote.title,
-        content: newNote.content})
+        content: newNote.content,
+        withCredentials: true})
       .then((res) => {
         // console.log("App's post butt res "+res.data.status)
         console.log(res.data);
@@ -116,7 +116,7 @@ function App() {
 
   function deleteNote(id) {
     axios
-      .post("deletenote/", { withCredentials: true , note: notes[id] })
+      .post("deletenote/", { note: notes[id] , withCredentials: true})
       .then((res) => {
         if (res.data.status === "Delete Succeeded") {
           setNotes((prevNotes) => {

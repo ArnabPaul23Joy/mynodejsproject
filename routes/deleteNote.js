@@ -94,10 +94,8 @@ router.post("/", verify, async (req, res) => {
             process.env.TOKEN_SECRET
           );
           console.log("token");
-          console.log(token);
+          console.log(token)
 
-          res.cookie("token", token, { httpOnly: true });
-          res.send({ status: "Delete Succeeded", token: token });
 
           await randNumber.updateOne(
             { u_idHash: u_iid },
@@ -112,7 +110,10 @@ router.post("/", verify, async (req, res) => {
                 // return
               }
             }
-          );
+          ).then(()=>{              
+            res.cookie("token", token, { httpOnly: true });
+            res.send({ status: "Delete Succeeded", token: token });
+          })
 
           // return "";
           //     randNumber.updateOne(,
