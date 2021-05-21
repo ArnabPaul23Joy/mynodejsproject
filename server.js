@@ -108,9 +108,9 @@ passport.use(
       const newUser = new User({
         userName: profile.displayName,
         email: profile.emails[0].value,
-        googleId: profile.id,
         password: hash,
-      })
+        googleId: profile.id,
+      });
       // bcrypt.genSalt(10, async function (err, salt) {
       //   bcrypt.hash(stttt, salt, async function (err, hash) {
           
@@ -124,7 +124,11 @@ passport.use(
         //   return cb(err, user);
         // }
         // else{
+        // if (!user){
+
+        // }
         console.log(newUser);
+        console.log("user  ",user);
         return cb(err, newUser);
         // }
       });
