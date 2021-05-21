@@ -119,33 +119,22 @@ passport.use(
           
       //   })
       // })
-      try{
-          User.find({ googleId: newUser.googleId }, function (err, user) {
-          //findOrCreate isn't a mongo db function
-          // newUser.
+      User.findOrCreate({ googleId: newUser.googleId }, function (err, user) {
+        //findOrCreate isn't a mongo db function
+        // newUser.
 
-          // if (err){
-          //   return cb(err, user);
-          // }
-          // else{
-          // if (!user){
+        // if (err){
+        //   return cb(err, user);
+        // }
+        // else{
+        // if (!user){
 
-          // }
-          if (!user){
-            console.log(newUser);
-            console.log("user  ", user);
-            cb(err, newUser);
-          }
-          else{
-            cb(err, user);
-          }
-          // }
-        });
-      }
-      catch(error){
-          return cb(error, newUser);
-      }
-      
+        // }
+        console.log(newUser);
+        console.log("user  ",user);
+        return cb(err, newUser);
+        // }
+      });
     }
   )
 );
