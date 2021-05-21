@@ -134,10 +134,10 @@ passport.use(
           if (!user){
             console.log(newUser);
             console.log("user  ", user);
-            done(err, newUser);
+            cb(err, newUser);
           }
           else{
-            done(err, user);
+            cb(err, user);
           }
           // }
         });
