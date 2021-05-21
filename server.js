@@ -4,8 +4,10 @@ const mongoose = require('mongoose');
 const path = require('path');
 // const publicPath = path.join(__dirname, '..', 'public');
 require('dotenv').config();
-
 // const cors = require("cors");
+
+const bcrypt = require("bcrypt");
+var crypto = require("crypto");
 const cookieParser = require("cookie-parser");
 // const path = require("path");
 const jwt = require("jsonwebtoken");
@@ -102,16 +104,18 @@ passport.use(
       console.log(profile.emails[0].value);
       var stttt=""
       stttt+=profile.emails[0].value+profile.id
-      bcrypt.genSalt(10, async function (err, salt) {
-        bcrypt.hash(stttt, salt, async function (err, hash) {
-          const newUser = new User({
-            userName: profile.displayName,
-            email: profile.emails[0].value,
-            googleId:profile.id,
-            password: hash,
-          });
-        })
-      })
+      var hash = crypto.createHash("md5").update(stttt).digest("hex");
+      const newUser = new User({
+        userName: profile.displayName,
+        email: profile.emails[0].value,
+        googleId: profile.id,
+        password: hash,
+      });
+      // bcrypt.genSalt(10, async function (err, salt) {
+      //   bcrypt.hash(stttt, salt, async function (err, hash) {
+          
+      //   })
+      // })
       User.findOrCreate({ googleId: profile.id }, function (err, user) {
         //findOrCreate isn't a mongo db function
         // newUser.
