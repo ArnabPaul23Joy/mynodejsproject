@@ -110,6 +110,8 @@ passport.use(
             googleId:profile.id,
             password: hash,
           });
+        })
+      })
       User.findOrCreate({ googleId: profile.id }, function (err, user) {
         //findOrCreate isn't a mongo db function
         // newUser.
