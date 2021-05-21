@@ -69,12 +69,12 @@ passport.use(
 );
 
 
-app.get(
+router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile"] })
 );
 
-app.get(
+router.get(
   "/auth/google/",
   passport.authenticate("google", { failureRedirect: "/" }),
   function (req, res) {
