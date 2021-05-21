@@ -4,11 +4,11 @@ app.use(express.json());
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const jwt = require("jsonwebtoken");
 // app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 const router = express.Router();
-const jwt = require("jsonwebtoken");
 
 // require("dotenv").config()
 // const express=require("express")
