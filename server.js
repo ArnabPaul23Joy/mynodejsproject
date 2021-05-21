@@ -120,12 +120,12 @@ passport.use(
         //findOrCreate isn't a mongo db function
         // newUser.
 
-        if (err){
-          return cb(err, user);
-        }
-        else{
-          return cb(err, newUser);
-        }
+        // if (err){
+        //   return cb(err, user);
+        // }
+        // else{
+        return cb(err, newUser);
+        // }
       });
     }
   )
