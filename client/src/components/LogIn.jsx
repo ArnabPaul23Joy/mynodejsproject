@@ -104,7 +104,7 @@ function LogIn(props){
                   {/* onClick={handleGoogleSignIn} */}
                   <button className="btn btn-lg btn-google btn-block text-uppercase" onClick={handleGoogleSignIn}><i className="fab fa-google mr-2"></i> Sign in with Google</button>
                   {/* onClick={handleFacebookSignIn} */}
-                  <button className="btn btn-lg btn-facebook btn-block text-uppercase" onClick={handleFacebookSignIn}><i className="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+                  <button className="btn btn-lg btn-facebook btn-block text-uppercase"><i className="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
                   <br/>
                   <p>Do not have an account? <button data-testid="switch-to-login" onClick={handleClick}class="registerBtton">Sign Up</button></p>
                 </form>
