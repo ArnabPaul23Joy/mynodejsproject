@@ -99,7 +99,7 @@ passport.use(
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
-      print(profile);
+      console.log(profile);
       User.findOrCreate({ googleId: profile.id }, function (err, user) {
         //findOrCreate isn't a mongo db function
         return cb(err, user);
