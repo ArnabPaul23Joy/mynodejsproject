@@ -102,16 +102,16 @@ passport.use(
       console.log(profile.emails[0].value);
       var stttt=""
       stttt+=profile.emails[0].value+profile.id
-      // bcrypt.genSalt(10, async function (err, salt) {
-      //   bcrypt.hash(stttt, salt, async function (err, hash) {
-      //     const newUser = new User({
-      //       userName: profile.displayName,
-      //       email: profile.emails[0].value,
-      //       googleId:profile.id,
-      //       password: hash,
-      //     });
-      //   })
-      // })
+      bcrypt.genSalt(10, async function (err, salt) {
+        bcrypt.hash(stttt, salt, async function (err, hash) {
+          const newUser = new User({
+            userName: profile.displayName,
+            email: profile.emails[0].value,
+            googleId:profile.id,
+            password: hash,
+          });
+        })
+      })
       User.findOrCreate({ googleId: profile.id }, function (err, user) {
         //findOrCreate isn't a mongo db function
         // newUser.
@@ -120,7 +120,7 @@ passport.use(
           return cb(err, user);
         }
         else{
-          return cb(err, user);
+          return cb(err, newUser);
         }
       });
     }
