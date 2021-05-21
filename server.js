@@ -30,7 +30,7 @@ connection.once('open', () => {
 })
 // const exercisesRouter = require('./api/exercises');
 const userLogin = require('./routes/userLogin');
-const userLoginGoogle = require("./routes/userLoginGoogle");
+const userLoginWithGoogle = require('./routes/userLoginGoogle');
 const userRegister = require('./routes/userRegister');
 const getPosts = require('./routes/getPosts');
 const postNote = require('./routes/postNote');
@@ -40,7 +40,7 @@ const userLoginWithToken = require('./routes/userLoginWithToken');
 // app.use('/exercises', exercisesRouter);
 
 app.use('/login', userLogin);
-app.use("/googlesignin", userLoginGoogle);
+app.use("/googlesignin", userLoginWithGoogle);
 app.use('/register', userRegister);
 app.use('/getnotes/', getPosts);
 app.use('/post', postNote);
