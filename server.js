@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // app.use(express.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 // const router = express.Router();
 
 
@@ -33,7 +33,7 @@ const md5 = require("md5");
 app.use(passport.initialize());
 app.use(passport.session());
 // const cors = require("cors");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 // const path = require("path");
 app.use(cors({ origin: "http://localhost:5000", credentials: true }));
 // app.use(express.json());
