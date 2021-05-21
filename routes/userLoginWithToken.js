@@ -50,13 +50,13 @@ router.post("/", verify, async (req, res) => {
 
     return res.send({ status: "Invalid Token" });
   } else {
-    var u_iid = crypto.createHash("md5").update(req.user.email).digest("hex");
+    var u_iid = crypto.createHash("md5").update(req.user.u_id).digest("hex");
     var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
     rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
     const token = jwt.sign(
       {
         status: "Success",
-        email: req.user.email,
+        // email: req.user.email,
         u_id: req.user.u_id,
         [u_iid]: rFieldVal,
       },

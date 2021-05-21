@@ -25,10 +25,10 @@ const bcrypt = require("bcrypt");
 // const session=require("express-session")
 
 // let User = require("../models/userModel.js");
-// // const passport=require("passport")
-// // const passportLocalMongoose=require("passport-local-mongoose")
-// // const GoogleStrategy = require('passport-google-oauth20').Strategy;
-// // const FacebookStrategy = require('passport-facebook').Strategy;
+const passport=require("passport")
+const passportLocalMongoose=require("passport-local-mongoose")
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 // const findOrCreate = require('mongoose-findorcreate')
 // const md5 =require("md5")
 // // const encrypt=require("mongoose-encryption")
@@ -106,18 +106,15 @@ router.route("/").post(async (req, res) => {
           //         })
 
           //     })
-
-          var u_iid = crypto
-            .createHash("md5")
-            .update(newUser.email)
-            .digest("hex");
-          var rFieldVal =
-            u_iid + Math.random().toString(36).substring(7) + u_iid;
+          var u_iid=""
+          u_iid += newUser._id.toString();
+          u_iid = crypto.createHash("md5").update(u_iid).digest("hex");
+          var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
           rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
           const token = jwt.sign(
             {
               status: "Success",
-              email: newUser.email,
+              // email: newUser.email,
               u_id: newUser._id,
               [u_iid]: rFieldVal,
             },

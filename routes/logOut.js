@@ -67,14 +67,14 @@ router.post("/", verify, async (req, res) => {
 
     //                     })
     var eml = "";
-    eml += req.user.email;
-    var u_iid = crypto.createHash("md5").update(eml).digest("hex");
+    // eml += req.user.email;
+    var u_iid = crypto.createHash("md5").update(req.user.u_id).digest("hex");
     var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
     rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
     var token = jwt.sign(
       {
         status: "Success",
-        email: eml,
+        // email: eml,
         u_id: req.user.u_id,
         [u_iid]: rFieldVal,
       },

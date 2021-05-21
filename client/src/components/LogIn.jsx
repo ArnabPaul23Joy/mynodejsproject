@@ -61,6 +61,21 @@ function LogIn(props){
     //   username: ''
     // })
   }
+  function handleGoogleSignIn(){
+    axios.get("googlesignin/auth/google").then(res => {
+        // console.log("login    hhh"+res.data)
+        if (!(res.data.status==="Wrong email bruh!"||res.data.status==="Wrong password bruh!")){
+          console.log("from login")
+          console.log(res.data.status)
+          // props.onToken()
+            //props.onLoggIn("home");
+        }
+        else{
+          console.log(res.data)
+          // props.onNote(res.data)
+        }
+      });
+  }
   return (
     <div className="login">
       <div className="container">
@@ -87,9 +102,9 @@ function LogIn(props){
                   <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
                   <hr className="my-4"/>
                   {/* onClick={handleGoogleSignIn} */}
-                  <button className="btn btn-lg btn-google btn-block text-uppercase"><i className="fab fa-google mr-2"></i> Sign in with Google</button>
+                  <button className="btn btn-lg btn-google btn-block text-uppercase" onClick={handleGoogleSignIn}><i className="fab fa-google mr-2"></i> Sign in with Google</button>
                   {/* onClick={handleFacebookSignIn} */}
-                  <button className="btn btn-lg btn-facebook btn-block text-uppercase"><i className="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+                  <button className="btn btn-lg btn-facebook btn-block text-uppercase" onClick={handleFacebookSignIn}><i className="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
                   <br/>
                   <p>Do not have an account? <button data-testid="switch-to-login" onClick={handleClick}class="registerBtton">Sign Up</button></p>
                 </form>

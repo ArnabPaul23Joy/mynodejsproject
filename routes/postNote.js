@@ -54,7 +54,7 @@ router.post("/", verify, async (req, res) => {
   } else {
     const newNote = new PostNote({
       u_id: req.user.u_id,
-      email: req.user.email,
+      // email: req.user.email,
       postTitle: req.body.title,
       postContent: req.body.content,
     });
@@ -77,15 +77,15 @@ router.post("/", verify, async (req, res) => {
 
         //                 })
         var eemail = "";
-        eemail += req.user.email;
-        var u_iid = crypto.createHash("md5").update(eemail).digest("hex");
+        // eemail += req.user.email;
+        var u_iid = crypto.createHash("md5").update(req.user.u_id).digest("hex");
         var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
         rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
 
         const token = jwt.sign(
           {
             status: "Success",
-            email: eemail,
+            // email: eemail,
             u_id: req.user.u_id,
             [u_iid]: rFieldVal,
           },

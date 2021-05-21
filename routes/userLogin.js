@@ -24,7 +24,7 @@ let bcrypt2 = require("bcrypt");
 
 let User = require("../models/userModel.js");
 let randNumber = require("../models/randomNumber.js");
-//const passport=require("passport")
+// const passport=require("passport")
 // const passportLocalMongoose=require("passport-local-mongoose")
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // const FacebookStrategy = require('passport-facebook').Strategy;
@@ -110,7 +110,7 @@ router.route("/").post((req, res) => {
             const token = jwt.sign(
               {
                 status: "Success",
-                email: foundUser.email,
+                // email: foundUser.email,
                 u_id: foundUser._id,
                 [u_iid]: rFieldVal,
               },
