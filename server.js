@@ -35,7 +35,7 @@ app.use(passport.session());
 // const cors = require("cors");
 // const cookieParser = require("cookie-parser");
 // const path = require("path");
-app.use(cors({ origin: "http://localhost:5000", credentials: true }));
+app.use(cors({credentials: true }));
 // app.use(express.json());
 app.use(cookieParser());
 
