@@ -21,8 +21,8 @@ app.use(express.urlencoded({extended: false}));
 // const router = express.Router();
 
 
-let User = require("../models/userModel.js");
-let randNumber = require("../models/randomNumber.js");
+let User = require("./models/userModel.js");
+let randNumber = require("./models/randomNumber.js");
 const passport = require("passport");
 // const passportLocalMongoose=require("passport-local-mongoose")
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
