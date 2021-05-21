@@ -89,7 +89,7 @@ app.use('/loginWithToken',userLoginWithToken)
 //     res.sendFile('client/build/index.html');
 //   });
 // }
-var newUser= new User()
+// var newUser= new User()
 passport.use(
   new GoogleStrategy(
     {
@@ -100,11 +100,26 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, cb) {
       console.log(profile.emails[0].value);
+      var stttt=""
+      stttt+=profile.emails[0].value+profile.id
+      bcrypt.genSalt(10, async function (err, salt) {
+        bcrypt.hash(stttt, salt, async function (err, hash) {
+          const newUser = new User({
+            userName: profile.displayName,
+            email: profile.emails[0].value,
+            googleId:profile.id,
+            password: hash,
+          });
       User.findOrCreate({ googleId: profile.id }, function (err, user) {
         //findOrCreate isn't a mongo db function
         // newUser.
 
-        return cb(err, user);
+        if (err){
+          return cb(err, user);
+        }
+        else{
+          return cb(err, newUser);
+        }
       });
     }
   )
