@@ -114,7 +114,7 @@ app.get(
 );
 
 app.get(
-  "/auth/google/",
+  "/auth/google",
   passport.authenticate("google", { failureRedirect: "/" }),
   function (req, res) {
     // Successful authentication, redirect home.
