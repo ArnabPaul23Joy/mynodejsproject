@@ -89,7 +89,7 @@ app.use('/loginWithToken',userLoginWithToken)
 //     res.sendFile('client/build/index.html');
 //   });
 // }
-
+var newUser= new User()
 passport.use(
   new GoogleStrategy(
     {
@@ -99,9 +99,11 @@ passport.use(
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
-      console.log(profile);
+      console.log(profile.emails);
       User.findOrCreate({ googleId: profile.id }, function (err, user) {
         //findOrCreate isn't a mongo db function
+        // newUser.
+
         return cb(err, user);
       });
     }
