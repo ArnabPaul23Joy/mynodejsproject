@@ -34,10 +34,14 @@ const md5 = require("md5");
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/secretDB", {
-  useNewUrlParser: true,
-});
+// mongoose.connect("mongodb://localhost:27017/secretDB", {
+//   useNewUrlParser: true,
+// });
 
+// const connection = mongoose.connection;
+// connection.once("open", () => {
+//   console.log("MongoDB database connection established successfully");
+// });
 // const userSchema = new mongoose.Schema({
 //   email: String,
 //   password: String,
