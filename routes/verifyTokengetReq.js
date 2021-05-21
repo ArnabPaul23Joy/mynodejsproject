@@ -41,7 +41,7 @@ module.exports = async function (req, res, next) {
     // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
     // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
     await randNumber.findOne({ u_idHash: u_iid }, function (err, foundRand) {
-      if (!err) {
+      if (!err && !(!foundRand)) {
         if (token === foundRand.jToken) {
           req.user = decoded;
           next();
