@@ -116,7 +116,7 @@ passport.use(
           
       //   })
       // })
-      User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      User.findOrCreate({ googleId: newUser.googleId }, function (err, user) {
         //findOrCreate isn't a mongo db function
         // newUser.
 
@@ -124,7 +124,7 @@ passport.use(
         //   return cb(err, user);
         // }
         // else{
-        console.log(newUser)
+        console.log(newUser);
         return cb(err, newUser);
         // }
       });
