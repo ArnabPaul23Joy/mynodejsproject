@@ -6,7 +6,7 @@ const path = require('path');
 require('dotenv').config();
 // const cors = require("cors");
 
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 var crypto = require("crypto");
 const cookieParser = require("cookie-parser");
@@ -18,7 +18,7 @@ const port = process.env.PORT||5000;
 // app.use(cors());
 app.use(express.json());
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({extended: false}));
 
 // app.use(express.json());
@@ -119,22 +119,28 @@ passport.use(
           
       //   })
       // })
-      User.findOrCreate({ googleId: newUser.googleId }, function (err, user) {
-        //findOrCreate isn't a mongo db function
-        // newUser.
+      try{
+          User.findOrCreate({ googleId: newUser.googleId }, function (err, user) {
+          //findOrCreate isn't a mongo db function
+          // newUser.
 
-        // if (err){
-        //   return cb(err, user);
-        // }
-        // else{
-        // if (!user){
+          // if (err){
+          //   return cb(err, user);
+          // }
+          // else{
+          // if (!user){
 
-        // }
-        console.log(newUser);
-        console.log("user  ",user);
-        return cb(err, newUser);
-        // }
-      });
+          // }
+          console.log(newUser);
+          console.log("user  ",user);
+          return cb(err, newUser);
+          // }
+        });
+      }
+      catch(error){
+          return cb(error, newUser);
+      }
+      
     }
   )
 );
