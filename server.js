@@ -66,7 +66,7 @@ const userLoginWithToken = require('./routes/userLoginWithToken');
 // app.use('/exercises', exercisesRouter);
 
 app.use('/login', userLogin);
-app.use('/googlesignin', LoginWithGoogle);
+app.use('/googlesignin/', LoginWithGoogle);
 app.use('/register', userRegister);
 app.use('/getnotes/', getPosts);
 app.use('/post', postNote);
