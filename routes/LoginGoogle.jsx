@@ -54,7 +54,7 @@ router.get("/",function(req,res){
   const client = new OAuth2Client(process.env.CLIENT_ID);
   async function verify() {
     const ticket = await client.verifyIdToken({
-      idToken: req.params.token,
+      idToken: req.query.token,
       audience: process.env.CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
       // Or, if multiple clients access the backend:
       //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
