@@ -62,7 +62,7 @@ function LogIn(props){
     //   username: ''
     // })
   }
-  function googleResponse(response)  {
+  const googleResponse = async (response) => {
     console.log(response);
   };
   // function handleGoogleSignIn(){
@@ -132,8 +132,8 @@ function LogIn(props){
                   <GoogleLogin
                     clientId="517942336474-lrnvutun4bbneubub8pln5f1st8u04om.apps.googleusercontent.com"
                     buttonText="Sign in with Google"
-                    onSuccess={googleResponse}
-                    onFailure={googleResponse}
+                    onSuccess={this.googleResponse}
+                    onFailure={this.googleResponse}
                   />
                   {/* <button
                     className="btn btn-lg btn-google btn-block text-uppercase"
