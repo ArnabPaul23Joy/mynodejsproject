@@ -51,11 +51,11 @@ const md5 = require("md5");
 //   secret: String,
 // });
 router.get("/",function(req,res){
-  const client = new OAuth2Client(CLIENT_ID);
+  const client = new OAuth2Client(process.env.CLIENT_ID);
   async function verify() {
     const ticket = await client.verifyIdToken({
       idToken: req.params.token,
-      audience: CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
+      audience: process.env.CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
       // Or, if multiple clients access the backend:
       //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
     });
