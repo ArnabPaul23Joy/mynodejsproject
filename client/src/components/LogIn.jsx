@@ -68,7 +68,9 @@ function LogIn(props){
     console.log(response);
     const token = response?.tokenId;
     try{
-
+      axios.get("googlesignin/",{params:{token:token}}).then(function(res){
+        console.log("ressssssssssssssssss  "+res)
+      });
     }
     catch(error){
       console.log(error)

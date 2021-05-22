@@ -24,7 +24,7 @@ app.use(express.urlencoded({extended: false}));
 // app.use(express.json());
 // app.use(cookieParser());
 // const router = express.Router();
-
+console.log
 
 let User = require("./models/userModel.js");
 let randNumber = require("./models/randomNumber.js");
@@ -66,7 +66,7 @@ const userLoginWithToken = require('./routes/userLoginWithToken');
 // app.use('/exercises', exercisesRouter);
 
 app.use('/login', userLogin);
-// app.use('/googlesignin', userLoginWithGoogle);
+app.use('/googlesignin', userLoginWithGoogle);
 app.use('/register', userRegister);
 app.use('/getnotes/', getPosts);
 app.use('/post', postNote);
