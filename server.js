@@ -4,8 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 // const publicPath = path.join(__dirname, '..', 'public');
 require('dotenv').config();
-// const cors = require("cors");
-
+const cors = require("cors");
 // const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 var crypto = require("crypto");
@@ -45,6 +44,8 @@ const md5 = require("md5");
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(cors({ origin: "http://localhost:5000", credentials: true }));
+
 // app.use(express.static(path.join(__dirname, 'client/build')));
 const uri = "mongodb://localhost:27017/ListingAppTodo";
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
