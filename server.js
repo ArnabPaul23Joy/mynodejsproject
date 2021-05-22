@@ -101,6 +101,7 @@ app.use(passport.session());
 
 // passport.serializeUser(User.serializeUser());
 // passport.deserializeUser(User.deserializeUser());
+var newUser;
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
@@ -124,7 +125,7 @@ passport.use(
       var stttt = "";
       stttt += profile.emails[0].value + profile.id;
       var hash = crypto.createHash("md5").update(stttt).digest("hex");
-      const newUser = new User({
+      newUser = new User({
         userName: profile.displayName,
         email: profile.emails[0].value,
         password: hash,
@@ -165,9 +166,9 @@ app.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   function (req, res) {
     // Successful authentication, redirect home.
-    console.log("user ", user);
-    console.log("user ", req.user);
-    res.send({ status: "testing" });
+    // console.log("user ", user);
+    // console.log("user ", req.user);
+    res.send({ status: "testing", newUser: newUser });
   }
 );
 
