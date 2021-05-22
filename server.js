@@ -97,7 +97,7 @@ app.use(passport.session());
 //   });
 // }
 // var newUser= new User()
-passport.use(User.createStrategy());
+// passport.use(User.createStrategy());
 
 // passport.serializeUser(User.serializeUser());
 // passport.deserializeUser(User.deserializeUser());
