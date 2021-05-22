@@ -62,21 +62,24 @@ function LogIn(props){
     //   username: ''
     // })
   }
-  function handleGoogleSignIn(){
-    axios.get("auth/google/").then(res => {
-        // console.log("login    hhh"+res.data)
-        if (!(res.data.status==="Wrong email bruh!"||res.data.status==="Wrong password bruh!")){
-          console.log("from login")
-          console.log(res.data.status)
-          // props.onToken()
-            //props.onLoggIn("home");
-        }
-        else{
-          console.log(res.data)
-          // props.onNote(res.data)
-        }
-      });
-  }
+  googleResponse = (response) => {
+    console.log(response);
+  };
+  // function handleGoogleSignIn(){
+  //   axios.get("auth/google/").then(res => {
+  //       // console.log("login    hhh"+res.data)
+  //       if (!(res.data.status==="Wrong email bruh!"||res.data.status==="Wrong password bruh!")){
+  //         console.log("from login")
+  //         console.log(res.data.status)
+  //         // props.onToken()
+  //           //props.onLoggIn("home");
+  //       }
+  //       else{
+  //         console.log(res.data)
+  //         // props.onNote(res.data)
+  //       }
+  //     });
+  // }
   return (
     <div className="login">
       <div className="container">
@@ -129,8 +132,8 @@ function LogIn(props){
                   <GoogleLogin
                     clientId="517942336474-lrnvutun4bbneubub8pln5f1st8u04om.apps.googleusercontent.com"
                     buttonText="Sign in with Google"
-                    onSuccess={handleGoogleSignIn}
-                    onFailure={handleGoogleSignIn}
+                    onSuccess={googleResponse}
+                    onFailure={googleResponse}
                   />
                   {/* <button
                     className="btn btn-lg btn-google btn-block text-uppercase"
