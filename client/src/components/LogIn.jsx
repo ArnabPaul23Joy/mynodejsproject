@@ -62,7 +62,7 @@ function LogIn(props){
     //   username: ''
     // })
   }
-  googleResponse = (response) => {
+  function googleResponse(response)  {
     console.log(response);
   };
   // function handleGoogleSignIn(){
