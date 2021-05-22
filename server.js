@@ -24,19 +24,19 @@ app.use(express.urlencoded({extended: false}));
 // app.use(express.json());
 // app.use(cookieParser());
 // const router = express.Router();
-console.log
+// console.log
 
 let User = require("./models/userModel.js");
 let randNumber = require("./models/randomNumber.js");
-const passport = require("passport");
+// const passport = require("passport");
 // const passportLocalMongoose=require("passport-local-mongoose")
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const FacebookStrategy = require("passport-facebook").Strategy;
-const findOrCreate = require("mongoose-findorcreate");
+// const GoogleStrategy = require("passport-google-oauth20").Strategy;
+// const FacebookStrategy = require("passport-facebook").Strategy;
+// const findOrCreate = require("mongoose-findorcreate");
 const md5 = require("md5");
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 // const cors = require("cors");
 // const cookieParser = require("cookie-parser");
 // const path = require("path");
