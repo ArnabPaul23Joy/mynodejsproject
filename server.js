@@ -56,7 +56,7 @@ connection.once('open', () => {
 
 // const exercisesRouter = require('./api/exercises');
 const userLogin = require('./routes/userLogin');
-const LoginWithGoogle = require("./routes/LoginGoogle.jsx");
+const LoginWithGoogle = require('./routes/LoginGoogle.jsx');
 const userRegister = require('./routes/userRegister');
 const getPosts = require('./routes/getPosts');
 const postNote = require('./routes/postNote');
@@ -74,8 +74,8 @@ app.use('/deletenote', deleteNote);
 app.use('/logout', logOut);
 app.use('/loginWithToken',userLoginWithToken)
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 // app.get('/*', function (req, res) {
 //    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 //  });
