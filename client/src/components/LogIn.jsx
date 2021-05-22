@@ -67,6 +67,7 @@ function LogIn(props){
     const result=response?.profileObj
     console.log(response);
     const token = response?.tokenObj.id_token;
+    console.log("tk   "+token)
     try{
       axios.get("googlesignin/",{params:{token:token}}).then(function(res){
         console.log("ressssssssssssssssss  "+res)
