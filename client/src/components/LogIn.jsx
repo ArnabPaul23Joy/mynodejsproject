@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { GoogleLogin } from "react-google-login";
+import {useDispatch} from "react-redux"
 function LogIn(props){
   
   function handleClick() {
@@ -63,7 +64,15 @@ function LogIn(props){
     // })
   }
   async function googleResponse(response){
+    const result=response?.profileObj
     console.log(response);
+    const token = response?.tokenId;
+    try{
+
+    }
+    catch(error){
+      console.log(error)
+    }
   };
   // function handleGoogleSignIn(){
   //   axios.get("auth/google/").then(res => {
