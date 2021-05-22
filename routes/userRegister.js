@@ -151,7 +151,7 @@ router.route("/").post(async (req, res) => {
 
           //   return "";
         } else {
-          return res.send("user exists already you fuck!");
+          return res.send("Wrong email or password!");
         }
       });
       // .then(()=> res.json('User added Successfully'))

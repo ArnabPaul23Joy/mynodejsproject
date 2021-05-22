@@ -39,11 +39,11 @@ function Register(props){
       axios.post('register/', user)
         .then(res => {
         // console.log("login    hhh"+res.data)
-          if (!(res.data==="user exists already you fuck!")){
-              props.onToken()
-          }
-          else{
-            console.log(res.data)
+          if (!(res.data === "Wrong email or password!")) {
+            props.onToken();
+          } else {
+            console.log(res.data);
+            window.alert("Wrong Email or Password!\n Try again bro!")
           }
         });
         // if (!(tttt=="user exists already you fuck!")){
