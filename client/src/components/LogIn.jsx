@@ -62,7 +62,7 @@ function LogIn(props){
     // })
   }
   function handleGoogleSignIn(){
-    axios.get("auth/google/").then(res => {
+    axios.post("auth/google/").then(res => {
         // console.log("login    hhh"+res.data)
         if (!(res.data.status==="Wrong email bruh!"||res.data.status==="Wrong password bruh!")){
           console.log("from login")
