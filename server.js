@@ -117,7 +117,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/google/callback",
+      callbackURL: "http://localhost:5000/callback",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
@@ -157,12 +157,12 @@ passport.use(
 );
 
 app.get(
-  "/auth/google",
+  "/",
   passport.authenticate("google", { scope: ["profile","email"] })
 );
 
 app.get(
-  "/auth/google/callback",
+  "/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   function (req, res) {
     // Successful authentication, redirect home.
