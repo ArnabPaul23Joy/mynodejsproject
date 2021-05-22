@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
+import { GoogleLogin } from "react-google-login";
 function LogIn(props){
   
   function handleClick() {
@@ -62,7 +63,7 @@ function LogIn(props){
     // })
   }
   function handleGoogleSignIn(){
-    axios.post("auth/google/").then(res => {
+    axios.get("auth/google/").then(res => {
         // console.log("login    hhh"+res.data)
         if (!(res.data.status==="Wrong email bruh!"||res.data.status==="Wrong password bruh!")){
           console.log("from login")
@@ -125,12 +126,18 @@ function LogIn(props){
                   </button>
                   <hr className="my-4" />
                   {/* onClick={handleGoogleSignIn} */}
-                  <button
+                  <GoogleLogin
+                    clientId="517942336474-lrnvutun4bbneubub8pln5f1st8u04om.apps.googleusercontent.com"
+                    buttonText="Sign in with Google"
+                    onSuccess={handleGoogleSignIn}
+                    onFailure={handleGoogleSignIn}
+                  />
+                  {/* <button
                     className="btn btn-lg btn-google btn-block text-uppercase"
                     onClick={handleGoogleSignIn}
                   >
                       <i className="fab fa-google mr-2"></i> Sign in with Google
-                   </button>
+                   </button> */}
                   {/* onClick={handleFacebookSignIn} */}
                   <button className="btn btn-lg btn-facebook btn-block text-uppercase">
                     <i className="fab fa-facebook-f mr-2"></i> Sign in with
