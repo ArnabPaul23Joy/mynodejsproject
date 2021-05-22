@@ -101,4 +101,5 @@ router.get("/",function(req,res){
 //     res.send({status:"testing"});
 //   }
 // );
+module.exports = router;
 

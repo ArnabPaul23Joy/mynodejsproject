@@ -19,7 +19,7 @@ app.use(express.json());
 
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({extended: false}));
-
+// app.use("/", routes);
 // app.use(express.json());
 // app.use(cookieParser());
 // const router = express.Router();
