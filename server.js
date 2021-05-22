@@ -116,13 +116,13 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "/auth/google/",
+      callbackURL: "http://localhost:5000/auth/google/",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
       console.log(profile.emails[0].value);
-      var stttt=""
-      stttt+=profile.emails[0].value+profile.id
+      var stttt = "";
+      stttt += profile.emails[0].value + profile.id;
       var hash = crypto.createHash("md5").update(stttt).digest("hex");
       const newUser = new User({
         userName: profile.displayName,
@@ -132,7 +132,7 @@ passport.use(
       });
       // bcrypt.genSalt(10, async function (err, salt) {
       //   bcrypt.hash(stttt, salt, async function (err, hash) {
-          
+
       //   })
       // })
       User.findOrCreate({ googleId: newUser.googleId }, function (err, user) {
@@ -147,7 +147,7 @@ passport.use(
 
         // }
         console.log(newUser);
-        console.log("user  ",user);
+        console.log("user  ", user);
         return cb(err, newUser);
         // }
       });
@@ -161,7 +161,7 @@ app.get(
 );
 
 app.get(
-  "/auth/google",
+  "/auth/google/",
   passport.authenticate("google", { failureRedirect: "/" }),
   function (req, res) {
     // Successful authentication, redirect home.
