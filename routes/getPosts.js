@@ -111,12 +111,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
     console.log("token");
     console.log(token);
 
-    res.cookie("token", token, { httpOnly: true });
-    res.send({
-      status: "Found bruh!",
-      notes: allNotes,
-      token: token,
-    });
+    
     // console.log(token)
     // var tkn=""
     // tkn+=token
@@ -136,7 +131,14 @@ router.get("/", verifyTokengetReq, async (req, res) => {
           // return
         }
       }
-    );
+    ).then(()=>{
+      res.cookie("token", token, { httpOnly: true });
+      res.send({
+        status: "Found bruh!",
+        notes: allNotes,
+        token: token,
+      });
+    })
 
     // return "";
     // .updateOne(

@@ -124,8 +124,6 @@ router.route("/").post(async (req, res) => {
 
           console.log("userRegister   " + token);
 
-          res.cookie("token", token, { httpOnly: true });
-          res.send({ status: "Successful", token: token });
           await randNumber.updateOne(
             { u_idHash: u_iid },
             { jToken: token },
@@ -139,7 +137,10 @@ router.route("/").post(async (req, res) => {
                 // return
               }
             }
-          );
+          ).then(()=>{            
+            res.cookie("token", token, { httpOnly: true });
+            res.send({ status: "Successful", token: token });
+          })
           //   await randNumber.updateOne(
           //     { upsert: true },
           //     function (err) {

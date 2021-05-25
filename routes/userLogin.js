@@ -135,9 +135,11 @@ router.route("/").post((req, res) => {
                   // return
                 }
               }
-            );
-            res.cookie("token", token, { httpOnly: true });
-            res.send({ status: "Successful", token: token });
+            ).then(()=>{
+              
+              res.cookie("token", token, { httpOnly: true });
+              res.send({ status: "Successful", token: token });
+            })
             // return "";
             // randNumber.updateOne(
             //   { upsert: true },

@@ -85,7 +85,7 @@ router.post("/", verify, async (req, res) => {
     console.log("token");
     console.log(token);
 
-    res.send({ status: "Logged out bitch!" });
+    
 
     await randNumber.updateOne(
       { u_idHash: u_iid },
@@ -100,7 +100,9 @@ router.post("/", verify, async (req, res) => {
           // return
         }
       }
-    );
+    ).then(()=>{
+      res.send({ status: "Logged out bitch!" });
+    })
     // return ""
     // randNumber.updateOne(
     //   { upsert: true },

@@ -66,8 +66,6 @@ router.post("/", verify, async (req, res) => {
 
     console.log("token");
     console.log(token);
-    res.cookie("token", token, { httpOnly: true });
-    res.send({ status: "Success", token: token });
     await randNumber.updateOne(
       { u_idHash: u_iid },
       { jToken: token },
@@ -81,7 +79,11 @@ router.post("/", verify, async (req, res) => {
           // return
         }
       }
-    );
+    ).then(()=>{
+      
+      res.cookie("token", token, { httpOnly: true });
+      res.send({ status: "Success", token: token });
+    })
   }
   // const uName=req.body.email
   // const pword=req.body.password

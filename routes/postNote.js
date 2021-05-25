@@ -92,12 +92,7 @@ router.post("/", verify, async (req, res) => {
           },
           process.env.TOKEN_SECRET
         );
-        res.cookie("token", token, { httpOnly: true });
-        res.send({
-          status: "Successfully added",
-          token: token,
-          noteNew: newNote,
-        });
+
 
         console.log("token");
         console.log(token);
@@ -115,7 +110,14 @@ router.post("/", verify, async (req, res) => {
               // return
             }
           }
-        );
+        ).then(()=>{
+                  res.cookie("token", token, { httpOnly: true });
+                  res.send({
+                    status: "Successfully added",
+                    token: token,
+                    noteNew: newNote,
+                  });
+        })
         // return ""
         // randNumber.updateOne(
         //   { upsert: true },
