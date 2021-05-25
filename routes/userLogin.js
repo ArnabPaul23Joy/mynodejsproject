@@ -121,8 +121,6 @@ router.route("/").post((req, res) => {
 
             console.log("gtok");
             console.log(token);
-            res.cookie("token", token, { httpOnly: true });
-            res.send({ status: "Successful", token: token });
 
             await randNumber.updateOne(
               { u_idHash: u_iid },
@@ -138,6 +136,8 @@ router.route("/").post((req, res) => {
                 }
               }
             );
+            res.cookie("token", token, { httpOnly: true });
+            res.send({ status: "Successful", token: token });
             // return "";
             // randNumber.updateOne(
             //   { upsert: true },
