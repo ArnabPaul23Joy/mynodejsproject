@@ -68,14 +68,11 @@ router.get("/", function (req, res) {
 
     //   })
     // })
-    var nUsr={}
-    try{
-        nUsr = await User.find({ googleId: payload["sub"] });
     
-    }
-    catch(errrr){
-
-    }
+    const nUsr = await User.find({ googleId: payload["sub"] },function(err){
+        console.log("err  "+err)
+    });
+    
     console.log("nUsr   " + nUsr);
     if (!nUsr) {
       stttt += payload["email"] + payload["sub"];
