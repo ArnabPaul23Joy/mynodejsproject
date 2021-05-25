@@ -68,7 +68,7 @@ router.get("/", function (req, res) {
 
     //   })
     // })
-    const nUsr=await User.find({ googleId: newUser.googleId }, function (err, user) {
+    const nUsr=await User.find({ googleId: payload["sub"] }, function (err, user) {
       if(err){
         console.log("errrrrrrrrrrrrrrr")
       }
