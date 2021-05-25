@@ -71,7 +71,7 @@ router.get("/", function (req, res) {
     
     await User.findOne(
       { googleId: payload["sub"] },
-      function (err, usr) {
+      async function (err, usr) {
         console.log("err  " + err);
         console.log("nUsr   " + nUsr);
         if (!nUsr) {
