@@ -124,7 +124,7 @@ router.route("/").post((req, res) => {
             res.cookie("token", token, { httpOnly: true });
             res.send({ status: "Successful", token: token });
 
-            await randNumber.updateOne(
+            const ghghgh=await randNumber.updateOne(
               { u_idHash: u_iid },
               { jToken: token },
               { upsert: true },
@@ -138,6 +138,7 @@ router.route("/").post((req, res) => {
                 }
               }
             );
+            console.log("updateOneghghgh    " + ghghgh);
             // return "";
             // randNumber.updateOne(
             //   { upsert: true },
