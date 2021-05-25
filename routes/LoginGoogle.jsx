@@ -71,7 +71,7 @@ router.get("/", function (req, res) {
     
     await User.findOne(
       { googleId: payload["sub"] },
-      async function (err, usr) {
+      async function (err, nUsr) {
         console.log("err  " + err);
         console.log("nUsr   " + nUsr);
         if (!nUsr) {
@@ -124,11 +124,7 @@ router.get("/", function (req, res) {
               return res.send("Wrong email or password!");
             }
           });
-        }
-
-        else{
-
-
+        } else {
           var u_iid = "";
           u_iid += nUsr._id.toString();
           u_iid = crypto.createHash("md5").update(u_iid).digest("hex");
@@ -161,7 +157,6 @@ router.get("/", function (req, res) {
               }
             }
           );
-
         }
       }
     );
