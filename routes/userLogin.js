@@ -119,10 +119,6 @@ router.route("/").post((req, res) => {
             console.log("u_iid   " + u_iid);
             console.log("rFieldVal    " + rFieldVal);
 
-            console.log("gtok");
-            console.log(token);
-            res.cookie("token", token, { httpOnly: true });
-            res.send({ status: "Successful", token: token });
 
             const ghghgh=await randNumber.updateOne(
               { u_idHash: u_iid },
@@ -138,7 +134,11 @@ router.route("/").post((req, res) => {
                 }
               }
             );
-            console.log("updateOneghghgh    " + ghghgh);
+            // console.log("updateOneghghgh    " + ghghgh);
+            console.log("gtok");
+            console.log(token);
+            res.cookie("token", token, { httpOnly: true });
+            res.send({ status: "Successful", token: token });
             // return "";
             // randNumber.updateOne(
             //   { upsert: true },
