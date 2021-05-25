@@ -95,6 +95,8 @@ router.post("/", verify, async (req, res) => {
             process.env.TOKEN_SECRET
           );
                         
+          res.cookie("token", token, { httpOnly: true });
+          res.send({ status: "Delete Succeeded", token: token });
           console.log("token");
           console.log(token)
 
@@ -112,11 +114,9 @@ router.post("/", verify, async (req, res) => {
                 // return
               }
             }
-          ).then(()=>{
-            
-            res.cookie("token", token, { httpOnly: true });
-            res.send({ status: "Delete Succeeded", token: token });
-          })
+          )
+        //   .then(()=>{
+        //   })
 
           // return "";
           //     randNumber.updateOne(,
