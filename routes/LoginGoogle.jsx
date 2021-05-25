@@ -69,9 +69,13 @@ router.get("/", function (req, res) {
     //   })
     // })
     
-    const nUsr = await User.find({ googleId: payload["sub"] },function(err){
-        console.log("err  "+err)
-    });
+    const nUsr = await User.find(
+      { googleId: payload["sub"] },
+      function (err, usr) {
+        console.log("err  " + err);
+        console.log("usr  " + usr);
+      }
+    );
     
     console.log("nUsr   " + nUsr);
     if (!nUsr) {
