@@ -14,7 +14,7 @@ var crypto = require("crypto");
 let randNumber = require("../models/randomNumber.js");
 module.exports = async function (req, res, next) {
   // const token=req.header('auth-token')
-  console.log("Cookies: ", req.cookies);
+  // console.log("Cookies: ", req.cookies);
   const token = req.cookies.token;
   console.log("hghghgh  " + token);
   if (!token) return res.send("Access Denied");
@@ -42,6 +42,7 @@ module.exports = async function (req, res, next) {
     // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
     await randNumber.findOne({ u_idHash: u_iid }, function (err, foundRand) {
       if (!err && !(!foundRand)) {
+        console.log("foundRand.jToken   " + foundRand.jToken);
         if (token === foundRand.jToken) {
           req.user = decoded;
           next();
