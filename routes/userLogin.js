@@ -60,7 +60,7 @@ router.route("/").post((req, res) => {
   //             })
   //         }
   //     })
-  // console.log(uName+" "+pword)
+  console.log("Never gonna give you up")
   User.findOne({ email: uName }, async function (err, foundUser) {
     if (!err) {
       console.log("found user " + uName);
