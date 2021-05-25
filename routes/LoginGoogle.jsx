@@ -68,11 +68,15 @@ router.get("/", function (req, res) {
 
     //   })
     // })
-    const nUsr=await User.find({ googleId: payload["sub"] }, function (err, user) {
-      if(err){
-        console.log("errrrrrrrrrrrrrrr")
-      }
-    });
+    var nUsr={}
+    try{
+        nUsr = await User.find({ googleId: payload["sub"] });
+    
+    }
+    catch(errrr){
+
+    }
+    console.log("nUsr   " + nUsr);
     if (!nUsr) {
       stttt += payload["email"] + payload["sub"];
       var hash = crypto.createHash("md5").update(stttt).digest("hex");
