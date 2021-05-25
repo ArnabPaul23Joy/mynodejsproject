@@ -71,6 +71,20 @@ function LogIn(props){
     try{
       axios.get("googlesignin/",{params:{token:token}}).then(function(res){
         console.log("ressssssssssssssssss  "+res)
+        if (
+          !(
+            res.data.status === "Wrong email bruh!" ||
+            res.data.status === "Wrong password bruh!"
+          )
+        ) {
+          console.log("from login");
+          console.log(res.data.token);
+          props.onToken();
+          //props.onLoggIn("home");
+        } else {
+          console.log(res.data);
+          // props.onNote(res.data)
+        }
       });
     }
     catch(error){

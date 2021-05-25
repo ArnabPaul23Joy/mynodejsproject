@@ -51,7 +51,7 @@ router.post("/", verify, async (req, res) => {
   console.log("req.body.content  " + req.body.content);
   // console.log(req.user)
   if (req.user.status === "Invalid Token") {
-    return res.send({ status: "Invalid Token" });
+    return res.send(req.user.status);
   } else {
     const newNote = new PostNote({
       u_id: req.user.u_id,
@@ -134,7 +134,6 @@ router.post("/", verify, async (req, res) => {
         // );
       } else {
         return res.send({
-
           status: "Failed to save the note bruh!",
         });
       }
