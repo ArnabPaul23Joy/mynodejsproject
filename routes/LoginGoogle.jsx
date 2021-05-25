@@ -29,7 +29,7 @@ let randNumber = require("../models/randomNumber.js");
 // const passportLocalMongoose=require("passport-local-mongoose")
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // const FacebookStrategy = require('passport-facebook').Strategy;
-// const findOrCreate = require('mongoose-findorcreate')
+const findOrCreate = require('mongoose-findorcreate')
 const md5 = require("md5");
 
 // app.use(passport.initialize());
@@ -62,6 +62,7 @@ router.get("/",function(req,res){
     const payload = ticket.getPayload();
     const userid = payload["sub"];
     console.log(payload)
+
     // If request specified a G Suite domain:
     // const domain = payload['hd'];
   }
