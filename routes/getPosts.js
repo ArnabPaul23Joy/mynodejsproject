@@ -96,13 +96,18 @@ router.get("/", verifyTokengetReq,  (req, res) => {
                 return res.send({ status: "Update Failed" });
               } else {
                 console.log("Original Doc : ", docs);
-
-                res.cookie("token", token, { httpOnly: true });
+                try{
+                  res.cookie("token", token, { httpOnly: true });
                 return res.send({
                   status: "Found bruh!",
                   notes: allNotes,
                   token: token,
                 });
+                }
+                catch(err){
+                  console.log(err)
+                }
+                
                 // return
               }
             }
