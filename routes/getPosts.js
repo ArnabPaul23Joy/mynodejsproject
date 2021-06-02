@@ -101,7 +101,6 @@ router.get("/", verifyTokengetReq,  (req, res) => {
                 return res.send({
                   status: "Found bruh!",
                   notes: allNotes,
-                  token: token,
                 });
                 }
                 catch(err){
