@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const mdbUri = process.env.mongoDBURI;
 const findOrCreate = require("mongoose-findorcreate");
-mongoose.connect(mdbUri, { useNewUrlParser: true });
+// mongoose.connect(mdbUri, { useNewUrlParser: true });
 const userSchema = new mongoose.Schema(
   {
     userName: String,
