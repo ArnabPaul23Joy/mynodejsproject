@@ -93,12 +93,12 @@ router.get("/", verifyTokengetReq,  (req, res) => {
             function (err, docs) {
               if (err) {
                 console.log(err);
-                res.send({ status: "Update Failed" });
+                return res.send({ status: "Update Failed" });
               } else {
                 console.log("Original Doc : ", docs);
 
                 res.cookie("token", token, { httpOnly: true });
-                res.send({
+                return res.send({
                   status: "Found bruh!",
                   notes: allNotes,
                   token: token,
