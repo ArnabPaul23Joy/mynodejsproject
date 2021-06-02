@@ -55,7 +55,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-      await PostNote.find({ u_id: req.user.u_id },function(err,allNotes){
+      await PostNote.find({ u_id: req.user.u_id },async function(err,allNotes){
           var u_iid = crypto
             .createHash("md5")
             .update(req.user.u_id)
