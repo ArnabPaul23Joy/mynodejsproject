@@ -47,9 +47,9 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(cors({ origin: "http://localhost:5000", credentials: true }));
 
 // app.use(express.static(path.join(__dirname, 'client/build')));
-const uri = "mongodb://localhost:27017/ListingAppTodo";
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
-);
+
+const mdbUri = process.env.mongoDBURI;
+mongoose.connect(mdbUri, { useNewUrlParser: true, useCreateIndex: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
