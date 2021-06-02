@@ -49,13 +49,13 @@ const md5 = require("md5");
 
 // verify
 
-router.get("/", verifyTokengetReq, async (req, res) => {
+router.get("/", verifyTokengetReq,  (req, res) => {
   var allNotes = [];
   console.log("req.user.status   " + req.user.status);
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-      await PostNote.find({ u_id: req.user.u_id },async function(err,allNotes){
+       PostNote.find({ u_id: req.user.u_id }, function(err,allNotes){
           var u_iid = crypto
             .createHash("md5")
             .update(req.user.u_id)
@@ -86,7 +86,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
           // return res.json({ status: "just checking", token: token });
 
           // var errorExists = "";
-          await randNumber.updateOne(
+           randNumber.updateOne(
             { u_idHash: u_iid },
             { jToken: token },
             { upsert: true },
