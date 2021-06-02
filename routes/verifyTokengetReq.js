@@ -60,8 +60,8 @@ module.exports = async function (req, res, next) {
         next();
       }
     });
-    console.log(req.user);
-    next();
+    // console.log(req.user);
+    // next();
   } catch (err) {
     console.log("problem 3");
     req.user = { status: "Invalid Token" };

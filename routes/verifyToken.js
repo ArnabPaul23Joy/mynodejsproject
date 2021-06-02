@@ -60,8 +60,8 @@ module.exports = async function (req, res, next) {
     });
     console.log("3333333333333333");
 
-    console.log(req.user);
-    next();
+    // console.log(req.user);
+    // next();
   } catch (err) {
     console.log("44444444444444");
 
