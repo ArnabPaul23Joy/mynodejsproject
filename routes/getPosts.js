@@ -55,7 +55,59 @@ router.get("/", verifyTokengetReq, async (req, res) => {
   if (req.user.status === "Invalid Token") {
     return res.send({ status: "Invalid Token", token: req.body.token });
   } else {
-    allNotes = await PostNote.find({ u_id: req.user.u_id });
+      await PostNote.find({ u_id: req.user.u_id },function(err,allNotes){
+          var u_iid = crypto
+            .createHash("md5")
+            .update(req.user.u_id)
+            .digest("hex");
+          var rFieldVal =
+            u_iid + Math.random().toString(36).substring(7) + u_iid;
+          rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
+          console.log("get posts u_iid   " + u_iid);
+          // var u_iid = crypto.createHash('md5').update().digest('hex');
+          // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
+          // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
+          // allNotes=notes
+          var token = jwt.sign(
+            {
+              status: "Success",
+              // email: req.user.email,
+              u_id: req.user.u_id,
+              [u_iid]: rFieldVal,
+            },
+            process.env.TOKEN_SECRET
+          );
+          console.log("token");
+          console.log(token);
+
+          // console.log(token)
+          // var tkn=""
+          // tkn+=token
+          // return res.json({ status: "just checking", token: token });
+
+          // var errorExists = "";
+          await randNumber.updateOne(
+            { u_idHash: u_iid },
+            { jToken: token },
+            { upsert: true },
+            function (err, docs) {
+              if (err) {
+                console.log(err);
+                res.send({ status: "Update Failed" });
+              } else {
+                console.log("Original Doc : ", docs);
+
+                res.cookie("token", token, { httpOnly: true });
+                res.send({
+                  status: "Found bruh!",
+                  notes: allNotes,
+                  token: token,
+                });
+                // return
+              }
+            }
+          );
+      });
     //     , function (err, posts) {
     //   if (!err) {
     //     Array.prototype.push.apply(allNotes, posts);
@@ -91,53 +143,7 @@ router.get("/", verifyTokengetReq, async (req, res) => {
     var email = "";
     // email += req.user.email;
 
-    var u_iid = crypto.createHash("md5").update(req.user.u_id).digest("hex");
-    var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
-    rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
-    console.log("get posts u_iid   " + u_iid);
-    // var u_iid = crypto.createHash('md5').update().digest('hex');
-    // var rFieldVal=u_iid+Math.random().toString(36).substring(7)+u_iid
-    // rFieldVal = crypto.createHash('md5').update(rFieldVal).digest('hex');
-    // allNotes=notes
-    var token = jwt.sign(
-      {
-        status: "Success",
-        // email: req.user.email,
-        u_id: req.user.u_id,
-        [u_iid]: rFieldVal,
-      },
-      process.env.TOKEN_SECRET
-    );
-    console.log("token");
-    console.log(token);
-
-    // console.log(token)
-    // var tkn=""
-    // tkn+=token
-    // return res.json({ status: "just checking", token: token });
-
-    // var errorExists = "";
-    await randNumber.updateOne(
-      { u_idHash: u_iid },
-      { jToken: token },
-      { upsert: true },
-      function (err, docs) {
-        if (err) {
-          console.log(err);
-          res.send({ status: "Update Failed" });
-        } else {
-          console.log("Original Doc : ", docs);
-          
-          res.cookie("token", token, { httpOnly: true });
-          res.send({
-            status: "Found bruh!",
-            notes: allNotes,
-            token: token,
-          });
-          // return
-        }
-      }
-    );
+    // ;
 
     // return "";
     // .updateOne(
