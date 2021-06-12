@@ -10,9 +10,11 @@ app.use(express.json());
 app.use(cookieParser());
 const router = express.Router();
 
+var nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 let User = require("../models/userModel.js");
 let randNumber = require("../models/randomNumber.js");
+let TemporaryUserToken = require("../models/temporaryUserToken.js");
 console.log("register beyatch!");
 var crypto = require("crypto");
 // require("dotenv").config()
@@ -84,76 +86,63 @@ router.route("/").post(async (req, res) => {
   // })
   bcrypt.genSalt(3, async function (err, salt) {
     bcrypt.hash(req.body.password, salt, async function (err, hash) {
-      const newUser = new User({
-        userName: req.body.uName,
-        email: req.body.email,
-        password: hash,
+      // const newUser = new User({
+      //   userName: req.body.uName,
+      //   email: req.body.email,
+      //   password: hash,
+      // });
+      var smtpTransport = nodemailer.createTransport("SMTP", {
+        service: "Gmail",
+        auth: {
+          user: process.env.serverEmail,
+          pass: process.env.serverPassword,
+        },
       });
-
-      await newUser.save(async function (err) {
-        if (!err) {
-          //     var u_iid=""
-          //     bcrypt.genSalt(10, function(err, salt) {
-          //     bcrypt.hash(newUser.email, salt, function(err, hash) {
-          //         u_iid=hash
-          //         })
-
-          //     })
-          // // var rField=Math.random().toString(36).substring(7)
-          // var rFieldVal=+u_iid+Math.random().toString(36).substring(7)+u_iid
-          //  bcrypt.genSalt(10, function(err, salt) {
-          //     bcrypt.hash(rFieldVal, salt, function(err, hash) {
-          //         rFieldVal=hash
-          //         })
-
-          //     })
-          var u_iid=""
-          u_iid += newUser._id.toString();
-          u_iid = crypto.createHash("md5").update(u_iid).digest("hex");
-          var rFieldVal = u_iid + Math.random().toString(36).substring(7) + u_iid;
-          rFieldVal = crypto.createHash("md5").update(rFieldVal).digest("hex");
-          const token = jwt.sign(
-            {
-              status: "Success",
-              // email: newUser.email,
-              u_id: newUser._id,
-              [u_iid]: rFieldVal,
-            },
-            process.env.TOKEN_SECRET
-          );
-
-          console.log("userRegister   " + token);
-
-          res.cookie("token", token, { httpOnly: true });
-          res.send({ status: "Successful", token: token });
-          await randNumber.updateOne(
-            { u_idHash: u_iid },
-            { jToken: token },
-            { upsert: true },
-            function (err, docs) {
-              if (err) {
-                console.log(err);
-                res.send({ status: "Update Failed" });
-              } else {
-                console.log("Original Doc : ", docs);
-                // return
-              }
+      var u_iid = crypto
+        .createHash("md5")
+        .update(req.body.email)
+        .digest("hex");
+      var tempRand = crypto.randomBytes(64).toString("hex");
+      host = req.get("host")
+      const tempUser = await new TemporaryUserToken({
+        email: req.body.email,
+        // email: req.user.email,
+        password: hash,
+        tempRand: tempRand,
+      });
+      await TemporaryUserToken.findOneAndUpdate({ email: req.body.email }, tempUser, {upsert: true}, async function(err, doc) {
+        if(!err){
+          link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
+          mailOptions={
+            to : req.query.to,
+            subject : "Please confirm your Email account",
+            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
+          }
+          console.log(mailOptions);
+          await smtpTransport.sendMail(mailOptions, function (error, response) {
+            if (error) {
+              console.log(error);
+              res.send("Wrong email or password!");
+            } else {
+              console.log("Message sent: " + response.message);
+              await res.send("Check your email please");
             }
-          );
-          //   await randNumber.updateOne(
-          //     { upsert: true },
-          //     function (err) {
-          //       if (err) {
-          //         res.send("Update Failed");
-          //       }
-          //     }
-          //   );
-
-          //   return "";
-        } else {
-          return res.send("Wrong email or password!");
+          });
+          
+        }
+        else{
+          await res.send("Sorry, Something is wrong!");
         }
       });
+      
+      // .find(, async function (err, foundUser){
+        
+      // })
+      
+
+
+
+      
       // .then(()=> res.json('User added Successfully'))
       // .catch(err => res.status(400).json('Error: ' + err));
 

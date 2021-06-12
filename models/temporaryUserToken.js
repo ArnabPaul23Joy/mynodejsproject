@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const mdbUri = "mongodb://localhost:27017/ListingAppTodo";
 // process.env.mongoDBURI;
 // mongoose.connect(mdbUri, { useNewUrlParser: true });
-const randomTokenSchema = new mongoose.Schema(
+const temporaryUserToken = new mongoose.Schema(
   {
     u_idHash: {
       type: String,
@@ -20,6 +20,7 @@ const randomTokenSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    expire_at: { type: Date, default: Date.now, expires: 3600 },
   }
 );
 
@@ -30,6 +31,5 @@ const randomTokenSchema = new mongoose.Schema(
 // userSchema.plugin(passportLocalMongoose)
 // userSchema.plugin(findOrCreate)
 
-
-const RandomToken=mongoose.model("RandomToken",randomTokenSchema)
-module.exports = RandomToken;
+const TemporaryUserToken = mongoose.model("TemporaryUserToken", temporaryUserToken);
+module.exports = TemporaryUserToken;
