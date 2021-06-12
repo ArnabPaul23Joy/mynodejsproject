@@ -113,8 +113,8 @@ router.route("/").post(async (req, res) => {
       });
       await TemporaryUserToken.findOneAndUpdate({ email: req.body.email }, tempUser, {new: true, upsert: true}, async function(err, doc) {
         if(!err){
-          await link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
-          await mailOptions={
+          link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
+          mailOptions={
             to : req.query.to,
             subject : "Please confirm your Email account",
             html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
