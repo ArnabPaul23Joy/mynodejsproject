@@ -113,7 +113,7 @@ router.route("/").post(async (req, res) => {
       const oAuth2Client = new google.auth.OAuth2(
         CLIENT_ID,
         CLIENT_SECRET,
-        req.get('host')
+        "https://developers.google.com/oauthplayground/"
       );
       oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
