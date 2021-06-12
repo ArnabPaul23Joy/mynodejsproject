@@ -86,7 +86,7 @@ router.route("/").post(async (req, res) => {
   //     }
   // })
   bcrypt.genSalt(3, async function (err, salt) {
-    bcrypt.hash(req.body.password, salt, async function (err, hash) {
+    await bcrypt.hash(req.body.password, salt, async function (err, hash) {
       // const newUser = new User({
       //   userName: req.body.uName,
       //   email: req.body.email,
@@ -111,10 +111,10 @@ router.route("/").post(async (req, res) => {
         password: hash,
         tempRand: tempRand,
       });
-      await TemporaryUserToken.findOneAndUpdate({ email: req.body.email }, tempUser, {upsert: true}, async function(err, doc) {
+      await TemporaryUserToken.findOneAndUpdate({ email: req.body.email }, tempUser, {new: true, upsert: true}, async function(err, doc) {
         if(!err){
-          link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
-          mailOptions={
+          await link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
+          await mailOptions={
             to : req.query.to,
             subject : "Please confirm your Email account",
             html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
