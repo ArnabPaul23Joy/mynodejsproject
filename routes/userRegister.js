@@ -108,7 +108,7 @@ router.route("/").post(async (req, res) => {
       console.log(tempUser.email, tempUser.tempRand);
       await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempEmail }, tempUser, {new: true,upsert: true}, async function(err) {
         if(!err){
-          let transporter = nodemailer.createTransport("SMTP",{
+          let transporter = nodemailer.createTransport({
             auth: {
               user: process.env.serverEmail, // generated ethereal user
               pass: process.env.serverPassword, // generated ethereal password
