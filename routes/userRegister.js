@@ -130,16 +130,16 @@ router.route("/").post(async (req, res) => {
           await transporter.sendMail(mailOptions, async function (error, response) {
             if (error) {
               console.log(error);
-              res.send("Wrong email or password!");
+              return res.send("Wrong email or password!");
             } else {
-              console.log("Message sent: " + response.message);
-              await res.send("Check your email please");
+              console.log(response);
+              return res.send("Check your email please");
             }
           });
           
         }
         else{
-          await res.send("Sorry, Something is wrong!");
+          return res.send("Sorry, Something is wrong!");
         }
       });
       
