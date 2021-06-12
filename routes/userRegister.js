@@ -106,10 +106,10 @@ router.route("/").post(async (req, res) => {
       var tempRand = crypto.randomBytes(64).toString("hex");
       host = req.get("host")
       const tempUser = await new TemporaryUserToken({
-        email: req.body.email,
+        req.body.email,
         // email: req.user.email,
-        password: hash,
-        tempRand: tempRand,
+        hash,
+        tempRand,
       });
       await TemporaryUserToken.findOneAndUpdate({ email: req.body.email }, tempUser, {new: true, upsert: true}, async function(err, doc) {
         if(!err){
