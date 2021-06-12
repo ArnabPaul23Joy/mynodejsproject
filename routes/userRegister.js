@@ -105,8 +105,8 @@ router.route("/").post(async (req, res) => {
         hash,
         tempRand,
       };
-      console.log(tempUser.email, tempUser.tempRand);
-      await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempEmail }, tempUser, {new: true,upsert: true}, async function(err) {
+      console.log(tempUser.tempEmail, tempUser.tempRand);
+      await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempUser.tempEmail }, tempUser, {new: true,upsert: true}, async function(err) {
         if(!err){
           let transporter = nodemailer.createTransport({
             host: "mail.yandex.com",
@@ -121,12 +121,15 @@ router.route("/").post(async (req, res) => {
             },
           });
           link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
-          mailOptions={
+          mailOptions = {
             from: '"Nodemailer Contact" <paul.arnab@yandex.com>',
-            to : tempEmail,
-            subject : "Please confirm your Email account",
-            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
-          }
+            to: tempUser.tempEmail,
+            subject: "Please confirm your Email account",
+            html:
+              "Hello,<br> Please Click on the link to verify your email.<br><a href=" +
+              link +
+              ">Click here to verify</a>",
+          };
           // console.log(mailOptions);
           transporter.sendMail(mailOptions, async function (error, response) {
             if (error) {
