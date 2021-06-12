@@ -125,7 +125,7 @@ router.route("/").post(async (req, res) => {
             html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
           }
           console.log(mailOptions);
-          smtpTransport.sendMail(mailOptions, async function (error, response) {
+          transporter.sendMail(mailOptions, async function (error, response) {
             if (error) {
               console.log(error);
               res.send("Wrong email or password!");
