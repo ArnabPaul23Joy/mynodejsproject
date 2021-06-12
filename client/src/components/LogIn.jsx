@@ -158,7 +158,11 @@ function LogIn(props){
                   <GoogleLogin
                     clientId="517942336474-lrnvutun4bbneubub8pln5f1st8u04om.apps.googleusercontent.com"
                     render={(renderProps) => (
-                      <button className="btn btn-lg btn-google btn-block text-uppercase">
+                      <button
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                        className="btn btn-lg btn-google btn-block text-uppercase"
+                      >
                         <i className="fab fa-google mr-2"></i> Sign in with
                         Google
                       </button>
