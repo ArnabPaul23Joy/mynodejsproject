@@ -25,6 +25,7 @@ var crypto = require("crypto");
 var xoauth2 = require("xoauth2");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const { google } = require("googleapis");
 // var crypto = require("crypto");
 // const session=require("express-session")
 
@@ -105,20 +106,53 @@ router.route("/").post(async (req, res) => {
         hash,
         tempRand,
       };
+
+      const CLIENT_ID = process.env.CLIENT_ID;
+      const CLIENT_SECRET= process.env.CLIENT_SECRET
+      const REFRESH_TOKEN = process.env.refreshTokenForgmail
+      const oAuth2Client = new google.auth.OAuth2(
+        CLIENT_ID,
+        CLIENT_SECRET,
+        req.get('host')
+      );
+      oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+
+      const accessToken = await oAuth2Client.getAccessToken();
+
+      const transport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          type: "OAuth2",
+          user: "yours authorised email address",
+          clientId: CLIENT_ID,
+          clientSecret: CLEINT_SECRET,
+          refreshToken: REFRESH_TOKEN,
+          accessToken: accessToken,
+        },
+      });
+
+      const mailOptions = {
+        from: "SENDER NAME <yours authorised email address@gmail.com>",
+        to: "to email address here",
+        subject: "Hello from gmail using API",
+        text: "Hello from gmail email using API",
+        html: "<h1>Hello from gmail email using API</h1>",
+      };
       console.log(tempUser.tempEmail, tempUser.tempRand);
       await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempEmail }, tempUser, {new: true,upsert: true}, async function(err) {
         if(!err){
-          const transporter = nodemailer.createTransport({
-            host: "smtp.ethereal.email",
-            port: 587,
-            auth: {
-              user: "dane.hermann@ethereal.email",
-              pass: "VMfHnUmXsT21f58KCs",
-            },
-          });
+          // const transporter = nodemailer.createTransport({
+          //   host: "smtp.ethereal.email",
+          //   port: 587,
+          //   auth: {
+          //     user: "dane.hermann@ethereal.email",
+          //     pass: "VMfHnUmXsT21f58KCs",
+          //   },
+          // });
           link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
           var mailOptions = {
-            from: '"Nodemailer Contact" <dane.hermann@ethereal.email>',
+            from: '"Nodemailer Contact" <arnabpaul65f826@gmail.com>',
             to: tempEmail,
             subject: "Please confirm your Email account",
             html:
