@@ -108,8 +108,8 @@ router.route("/").post(async (req, res) => {
       var tempEmail=req.body.email
       const tempUser = {
         // email: req.user.email,
-        hash,
-        tempRand,
+        password: hash,
+        tempRand: tempRand,
       };
       await TemporaryUserToken.updateOne({ email: req.body.email }, tempUser, {upsert: true}, async function(err, doc) {
         if(!err){
