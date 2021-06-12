@@ -160,7 +160,7 @@ function LogIn(props){
                     render={(renderProps) => (
                       <button
                         onClick={renderProps.onClick}
-                        disabled={renderProps.disabled}
+                        // disabled={renderProps.disabled}
                         className="btn btn-lg btn-google btn-block text-uppercase"
                       >
                         <i className="fab fa-google mr-2"></i> Sign in with
