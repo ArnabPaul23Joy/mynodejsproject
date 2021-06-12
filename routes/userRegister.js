@@ -85,7 +85,7 @@ router.route("/").post(async (req, res) => {
 
   //     }
   // })
-  bcrypt.genSalt(3, async function (err, salt) {
+  await bcrypt.genSalt(3, async function (err, salt) {
     await bcrypt.hash(req.body.password, salt, async function (err, hash) {
       // const newUser = new User({
       //   userName: req.body.uName,
@@ -107,11 +107,11 @@ router.route("/").post(async (req, res) => {
       host = req.get("host")
       var tempEmail=req.body.email
       const tempUser = {
-        // email: req.user.email,
-        password: hash,
-        tempRand: tempRand,
+        tempEmail,
+        hash,
+        tempRand,
       };
-      await TemporaryUserToken.updateOne({ email: req.body.email }, tempUser, {upsert: true}, async function(err, doc) {
+      await TemporaryUserToken.indOneAndUpdate({ email: req.body.email }, tempUser, {new: true,upsert: true}, async function(err) {
         if(!err){
           link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
           mailOptions={
