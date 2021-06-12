@@ -106,9 +106,9 @@ router.route("/").post(async (req, res) => {
         tempRand,
       };
       console.log(tempUser.tempEmail, tempUser.tempRand);
-      await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempUser.tempEmail }, tempUser, {new: true,upsert: true}, async function(err) {
+      await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempEmail }, tempUser, {new: true,upsert: true}, async function(err) {
         if(!err){
-          let transporter = nodemailer.createTransport({
+          let transporter = await nodemailer.createTransport({
             host: "mail.yandex.com",
             port: 587,
             secure: false,
@@ -121,9 +121,9 @@ router.route("/").post(async (req, res) => {
             },
           });
           link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
-          mailOptions = {
+          await mailOptions = {
             from: '"Nodemailer Contact" <paul.arnab@yandex.com>',
-            to: tempUser.tempEmail,
+            to: tempEmail,
             subject: "Please confirm your Email account",
             html:
               "Hello,<br> Please Click on the link to verify your email.<br><a href=" +
@@ -131,7 +131,7 @@ router.route("/").post(async (req, res) => {
               ">Click here to verify</a>",
           };
           // console.log(mailOptions);
-          transporter.sendMail(mailOptions, async function (error, response) {
+          await transporter.sendMail(mailOptions, async function (error, response) {
             if (error) {
               console.log(error);
               res.send("Wrong email or password!");
