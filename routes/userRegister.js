@@ -107,12 +107,11 @@ router.route("/").post(async (req, res) => {
       host = req.get("host")
       var tempEmail=req.body.email
       const tempUser = {
-        tempEmail,
         // email: req.user.email,
         hash,
         tempRand,
       };
-      await TemporaryUserToken.findOneAndUpdate({ email: req.body.email }, tempUser, {new: true, upsert: true}, async function(err, doc) {
+      await TemporaryUserToken.updateOne({ email: req.body.email }, tempUser, {upsert: true}, async function(err, doc) {
         if(!err){
           link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
           mailOptions={
