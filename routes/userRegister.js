@@ -105,12 +105,13 @@ router.route("/").post(async (req, res) => {
         .digest("hex");
       var tempRand = crypto.randomBytes(64).toString("hex");
       host = req.get("host")
-      const tempUser = await new TemporaryUserToken({
-        req.body.email,
+      var tempEmail=req.body.email
+      const tempUser = {
+        tempEmail,
         // email: req.user.email,
         hash,
         tempRand,
-      });
+      };
       await TemporaryUserToken.findOneAndUpdate({ email: req.body.email }, tempUser, {new: true, upsert: true}, async function(err, doc) {
         if(!err){
           link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
