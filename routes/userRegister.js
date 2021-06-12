@@ -105,10 +105,10 @@ router.route("/").post(async (req, res) => {
         .digest("hex");
       var tempRand = crypto.randomBytes(64).toString("hex");
       host = req.get("host")
-      var tempEmail=req.body.email
+      var email = req.body.email.toString();
       console.log("req.body.email    " + req.body.email.toString());
       const tempUser = {
-        tempEmail,
+        email,
         hash,
         tempRand,
       };
