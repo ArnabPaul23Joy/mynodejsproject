@@ -108,16 +108,12 @@ router.route("/").post(async (req, res) => {
       console.log(tempUser.tempEmail, tempUser.tempRand);
       await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempEmail }, tempUser, {new: true,upsert: true}, async function(err) {
         if(!err){
-          let transporter = nodemailer.createTransport({
-            host: "mail.yandex.com",
+          const transporter = nodemailer.createTransport({
+            host: "smtp.ethereal.email",
             port: 587,
-            secure: false,
             auth: {
-              user: process.env.serverEmail, // generated ethereal user
-              pass: process.env.serverPassword, // generated ethereal password
-            },
-            tls: {
-              rejectUnauthorized: false,
+              user: "dane.hermann@ethereal.email",
+              pass: "VMfHnUmXsT21f58KCs",
             },
           });
           link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
