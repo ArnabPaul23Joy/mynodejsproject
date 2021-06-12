@@ -93,10 +93,10 @@ router.route("/").post(async (req, res) => {
       // });
       var smtpTransport = nodemailer.createTransport("SMTP", {
         service: "Gmail",
-        auth: {
+         xoauth2: xoauth2.createXOAuth2Generator({
           user: process.env.serverEmail,
           pass: process.env.serverPassword,
-        },
+         }),
       });
       var u_iid = crypto
         .createHash("md5")
