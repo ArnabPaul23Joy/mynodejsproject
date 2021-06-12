@@ -5,13 +5,19 @@ const mdbUri = "mongodb://localhost:27017/ListingAppTodo";
 // mongoose.connect(mdbUri, { useNewUrlParser: true });
 const temporaryUserToken = new mongoose.Schema(
   {
-    u_idHash: {
+    tempEmail: {
       type: String,
       required: true,
       trim: true,
       minlength: 3,
     },
-    jToken: {
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 3,
+    },
+    tempRand: {
       type: String,
       required: true,
       trim: true,
