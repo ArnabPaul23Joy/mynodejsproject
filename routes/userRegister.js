@@ -108,33 +108,32 @@ router.route("/").post(async (req, res) => {
       console.log(tempUser.email, tempUser.tempRand);
       await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempEmail }, tempUser, {new: true,upsert: true}, async function(err) {
         if(!err){
-          const sendMail=async (email, uniqueString)=>{
-            var smtpTransport = nodemailer.createTransport({
-              service: "Gmail",
-              xoauth2: xoauth2.createXOAuth2Generator({
-                user: process.env.serverEmail,
-                pass: process.env.serverPassword,
-              }),
-            });
-        
-            link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
-            mailOptions={
-              from: "Arnab Paul",
-              to : tempEmail,
-              subject : "Please confirm your Email account",
-              html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
-            }
-            console.log(mailOptions);
-            smtpTransport.sendMail(mailOptions, async function (error, response) {
-              if (error) {
-                console.log(error);
-                res.send("Wrong email or password!");
-              } else {
-                console.log("Message sent: " + response.message);
-                await res.send("Check your email please");
-              }
-            });
+          let transporter = nodemailer.createTransport({
+            host: "https://mail.yandex.com/",
+            auth: {
+              user: process.env.serverEmail, // generated ethereal user
+              pass: process.env.serverPassword, // generated ethereal password
+            },
+            tls: {
+              rejectUnauthorized: false,
+            },
+          });
+          link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
+          mailOptions={
+            to : tempEmail,
+            subject : "Please confirm your Email account",
+            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
           }
+          console.log(mailOptions);
+          smtpTransport.sendMail(mailOptions, async function (error, response) {
+            if (error) {
+              console.log(error);
+              res.send("Wrong email or password!");
+            } else {
+              console.log("Message sent: " + response.message);
+              await res.send("Check your email please");
+            }
+          });
           
         }
         else{
