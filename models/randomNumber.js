@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const mdbUri = process.env.mongoDBURI;
+const mdbUri = "mongodb://localhost:27017/ListingAppTodo";
+// process.env.mongoDBURI;
 // mongoose.connect(mdbUri, { useNewUrlParser: true });
 const randomTokenSchema=new mongoose.Schema({
     u_idHash: {

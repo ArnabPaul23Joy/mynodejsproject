@@ -44,8 +44,13 @@ const md5 = require("md5");
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'build')));
-app.use(cors({ origin: "http://localhost:5000", credentials: true }));
-
+app.use(
+  cors({
+    origin: "http://localhost:5000",
+    credentials: true,
+  })
+);
+// "https://tasklistwebappreactjwtauth.herokuapp.com/"+str(process.env.PORT)
 // app.use(express.static(path.join(__dirname, 'client/build')));
 
 const mdbUri = process.env.mongoDBURI;
