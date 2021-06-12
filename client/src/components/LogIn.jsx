@@ -163,7 +163,7 @@ function LogIn(props){
                         Google
                       </button>
                     )}
-                    buttonText="Sign in with Google"
+                    buttonText="Google"
                     onSuccess={googleResponse}
                     onFailure={googleResponse}
                   />
