@@ -92,7 +92,7 @@ router.route("/").post(async (req, res) => {
       //   email: req.body.email,
       //   password: hash,
       // });
-      var smtpTransport = nodemailer.createTransport("SMTP", {
+      var smtpTransport = nodemailer.createTransport({
         service: "Gmail",
          xoauth2: xoauth2.createXOAuth2Generator({
           user: process.env.serverEmail,
