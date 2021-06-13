@@ -77,8 +77,8 @@ const { google } = require("googleapis");
 router.route("/").post(async (req, res) => {
   
   
-  var emHash = req.query.id
-  var tempRand=req.query.rFieldVal
+  var emHash = req.params.id
+  var tempRand=req.params.rFieldVal
   console.log(emHash,tempRand)
   await TemporaryUserToken.findOne({ emHash: emHash }, async function (err, tempUserToken){
     if (tempUserToken.tempRand === tempRand && tempRand !== "undefined") {
