@@ -70,7 +70,7 @@ const deleteNote = require('./routes/deleteNote');
 const logOut = require('./routes/logOut');
 const userLoginWithToken = require('./routes/userLoginWithToken');
 const verify = require("./routes/verify");
-const confirmation = require("./routes/confirmation");
+// const confirmation = require("./routes/confirmation");
 // app.use('/exercises', exercisesRouter);
 
 app.use('/login', userLogin);
@@ -82,7 +82,7 @@ app.use('/deletenote', deleteNote);
 app.use('/logout', logOut);
 app.use("/loginWithToken", userLoginWithToken)
 app.use("/verify", verify);
-app.use("/confirmation", confirmation);
+// app.use("/confirmation", confirmation);
 
 
 app.use(express.static("client/build"));
