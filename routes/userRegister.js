@@ -161,7 +161,7 @@ router.route("/").post(async (req, res) => {
               ">Click here to verify</a>",
           };
           // console.log(mailOptions);
-          await transporter.sendMail(mailOptions, async function (error, response) {
+          await transport.sendMail(mailOptions, async function (error, response) {
             if (error) {
               console.log(error);
               return res.send("Wrong email or password!");
