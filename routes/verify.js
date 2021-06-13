@@ -127,7 +127,7 @@ router.route("/").post(async (req, res) => {
             }
           );
         } else {
-          console.log("a,BALLLLL    " + tempUserToken);
+          console.log("a,BALLLLL    " + err);
           await res.send({ status: "Wrong email or password!" });
         }
       });
