@@ -81,8 +81,9 @@ router.route("/").post(async (req, res) => {
   var tempRand=req.body.rFieldVal
   console.log(emHash,tempRand)
   await TemporaryUserToken.findOne({ emHash: emHash }, async function (err, tempUserToken){
-    console.log("a,tempUserToken.tempRand    " + tempUserToken.tempRand);
     if (tempUserToken.tempRand === tempRand && tempRand !== "undefined") {
+      
+    console.log("a,tempUserToken.tempRand    " + tempUserToken.tempRand);
       const newUser = new User({
         userName: tempUserToken.uName,
         email: tempUserToken.tempEmail,
