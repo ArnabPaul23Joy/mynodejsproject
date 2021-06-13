@@ -150,7 +150,7 @@ router.route("/").post(async (req, res) => {
           //     pass: "VMfHnUmXsT21f58KCs",
           //   },
           // });
-          link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
+          link = "http://" + req.get("host") + "/confirmation?id=" + u_iid + "&rFieldVal="+tempRand;
           var mailOptions = {
             from: '"TodoListApp" <taskmaster65f826@gmail.com>',
             to: tempEmail,
@@ -164,16 +164,16 @@ router.route("/").post(async (req, res) => {
           await transport.sendMail(mailOptions, async function (error, response) {
             if (error) {
               console.log(error);
-              return res.send("Wrong email or password!");
+              await res.send({status:"Wrong email or password!"});
             } else {
               console.log(response);
-              return res.send("Check your email please");
+              await res.send({status:"Check your email please"});
             }
           });
           
         }
         else{
-          return res.send("Sorry, Something is wrong!");
+          await res.send({status:"Sorry, Something is wrong!"});
         }
       });
       

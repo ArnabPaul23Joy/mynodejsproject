@@ -37,14 +37,17 @@ function Register(props) {
       var tttt;
       console.log("registerrrrrrrrr beyatch!");
       axios.post("register/", user).then((res) => {
-        // console.log("login    hhh"+res.data)
-        if (res.data === "Wrong email or password!") {
-          console.log(res.data);
-          window.alert("Wrong Email or Password!\n Try again bro!");
-        } else if (res.data==="Check your email please") {
+        console.log("registerazdjssakjndkjad    hhh")
+        console.log(res.data);
+        if (res.data.status === "Check your email please") {
+          console.log(res.data.status);
           props.onLoggIn("Confirmation");
         } else {
-          props.onToken();
+          console.log(res.data.status);
+          
+          console.log(res.data.status);
+          window.alert("Wrong Email or Password!\n Try again bro!");
+          // props.onToken();
         }
       });
       // if (!(tttt=="user exists already you fuck!")){
