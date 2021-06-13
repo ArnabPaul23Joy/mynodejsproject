@@ -109,8 +109,8 @@ router.route("/").post(async (req, res) => {
 
           console.log("userRegister   " + token);
 
-          res.cookie("token", token, { httpOnly: true });
-          res.send({ status: "Successful", token: token });
+          await res.cookie("token", token, { httpOnly: true });
+          await res.send({ status: "Successful", token: token });
           await randNumber.updateOne(
             { u_idHash: u_iid },
             { jToken: token },
@@ -126,11 +126,11 @@ router.route("/").post(async (req, res) => {
             }
           );
         } else {
-          return res.send({ status: "Wrong email or password!" });
+          await res.send({ status: "Wrong email or password!" });
         }
       });
     } else {
-      return res.send({ status: "Wrong email or password!" });
+      await res.send({ status: "Wrong email or password!" });
     }
 
   })
