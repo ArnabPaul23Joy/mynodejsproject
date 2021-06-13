@@ -29,3 +29,4 @@ const { google } = require("googleapis");
 router.route("/").get(async (req, res) => {
     console.log(req.query)
 })
+module.exports = router;
