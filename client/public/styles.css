@@ -225,6 +225,7 @@ form.create-note button {
 }
 .confirmation{
   position: relative;
+  border-radius: 7px;
   margin-top: 7rem;
   margin-left: auto;
   margin-right: auto;
@@ -233,8 +234,9 @@ form.create-note button {
   color: green;
   background: #fff;
 }
-.confirmation-p{
-  font-size: 60%;
+.confirmation h1{
+  font-size: 2.1em;
+  position: relative;
   margin:auto auto auto auto;
 }
 /* @supports (-ms-ime-align: auto) {

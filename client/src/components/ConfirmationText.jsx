@@ -7,9 +7,9 @@ function Note(props) {
 
   return (
     <div className="confirmation">
-      <p>A verification link link has been sent to your Email. Please Check your Email.</p>
+      <h1>A verification link link has been sent to your Email. h1lease Check your Email.</h1>
     </div>
   );
 }
-
+s
 export default Note;
