@@ -201,7 +201,7 @@ function App() {
           component={() => (
             <div>
               <Header onLogout={logOut} />
-              {logIn === "Confirmation" ? (<ConfirmationText />) : (<div></div>)}
+              {logIn === "Confirmation" ? <ConfirmationText /> : <div></div>}
               {logIn === "login" ? (
                 <LogIn onLoggIn={logInOrRegister} onToken={setToken} />
               ) : (
