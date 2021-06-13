@@ -198,16 +198,16 @@ function App() {
         <Route
           path="/about"
           exact
-          component={() => (
+          component={
             <div>
               <h1>asdasnbdbnasndbasmbvdmb</h1>
             </div>
-          )}
+          }
         />
-        {/* <Route
+        <Route
           path="/"
           exact
-          component={() => (
+          component={
             <div>
               <Header onLogout={logOut} />
               {logIn === "Confirmation" ? <ConfirmationText /> : <div></div>}
@@ -241,14 +241,14 @@ function App() {
               )}
               <Footer />
             </div>
-          )}
-        /> */}
+          }
+        />
         <Route
           path="/confirmation"
           exact
-          component={() => (
+          component={
             <Confirmation onLoggIn={logInOrRegister} onToken={setToken} />
-          )}
+          }
         />
       </Router>
     </div>
