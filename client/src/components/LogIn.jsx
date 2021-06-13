@@ -64,31 +64,36 @@ function LogIn(props){
     // })
   }
   async function googleResponse(response){
-    const result=response?.profileObj
-    console.log(response);
-    const token = response?.tokenObj.id_token;
-    console.log("tk   "+token)
-    try{
-      axios.get("googlesignin/",{params:{token:token}}).then(function(res){
-        console.log("ressssssssssssssssss  "+res)
-        if (
-          !(
-            res.data.status === "Wrong email bruh!" ||
-            res.data.status === "Wrong password bruh!"
-          )
-        ) {
-          console.log("from login");
-          console.log(res.data.token);
-          props.onToken();
-          //props.onLoggIn("home");
-        } else {
-          console.log(res.data);
-          // props.onNote(res.data)
-        }
-      });
-    }
-    catch(error){
-      console.log(error)
+    if(response){
+        
+      const result = response.profileObj;
+
+      console.log(response);
+      const token = response.tokenObj.id_token;
+      console.log("tk   " + token);
+      try {
+        axios
+          .get("googlesignin/", { params: { token: token } })
+          .then(function (res) {
+            console.log("ressssssssssssssssss  " + res);
+            if (
+              !(
+                res.data.status === "Wrong email bruh!" ||
+                res.data.status === "Wrong password bruh!"
+              )
+            ) {
+              console.log("from login");
+              console.log(res.data.token);
+              props.onToken();
+              //props.onLoggIn("home");
+            } else {
+              console.log(res.data);
+              // props.onNote(res.data)
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   // function handleGoogleSignIn(){
@@ -155,45 +160,44 @@ function LogIn(props){
                   </button>
                   <hr className="my-4" />
                   {/* onClick={handleGoogleSignIn} */}
-                  <GoogleLogin
-                    clientId="517942336474-lrnvutun4bbneubub8pln5f1st8u04om.apps.googleusercontent.com"
-                    render={(renderProps) => (
-                      <button
-                        onClick={renderProps.onClick}
-                        disabled={renderProps.disabled}
-                        className="btn btn-lg btn-google btn-block"
-                      >
-                        <i className="fab fa-google mr-2"></i> Sign in with
-                        Google
-                      </button>
-                    )}
-                    onSuccess={googleResponse}
-                    onFailure={googleResponse}
-                    cookiePolicy={"single_host_origin"}
-                  />
-                  {/* <button
+                </form>
+                <GoogleLogin
+                  clientId="517942336474-lrnvutun4bbneubub8pln5f1st8u04om.apps.googleusercontent.com"
+                  render={(renderProps) => (
+                    <button
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      className="btn btn-lg btn-google btn-block"
+                    >
+                      <i className="fab fa-google mr-2"></i> Sign in with Google
+                    </button>
+                  )}
+                  onSuccess={googleResponse}
+                  onFailure={googleResponse}
+                  cookiePolicy={"single_host_origin"}
+                />
+                {/* <button
                     className="btn btn-lg btn-google btn-block"
                     onClick={handleGoogleSignIn}
                   >
                       <i className="fab fa-google mr-2"></i> Sign in with Google
                    </button> */}
-                  {/* onClick={handleFacebookSignIn} */}
-                  <button className="btn btn-lg btn-facebook btn-block">
-                    <i className="fab fa-facebook-f mr-2"></i> Sign in with
-                    Facebook
+                {/* onClick={handleFacebookSignIn} */}
+                <button className="btn btn-lg btn-facebook btn-block">
+                  <i className="fab fa-facebook-f mr-2"></i> Sign in with
+                  Facebook
+                </button>
+                <br />
+                <p>
+                  Do not have an account?{" "}
+                  <button
+                    data-testid="switch-to-login"
+                    onClick={handleClick}
+                    class="registerBtton"
+                  >
+                    Sign Up
                   </button>
-                  <br />
-                  <p>
-                    Do not have an account?{" "}
-                    <button
-                      data-testid="switch-to-login"
-                      onClick={handleClick}
-                      class="registerBtton"
-                    >
-                      Sign Up
-                    </button>
-                  </p>
-                </form>
+                </p>
               </div>
             </div>
           </div>

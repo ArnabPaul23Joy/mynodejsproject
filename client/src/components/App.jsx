@@ -7,8 +7,9 @@ import CreateArea from "./CreateArea";
 import LogIn from "./LogIn";
 import Register from "./Register";
 import ConfirmationText from "./ConfirmationText";
+import Confirmation from "./Confirmation";
 import { set } from "mongoose";
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
 
   // function getCookie(cname) {
@@ -179,23 +180,8 @@ function App() {
       if (res.data.status === "Invalid Token") {
         window.alert("failed to logout!");
       } else {
-        // setGlobTok(res.data.token)
-        // setCookie("keeeeeeeeeeeeeeeeeeeeeeeeeeeeeeper", globToken, 100)
-
         logInOrRegister("login");
       }
-
-      // if(res.data.status==="Found bruh!"){
-      //   setNotes(res.data.notes)
-      //   setLogInBox("home")
-      // }
-      // else if(res.data.status==="no data found"){
-      //   setLogInBox("home")
-      // }
-      // else{
-      //   window.alert("Failed to get in bruh!")
-      // }
-      // console.log(res.data)
     });
   }
 
@@ -208,54 +194,66 @@ function App() {
   //   case "home":
   return (
     <div>
-      <Header onLogout={logOut} />
-
-      {logIn === "Confirmation" ? (
-        <ConfirmationText />
-      ) : (
-        <></>
-      )}
-      {logIn === "login" ? (
-        <LogIn onLoggIn={logInOrRegister} onToken={setToken} />
-      ) : (
-        <></>
-      )}
-      {logIn === "register" ? (
-        <Register onLoggIn={logInOrRegister} onToken={setToken} />
-      ) : (
-        <></>
-      )}
-      {logIn === "home" ? (
-        <div>
-          <CreateArea onAdd={addNote} />
-          {notes.map((noteItem, index) => {
-            return (
-              <Note
-                key={index}
-                id={index}
-                title={noteItem.postTitle}
-                content={noteItem.postContent}
-                onDelete={deleteNote}
-              />
-            );
-          })}
-        </div>
-      ) : (
-        <></>
-      )}
-      {/* <CreateArea onAdd={addNote} />
-    {notes.map((noteItem, index) => {
-      return (
-        <Note
-          key={index}
-          id={index}
-          title={noteItem.title}
-          content={noteItem.content}
-          onDelete={deleteNote}
+      <Router>
+        <Route
+          path="/"
+          exact
+          component={() => (
+            <div>
+              <Header onLogout={logOut} />
+              {logIn === "Confirmation" ? (<ConfirmationText />) : (<div></div>)}
+              {logIn === "login" ? (
+                <LogIn onLoggIn={logInOrRegister} onToken={setToken} />
+              ) : (
+                <div></div>
+              )}
+              {logIn === "register" ? (
+                <Register onLoggIn={logInOrRegister} onToken={setToken} />
+              ) : (
+                <div></div>
+              )}
+              {logIn === "home" ? (
+                <div>
+                  <CreateArea onAdd={addNote} />
+                  {notes.map((noteItem, index) => {
+                    return (
+                      <Note
+                        key={index}
+                        id={index}
+                        title={noteItem.postTitle}
+                        content={noteItem.postContent}
+                        onDelete={deleteNote}
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                <div></div>
+              )}
+              {/* <CreateArea onAdd={addNote} />
+                {notes.map((noteItem, index) => {
+                  return (
+                    <Note
+                      key={index}
+                      id={index}
+                      title={noteItem.title}
+                      content={noteItem.content}
+                      onDelete={deleteNote}
+                    />
+                  );
+                })} */}
+              <Footer />
+            </div>
+          )}
         />
-      );
-    })} */}
-      <Footer />
+        <Route
+          path="/confirmation"
+          exact
+          component={() => (
+            <Confirmation onLoggIn={logInOrRegister} onToken={setToken} />
+          )}
+        />
+      </Router>
     </div>
   );
 }

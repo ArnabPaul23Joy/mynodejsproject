@@ -69,6 +69,7 @@ const postNote = require('./routes/postNote');
 const deleteNote = require('./routes/deleteNote');
 const logOut = require('./routes/logOut');
 const userLoginWithToken = require('./routes/userLoginWithToken');
+const confirmation = require("./routes/confirmation");
 // app.use('/exercises', exercisesRouter);
 
 app.use('/login', userLogin);
@@ -78,8 +79,8 @@ app.use('/getnotes/', getPosts);
 app.use('/post', postNote);
 app.use('/deletenote', deleteNote);
 app.use('/logout', logOut);
-app.use('/loginWithToken',userLoginWithToken)
-
+app.use("/loginWithToken", userLoginWithToken)
+app.use("/verify", confirmation);
 // app.use(passport.initialize());
 // app.use(passport.session());
 // app.get('/*', function (req, res) {
@@ -91,7 +92,7 @@ app.use('/loginWithToken',userLoginWithToken)
 // });
 
 // if (process.env.NODE_ENV === 'production') {
-    console.log("production mode!")
+  console.log("production mode!")
   // Exprees will serve up production assets
   app.use(express.static('client/build'));
 

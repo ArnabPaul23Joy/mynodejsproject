@@ -95,7 +95,7 @@ router.route("/").post(async (req, res) => {
       // });
       var u_iid = crypto
         .createHash("md5")
-        .update(req.body.email)
+        .update(req.body.email.toString())
         .digest("hex");
       var tempRand = crypto.randomBytes(64).toString("hex");
       host = req.get("host")
@@ -104,6 +104,7 @@ router.route("/").post(async (req, res) => {
       const tempUser = {
         tempEmail,
         hash,
+        u_iid,
         tempRand,
       };
 
@@ -139,43 +140,63 @@ router.route("/").post(async (req, res) => {
       //   text: "Hello from gmail email using API",
       //   html: "<h1>Hello from gmail email using API</h1>",
       // };
+      
       console.log(tempUser.tempEmail, tempUser.tempRand);
-      await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempEmail }, {password:hash,tempRand:tempRand}, {new: true,upsert: true}, async function(err) {
-        if(!err){
-          // const transporter = nodemailer.createTransport({
-          //   host: "smtp.ethereal.email",
-          //   port: 587,
-          //   auth: {
-          //     user: "dane.hermann@ethereal.email",
-          //     pass: "VMfHnUmXsT21f58KCs",
-          //   },
-          // });
-          link = "http://" + req.get("host") + "/confirmation?id=" + u_iid + "&rFieldVal="+tempRand;
-          var mailOptions = {
-            from: '"TodoListApp" <taskmaster65f826@gmail.com>',
-            to: tempEmail,
-            subject: "Please confirm your Email account",
-            html:
-              "Hello,<br> Please Click on the link to verify your email.<br><a href=" +
-              link +
-              ">Click here to verify</a>",
-          };
-          // console.log(mailOptions);
-          await transport.sendMail(mailOptions, async function (error, response) {
-            if (error) {
-              console.log(error);
-              await res.send({status:"Wrong email or password!"});
-            } else {
-              console.log(response);
-              await res.send({status:"Check your email please"});
-            }
-          });
-          
+      await TemporaryUserToken.findOneAndUpdate(
+        { tempEmail: tempEmail },
+        {
+          $set: {
+            uName: req.body.uName.toString(),
+            password: hash,
+            emHash: u_iid,
+            tempRand: tempRand,
+          },
+        },
+        { upsert: true },
+        async function (err) {
+          if (!err) {
+            // const transporter = nodemailer.createTransport({
+            //   host: "smtp.ethereal.email",
+            //   port: 587,
+            //   auth: {
+            //     user: "dane.hermann@ethereal.email",
+            //     pass: "VMfHnUmXsT21f58KCs",
+            //   },
+            // });
+            link =
+              "http://" +
+              req.get("host") +
+              "/confirmation?id=" +
+              u_iid +
+              "&rFieldVal=" +
+              tempRand;
+            var mailOptions = {
+              from: '"TodoListApp" <taskmaster65f826@gmail.com>',
+              to: tempEmail,
+              subject: "Please confirm your Email account",
+              html:
+                "Hello,<br> Please Click on the link to verify your email.<br><a href=" +
+                link +
+                ">Click here to verify</a>",
+            };
+            // console.log(mailOptions);
+            await transport.sendMail(
+              mailOptions,
+              async function (error, response) {
+                if (error) {
+                  console.log(error);
+                  await res.send({ status: "Wrong email or password!" });
+                } else {
+                  console.log(response);
+                  await res.send({ status: "Check your email please" });
+                }
+              }
+            );
+          } else {
+            await res.send({ status: "Sorry, Something is wrong!" });
+          }
         }
-        else{
-          await res.send({status:"Sorry, Something is wrong!"});
-        }
-      });
+      );
       
       // .find(, async function (err, foundUser){
         
