@@ -94,7 +94,7 @@ app.use("/confirmation", confirmation);
 // });
 
 // if (process.env.NODE_ENV === 'production') {
-  console.log("production mode!")
+  // console.log("production mode!")
   // Exprees will serve up production assets
   app.use(express.static('client/build'));
 
