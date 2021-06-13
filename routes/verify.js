@@ -81,7 +81,7 @@ router.route("/").post(async (req, res) => {
   var tempRand=req.query.rFieldVal
   console.log(emHash,tempRand)
   await TemporaryUserToken.findOne({ emHash: emHash }, async function (err, tempUserToken){
-    if(tempUserToken.tempRand===tempRand && tempRand!== 'undefined'){
+    if (tempUserToken.tempRand === tempRand && tempRand !== "undefined") {
       const newUser = new User({
         userName: tempUserToken.uName,
         email: tempUserToken.tempEmail,
@@ -127,7 +127,10 @@ router.route("/").post(async (req, res) => {
           return res.send({ status: "Wrong email or password!" });
         }
       });
+    } else {
+      return res.send({ status: "Wrong email or password!" });
     }
+
   })
   
   
