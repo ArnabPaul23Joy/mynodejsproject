@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import Header from "./Header";
-// import Footer from "./Footer";
-// import Note from "./Note";
-// import CreateArea from "./CreateArea";
-// import LogIn from "./LogIn";
-// import Register from "./Register";
-// import ConfirmationText from "./ConfirmationText";
+import Header from "./Header";
+import Footer from "./Footer";
+import Note from "./Note";
+import CreateArea from "./CreateArea";
+import LogIn from "./LogIn";
+import Register from "./Register";
+import ConfirmationText from "./ConfirmationText";
 import Confirmation from "./Confirmation";
-import Home from "./Home";;
 import { set } from "mongoose";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-function App() {
-
+function Home() {
   // function getCookie(cname) {
   //   var name = cname + "=";
   //   var decodedCookie = decodeURIComponent(document.cookie);
@@ -96,7 +94,8 @@ function App() {
       .post("post/", {
         title: newNote.title,
         content: newNote.content,
-        withCredentials: true})
+        withCredentials: true,
+      })
       .then((res) => {
         // console.log("App's post butt res "+res.data.status)
         console.log(res.data);
@@ -119,7 +118,7 @@ function App() {
 
   function deleteNote(id) {
     axios
-      .post("deletenote/", { note: notes[id] , withCredentials: true})
+      .post("deletenote/", { note: notes[id], withCredentials: true })
       .then((res) => {
         if (res.data.status === "Delete Succeeded") {
           setNotes((prevNotes) => {
@@ -194,34 +193,40 @@ function App() {
   //     return <Register onLoggIn={logInOrRegister}  onToken={setToken}/>
   //   case "home":
   return (
-    <div className="App">
-      <Router>
-        <Route
-          path="/about"
-          exact
-          component={() => (
-            <div>
-              <h1>asdasnbdbnasndbasmbvdmb</h1>
-            </div>
-          )}
-        />
-        <Route
-          path="/"
-          exact
-          component={() => (
-            <Home/>
-          )}
-        />
-        <Route
-          path="/confirmation"
-          exact
-          component={() => (
-            <Confirmation onLoggIn={logInOrRegister} onToken={setToken} />
-          )}
-        />
-      </Router>
+    <div>
+      <Header onLogout={logOut} />
+      {logIn === "Confirmation" ? <ConfirmationText /> : <div></div>}
+      {logIn === "login" ? (
+        <LogIn onLoggIn={logInOrRegister} onToken={setToken} />
+      ) : (
+        <div></div>
+      )}
+      {logIn === "register" ? (
+        <Register onLoggIn={logInOrRegister} onToken={setToken} />
+      ) : (
+        <div></div>
+      )}
+      {logIn === "home" ? (
+        <div>
+          <CreateArea onAdd={addNote} />
+          {notes.map((noteItem, index) => {
+            return (
+              <Note
+                key={index}
+                id={index}
+                title={noteItem.postTitle}
+                content={noteItem.postContent}
+                onDelete={deleteNote}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <div></div>
+      )}
+      <Footer />
     </div>
   );
 }
 
-export default App;
+export default Home;

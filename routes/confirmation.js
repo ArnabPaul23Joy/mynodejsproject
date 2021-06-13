@@ -27,6 +27,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const { google } = require("googleapis");
 router.route("/").get(async (req, res) => {
-    console.log(req.query)
+    // console.log(req.query.params)
 })
 module.exports = router;
