@@ -180,7 +180,10 @@ var newUser;
 //     res.send({ status: "testing", newUser: newUser });
 //   }
 // );
-console.log(process.env.NODE_ENV)
+console.log(process.env.NODE_ENV);
+  // process.env.ChocolateyLastPathUpdate
+  
+  // ;
 
 
 app.listen(port, () => {
