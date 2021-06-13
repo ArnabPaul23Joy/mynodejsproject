@@ -83,7 +83,7 @@ router.route("/").post(async (req, res) => {
   await TemporaryUserToken.findOne({ emHash: emHash }, async function (err, tempUserToken){
     if (tempUserToken.tempRand === tempRand && tempRand !== "undefined") {
       
-    console.log("a,tempUserToken    " + tempUserToken);
+    
       const newUser = new User({
         userName: tempUserToken.uName,
         email: tempUserToken.tempEmail,
@@ -91,6 +91,7 @@ router.route("/").post(async (req, res) => {
       });
       await newUser.save(async function (err) {
         if (!err) {
+          console.log("a,tempUserToken    " + tempUserToken);
           var u_iid = "";
           u_iid += newUser._id.toString();
           u_iid = crypto.createHash("md5").update(u_iid).digest("hex");
@@ -126,6 +127,7 @@ router.route("/").post(async (req, res) => {
             }
           );
         } else {
+          console.log("a,BALLLLL    " + tempUserToken);
           await res.send({ status: "Wrong email or password!" });
         }
       });
