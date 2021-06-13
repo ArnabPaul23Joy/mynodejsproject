@@ -194,7 +194,7 @@ function App() {
   //   case "home":
   return (
     <div className="App">
-      <Router>
+      {/* <Router>
         <Route
           path="/about"
           exact
@@ -203,11 +203,11 @@ function App() {
               <h1>asdasnbdbnasndbasmbvdmb</h1>
             </div>
           }
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/"
           exact
-          component={
+          component={ */}
             <div>
               <Header onLogout={logOut} />
               {logIn === "Confirmation" ? <ConfirmationText /> : <div></div>}
@@ -241,16 +241,16 @@ function App() {
               )}
               <Footer />
             </div>
-          }
-        />
-        <Route
+          {/* }
+        /> */}
+        {/* <Route
           path="/confirmation"
           exact
           component={
             <Confirmation onLoggIn={logInOrRegister} onToken={setToken} />
           }
-        />
-      </Router>
+        /> */}
+      {/* </Router> */}
     </div>
   );
 }
