@@ -107,13 +107,13 @@ router.route("/").post(async (req, res) => {
         tempRand,
       };
 
-      const CLIENT_ID = process.env.CLIENT_ID;
-      const CLIENT_SECRET= process.env.CLIENT_SECRET
+      const GMAIL_CLIENT_ID = process.env.GMAIL_CLIENT_ID;
+      const GMAIL_CLIENT_SECRET= process.env.GMAIL_CLIENT_SECRET
       const REFRESH_TOKEN = process.env.refreshTokenForgmail
       const oAuth2Client = new google.auth.OAuth2(
-        CLIENT_ID,
-        CLIENT_SECRET,
-        "https://developers.google.com/oauthplayground/"
+        GMAIL_CLIENT_ID,
+        GMAIL_CLIENT_SECRET,
+        "https://developers.google.com/oauthplayground"
       );
       oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
@@ -124,23 +124,23 @@ router.route("/").post(async (req, res) => {
         service: "gmail",
         auth: {
           type: "OAuth2",
-          user: "yours authorised email address",
-          clientId: CLIENT_ID,
+          user: process.env.serverEmail,
+          clientId: GMAIL_CLIENT_ID,
           clientSecret: CLEINT_SECRET,
           refreshToken: REFRESH_TOKEN,
           accessToken: accessToken,
         },
       });
 
-      const mailOptions = {
-        from: "SENDER NAME <yours authorised email address@gmail.com>",
-        to: "to email address here",
-        subject: "Hello from gmail using API",
-        text: "Hello from gmail email using API",
-        html: "<h1>Hello from gmail email using API</h1>",
-      };
+      // const mailOptions = {
+      //   from: "SENDER NAME "+"<"+process.env.serverEmail+">",
+      //   to: tempEmail,
+      //   subject: "Hello from gmail using API",
+      //   text: "Hello from gmail email using API",
+      //   html: "<h1>Hello from gmail email using API</h1>",
+      // };
       console.log(tempUser.tempEmail, tempUser.tempRand);
-      await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempEmail }, tempUser, {new: true,upsert: true}, async function(err) {
+      await TemporaryUserToken.findOneAndUpdate({ tempEmail: tempEmail }, {password:hash,tempRand:tempRand}, {new: true,upsert: true}, async function(err) {
         if(!err){
           // const transporter = nodemailer.createTransport({
           //   host: "smtp.ethereal.email",
