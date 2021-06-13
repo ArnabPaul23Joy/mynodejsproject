@@ -224,9 +224,13 @@ form.create-note button {
   text-decoration:underline;
 }
 .confirmation{
-  font-size: 80%;
-  margin-top: 4rem;
+  position: relative;
+  font-size: 60%;
+  margin-top: 7rem;
+  margin-left: auto;
+  margin-right: auto;
   width: 480px;
+  height: 120px;
   color: green;
   background: #fff;
 }
