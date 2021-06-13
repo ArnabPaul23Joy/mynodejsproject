@@ -126,7 +126,7 @@ router.route("/").post(async (req, res) => {
           type: "OAuth2",
           user: process.env.serverEmail,
           clientId: GMAIL_CLIENT_ID,
-          clientSecret: CLEINT_SECRET,
+          clientSecret: GMAIL_CLIENT_SECRET,
           refreshToken: REFRESH_TOKEN,
           accessToken: accessToken,
         },
