@@ -38,7 +38,7 @@ const md5 = require("md5");
 // app.use(passport.session());
 // const cors = require("cors");
 // const cookieParser = require("cookie-parser");
-const path = require("path");
+// const path = require("path");
 // app.use(cors({credentials: true }));
 // app.use(express.json());
 app.use(cookieParser());
