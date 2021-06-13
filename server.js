@@ -82,7 +82,7 @@ app.use('/deletenote', deleteNote);
 app.use('/logout', logOut);
 app.use("/loginWithToken", userLoginWithToken)
 app.use("/verify", verify);
-app.use("/confirmation", confirmation);
+app.use("/confirmation/", confirmation);
 // app.use(passport.initialize());
 // app.use(passport.session());
 // app.get('/*', function (req, res) {
