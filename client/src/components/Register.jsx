@@ -172,28 +172,36 @@ function Register(props) {
                     Sign Up
                   </button>
                   <hr className="my-4" />
-
-                  <GoogleLogin
-                    clientId="517942336474-lrnvutun4bbneubub8pln5f1st8u04om.apps.googleusercontent.com"
-                    buttonText="Sign Up with Google"
-                    onSuccess={googleResponse}
-                    onFailure={googleResponse}
-                  />
-                  {/* <button className="btn btn-lg btn-google btn-block text-uppercase">
+                </form>
+                <GoogleLogin
+                  clientId="517942336474-lrnvutun4bbneubub8pln5f1st8u04om.apps.googleusercontent.com"
+                  clientId="517942336474-lrnvutun4bbneubub8pln5f1st8u04om.apps.googleusercontent.com"
+                  render={(renderProps) => (
+                    <button
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      className="btn btn-lg btn-google btn-block"
+                    >
+                      <i className="fab fa-google mr-2"></i> Sign up with Google
+                    </button>
+                  )}
+                  onSuccess={googleResponse}
+                  onFailure={googleResponse}
+                />
+                {/* <button className="btn btn-lg btn-google btn-block text-uppercase">
                     <i className="fab fa-google mr-2"></i> Sign in with Google
                   </button> */}
-                  <button className="btn btn-lg btn-facebook btn-block text-uppercase">
-                    <i className="fab fa-facebook-f mr-2"></i> Sign in with
-                    Facebook
+                <button className="btn btn-lg btn-facebook btn-block text-uppercase">
+                  <i className="fab fa-facebook-f mr-2"></i> Sign in with
+                  Facebook
+                </button>
+                <br />
+                <p>
+                  already have an account?{" "}
+                  <button onClick={handleClick} class="registerBtton">
+                    Sign In
                   </button>
-                  <br />
-                  <p>
-                    already have an account?{" "}
-                    <button onClick={handleClick} class="registerBtton">
-                      Sign In
-                    </button>
-                  </p>
-                </form>
+                </p>
               </div>
             </div>
           </div>
