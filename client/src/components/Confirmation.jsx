@@ -5,9 +5,17 @@ import axios from "axios";
 import Footer from "./Footer";
 import Header from "./Header";
 import { useParams } from "react-router";
+import { Link, useLocation, BrowserRouter as Router } from "react-router-dom";
 function Confirmation(props) {
-  let {id, rFieldVal} = useParams(); 
-  var [headerText,setHeaderText] = useState("Your Email Confiramtion Is Going On.");
+  
+    function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  
+  var query = useQuery();
+  var [headerText,setHeaderText] = useState("Your Email Confirmation Is Going On.");
+  var id = query.get("id");
+  var rFieldVal = query.get("rFieldVal");
   
   function logOut() {
     axios.post("logout/", { withCredentials: true }).then((res) => {

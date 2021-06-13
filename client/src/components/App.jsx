@@ -244,7 +244,7 @@ function App() {
           )}
         />
         <Route
-          path="/confirmation/:id/:rFieldVal"
+          path="/confirmation"
           exact
           component={() => (
             <Confirmation onLoggIn={logInOrRegister} onToken={setToken} />
