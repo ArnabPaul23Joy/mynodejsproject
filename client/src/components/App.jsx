@@ -204,7 +204,7 @@ function App() {
             </div>
           )}
         />
-        <Route
+        {/* <Route
           path="/"
           exact
           component={() => (
@@ -239,22 +239,10 @@ function App() {
               ) : (
                 <div></div>
               )}
-              {/* <CreateArea onAdd={addNote} />
-                {notes.map((noteItem, index) => {
-                  return (
-                    <Note
-                      key={index}
-                      id={index}
-                      title={noteItem.title}
-                      content={noteItem.content}
-                      onDelete={deleteNote}
-                    />
-                  );
-                })} */}
               <Footer />
             </div>
           )}
-        />
+        /> */}
         <Route
           path="/confirmation"
           exact
