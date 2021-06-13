@@ -193,9 +193,17 @@ function App() {
   //     return <Register onLoggIn={logInOrRegister}  onToken={setToken}/>
   //   case "home":
   return (
-    <div>
+    <div className="App">
       <Router>
-        <Route path="about" exact component={() => <div><h1>asdasnbdbnasndbasmbvdmb</h1></div>} />
+        <Route
+          path="/about"
+          exact
+          component={() => (
+            <div>
+              <h1>asdasnbdbnasndbasmbvdmb</h1>
+            </div>
+          )}
+        />
         <Route
           path="/"
           exact
