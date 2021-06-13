@@ -10,7 +10,7 @@ const temporaryUserToken = new mongoose.Schema(
       required: true,
       trim: true,
       minlength: 3,
-    }
+    },
     tempEmail: {
       type: String,
       required: true,

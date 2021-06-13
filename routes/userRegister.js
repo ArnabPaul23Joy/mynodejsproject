@@ -147,6 +147,7 @@ router.route("/").post(async (req, res) => {
         {
           $set: {
             uName: req.body.uName.toString(),
+            tempEmail: tempEmail,
             password: hash,
             emHash: u_iid,
             tempRand: tempRand,
