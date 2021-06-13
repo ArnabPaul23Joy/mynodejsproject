@@ -36,15 +36,16 @@ function Register(props) {
     if (conPassword == user.password && user.password.length >= 8) {
       var tttt;
       console.log("registerrrrrrrrr beyatch!");
+      
       axios.post("register/", user).then((res) => {
-        console.log("registerazdjssakjndkjad    hhh")
+        console.log("registerazdjssakjndkjad    hhh");
         console.log(res.data);
         if (res.data.status === "Check your email please") {
           console.log(res.data.status);
           props.onLoggIn("Confirmation");
         } else {
           console.log(res.data.status);
-          
+
           console.log(res.data.status);
           window.alert("Wrong Email or Password!\n Try again bro!");
           // props.onToken();
