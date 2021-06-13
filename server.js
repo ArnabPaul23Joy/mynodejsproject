@@ -89,17 +89,17 @@ app.use(express.static("client/build"));
 
 app.get("/", function (req, res) {
   res.sendFile("index.html", {
-    root: path.join(__dirname, "../../client/build/"),
+    root: path.join(__dirname, "/client/build/"),
   });
 });
 app.get("/about", function (req, res) {
   res.sendFile("index.html", {
-    root: path.join(__dirname, "../../client/build/"),
+    root: path.join(__dirname, "/client/build/"),
   });
 });
 app.get("/confirmation", function (req, res) {
   res.sendFile("index.html", {
-    root: path.join(__dirname, "../../client/build/"),
+    root: path.join(__dirname, "/client/build/"),
   });
 });
 console.log(process.env.NODE_ENV);
