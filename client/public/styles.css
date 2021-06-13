@@ -235,9 +235,9 @@ form.create-note button {
   background: #fff;
 }
 .confirmation h1{
-  font-size: 2.1em;
+  font-size: 1.5em;
   position: relative;
-  margin:auto auto auto auto;
+  margin:.1rem .2rem auto .2rem;
 }
 /* @supports (-ms-ime-align: auto) {
   .form-label-group>label {
