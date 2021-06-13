@@ -40,6 +40,8 @@ function Register(props) {
         // console.log("login    hhh"+res.data)
         if (!(res.data === "Wrong email or password!")) {
           props.onToken();
+        } else if ("Check your email please") {
+          
         } else {
           console.log(res.data);
           window.alert("Wrong Email or Password!\n Try again bro!");

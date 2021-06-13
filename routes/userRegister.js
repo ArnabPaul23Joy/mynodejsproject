@@ -152,7 +152,7 @@ router.route("/").post(async (req, res) => {
           // });
           link = "http://" + req.get("host") + "/verify?id=" + u_iid + "&rFieldVal="+tempRand;
           var mailOptions = {
-            from: '"Nodemailer Contact" <arnabpaul65f826@gmail.com>',
+            from: '"TodoListApp" <taskmaster65f826@gmail.com>',
             to: tempEmail,
             subject: "Please confirm your Email account",
             html:

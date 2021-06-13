@@ -223,6 +223,13 @@ form.create-note button {
   background: none;
   text-decoration:underline;
 }
+.confirmation{
+  font-size: 80%;
+  margin-top: 4rem;
+  width: 480px;
+  color: green;
+  background: #fff;
+}
 /* @supports (-ms-ime-align: auto) {
   .form-label-group>label {
     display: none;

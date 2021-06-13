@@ -6,6 +6,7 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 import LogIn from "./LogIn";
 import Register from "./Register";
+import ConfirmationText from "./ConfirmationText";
 import { set } from "mongoose";
 
 function App() {
@@ -208,12 +209,17 @@ function App() {
   return (
     <div>
       <Header onLogout={logOut} />
+
+      {logIn === "Confirmation" ? (
+        <ConfirmationText />
+      ) : (
+        <></>
+      )}
       {logIn === "login" ? (
         <LogIn onLoggIn={logInOrRegister} onToken={setToken} />
       ) : (
         <></>
       )}
-
       {logIn === "register" ? (
         <Register onLoggIn={logInOrRegister} onToken={setToken} />
       ) : (
