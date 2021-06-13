@@ -180,7 +180,7 @@ var newUser;
 //     res.send({ status: "testing", newUser: newUser });
 //   }
 // );
-console.log(process.env.NODE)
+console.log(process.env.NODE_ENV)
 
 
 app.listen(port, () => {
