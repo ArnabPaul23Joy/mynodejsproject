@@ -20,6 +20,7 @@ function Confirmation(props) {
   }
 
   useEffect(() => {
+    console.log(id, rFieldVal);
     axios.post("verify/", { id: id, rFieldVal: rFieldVal }).then((res) => {
       if (res.data.status === "Success") {
         console.log(res.data.status);

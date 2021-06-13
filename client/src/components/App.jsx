@@ -198,11 +198,11 @@ function App() {
         <Route
           path="/about"
           exact
-          component={() => 
+          component={() => (
             <div>
               <h1>asdasnbdbnasndbasmbvdmb</h1>
             </div>
-          }
+          )}
         />
         <Route
           path="/"
@@ -244,7 +244,7 @@ function App() {
           )}
         />
         <Route
-          path="/confirmation"
+          path="/confirmation/:id/:rFieldVal"
           exact
           component={() => (
             <Confirmation onLoggIn={logInOrRegister} onToken={setToken} />
