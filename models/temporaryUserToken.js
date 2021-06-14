@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const mdbUri = "mongodb://localhost:27017/ListingAppTodo";
+// const mdbUri = process.env.mongoDBURI;
+// "mongodb://localhost:27017/ListingAppTodo";
 // process.env.mongoDBURI;
 // mongoose.connect(mdbUri, { useNewUrlParser: true });
 const temporaryUserToken = new mongoose.Schema(
