@@ -11,7 +11,7 @@ function Confirmation(props) {
     function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
-  var link = window.location.host + "/";
+  var link = window.location.protocol + "//" + window.location.host;
   var query = useQuery();
   var [headerText,setHeaderText] = useState("Your Email Confirmation Is Going On.");
   var id = query.get("id");
@@ -23,7 +23,6 @@ function Confirmation(props) {
     axios.post("verify/", { id: id, rFieldVal: rFieldVal }).then((res) => {
       if (res.data.status === "Successful") {
         console.log(res.data.status);
-        var link = window.protocol + "//" + window.location.host;
         setEmailConfirmed(true);
       } else {
         console.log(res.data.status);
