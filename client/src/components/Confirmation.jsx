@@ -11,24 +11,20 @@ function Confirmation(props) {
     function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
-  
+  var link=window.location.host
   var query = useQuery();
   var [headerText,setHeaderText] = useState("Your Email Confirmation Is Going On.");
   var id = query.get("id");
   var rFieldVal = query.get("rFieldVal");
   
-
+  var [emailConfirmed,setEmailConfirmed]=useState(false)
   useEffect(() => {
     console.log(id, rFieldVal);
     axios.post("verify/", { id: id, rFieldVal: rFieldVal }).then((res) => {
       if (res.data.status === "Successful") {
         console.log(res.data.status);
         var link=window.location.host
-        setHeaderText(
-          "Your Email Is Confirmed.<br> Please Click on the link to do your listing.<br><a href=" +
-            link +
-            ">Click here to verify</a>"
-        );
+        setEmailConfirmed(true);
       } else {
         console.log(res.data.status);
         alert(res.data.status);
@@ -40,10 +36,17 @@ function Confirmation(props) {
   
   return (
     <div>
-      <Header onLogout={function(){}} loginOr="confirmation" />
-      <div className="confirmation">
-        <h1>{headerText}</h1>
-      </div>
+      <Header onLogout={function () {}} loginOr="confirmation" />
+      {emailConfirmed ? (
+        <div className="confirmation">
+          <h1>{headerText}</h1>
+        </div>
+      ) : (
+        <div className="confirmation">
+          <h1>Your Email Is Confirmed.<br/> Please Click on the link to do your listing<a href={link}>Click here to verify</a>.<br/></h1>
+        </div>
+      )}
+
       <Footer />
     </div>
   );
