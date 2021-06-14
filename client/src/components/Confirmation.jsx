@@ -43,8 +43,7 @@ function Confirmation(props) {
         </div>
       ) : (
         <div className="confirmation">
-          <h1>Your Email Is Confirmed.</h1><br/>
-          <Link to="/"/>Click here to do your listing<Link/>
+          <h1>Your Email Is Confirmed.<br/><a href={link}>Click here to do your listing</a>.<br/></h1>
         </div>
       )}
 
