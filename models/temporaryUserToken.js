@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 // process.env.mongoDBURI;
 // mongoose.connect(mdbUri, { useNewUrlParser: true });
 const temporaryUserToken = new mongoose.Schema(
-  { expireAfterSeconds: 3600 },
   {
     uName: {
       type: String,
@@ -40,6 +39,9 @@ const temporaryUserToken = new mongoose.Schema(
   },
   {
     timestamps: true,
+  },
+  {
+    expireAfterSeconds: 3600 ,
   }
 );
 
