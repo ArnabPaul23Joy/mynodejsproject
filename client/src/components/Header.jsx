@@ -9,7 +9,8 @@ function Header(props) {
     <header>
       <h1>
         <HighlightIcon />
-        Keeper                             <button onClick={handleClick}>logout</button>
+        Keeper {props.loginOr == "home"?<button onClick={handleClick}>logout</button>:<div></div>}
+        
       </h1>
     </header>
   );

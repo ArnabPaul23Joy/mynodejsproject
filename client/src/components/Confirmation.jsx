@@ -17,33 +17,30 @@ function Confirmation(props) {
   var id = query.get("id");
   var rFieldVal = query.get("rFieldVal");
   
-  function logOut() {
-    axios.post("logout/", { withCredentials: true }).then((res) => {
-      if (res.data.status === "Invalid Token") {
-        window.alert("failed to logout!");
-      } else {
-        props.onLoggIn("login");
-      }
-    });
-  }
 
   useEffect(() => {
     console.log(id, rFieldVal);
     axios.post("verify/", { id: id, rFieldVal: rFieldVal }).then((res) => {
-      if (res.data.status === "Success") {
+      if (res.data.status === "Successful") {
         console.log(res.data.status);
-        setHeaderText("Your Email Is Confirmed.");
-        // props.onToken();
+        var link=window.location.host
+        setHeaderText(
+          "Your Email Is Confirmed.<br> Please Click on the link to do your listing.<br><a href=" +
+            link +
+            ">Click here to verify</a>"
+        );
       } else {
         console.log(res.data.status);
-        // props.onLoggIn("login");
+        alert(res.data.status);
+        window.location.replace(window.location.host);
       }
     });
   }, []);
 
+  
   return (
     <div>
-      <Header onLogout={logOut} />
+      <Header onLogout={function(){}} loginOr="confirmation" />
       <div className="confirmation">
         <h1>{headerText}</h1>
       </div>
