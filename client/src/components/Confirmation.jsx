@@ -37,7 +37,7 @@ function Confirmation(props) {
   return (
     <div>
       <Header onLogout={function () {}} loginOr="confirmation" />
-      {emailConfirmed ? (
+      {!emailConfirmed ? (
         <div className="confirmation">
           <h1>{headerText}</h1>
         </div>
