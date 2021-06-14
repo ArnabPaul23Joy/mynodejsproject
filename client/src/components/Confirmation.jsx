@@ -11,7 +11,7 @@ function Confirmation(props) {
     function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
-  var link = window.location.hostname + "/";
+  var link = window.location.host + "/";
   var query = useQuery();
   var [headerText,setHeaderText] = useState("Your Email Confirmation Is Going On.");
   var id = query.get("id");
@@ -43,7 +43,8 @@ function Confirmation(props) {
         </div>
       ) : (
         <div className="confirmation">
-          <h1>Your Email Is Confirmed.<br/><a href={link}>Click here to do your listing</a>.<br/></h1>
+          <h1>Your Email Is Confirmed.</h1><br/>
+          <Link to="/"/>Click here to do your listing<Link/>
         </div>
       )}
 
