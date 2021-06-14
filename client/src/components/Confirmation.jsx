@@ -23,7 +23,7 @@ function Confirmation(props) {
     axios.post("verify/", { id: id, rFieldVal: rFieldVal }).then((res) => {
       if (res.data.status === "Successful") {
         console.log(res.data.status);
-        var link=window.location.host
+        var link = window.protocol + "//" + window.location.host;
         setEmailConfirmed(true);
       } else {
         console.log(res.data.status);
