@@ -32,7 +32,7 @@ function Home() {
     setLogInBox(logValue);
   }
   const [notes, setNotes] = useState([]);
-  
+
   function addNote(newNote) {
     axios
       .post("post/", {
@@ -72,7 +72,7 @@ function Home() {
       });
   }
   function setToken() {
-    axios.get("getnotes/", { withCredentials: true }).then((res) => {
+    axios.post("getnotes/", { withCredentials: true }).then((res) => {
       if (res.data.status === "Invalid Token") {
       }
       console.log(res.data);

@@ -137,6 +137,18 @@ router.route("/").post(async (req, res) => {
 
   })
   
+  await TemporaryUserToken.deleteOne(
+    { emHash: emHash },
+    async function (err, tempUToken) {
+        if(!err){
+          console.log(tempUToken);
+        }
+        else{
+          console.log(err);
+        }
+    }
+  );
+  
   
 
   
