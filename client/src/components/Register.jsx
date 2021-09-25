@@ -26,77 +26,60 @@ function Register(props) {
     setCon(value);
   }
   function handleSignIn(e) {
-    // const user = {
-    //   username: this.state.username
-    // }
-
-    // console.log(conPassword);
-    // console.log(user);
     let registerResponse = {};
     if (conPassword == user.password && user.password.length >= 8) {
       var tttt;
-      console.log("registerrrrrrrrr beyatch!");
+      // console.log("registerrrrrrrrr beyatch!");
       
       axios.post("register/", user).then((res) => {
-        console.log("registerazdjssakjndkjad    hhh");
-        console.log(res.data);
+        // console.log("registerazdjssakjndkjad    hhh");
+        // console.log(res.data);
         if (res.data.status === "Check your email please") {
-          console.log(res.data.status);
+          // console.log(res.data.status);
           props.onLoggIn("Confirmation");
         } else {
-          console.log(res.data.status);
+          // console.log(res.data.status);
 
-          console.log(res.data.status);
+          // console.log(res.data.status);
           window.alert("Wrong Email or Password!\n Try again bro!");
-          // props.onToken();
         }
       });
-      // if (!(tttt=="user exists already you fuck!")){
-      //   props.onToken(tttt)
-      // }
-
-      // console.log("register Response "+ JSON.stringify(registerResponse))
     } else {
       if (conPassword != user.password) {
         alert("wrong password!");
       } else if (user.password.length < 8) {
         alert("too short password!");
       }
-      // setHolder("Wrong Password")
     }
     e.preventDefault();
-    // this.setState({
-    //   username: ''
-    // })
+    
   }
   async function googleResponse(response) {
     if(response){
       const result = response.profileObj;
-      console.log(response);
+      // console.log(response);
       const token = response.tokenObj.id_token;
-      console.log("tk   " + token);
+      // console.log("tk   " + token);
       try {
         axios
           .get("googlesignin/", { params: { token: token } })
           .then(function (res) {
-            console.log("ressssssssssssssssss  " + res);
+            // console.log("ressssssssssssssssss  " + res);
             if (
               !(
                 res.data.status === "Wrong email bruh!" ||
                 res.data.status === "Wrong password bruh!"
               )
             ) {
-              console.log("from login");
-              console.log(res.data.token);
+              // console.log("from login");
+              // console.log(res.data.token);
               props.onToken();
-              //props.onLoggIn("home");
             } else {
-              console.log(res.data);
-              // props.onNote(res.data)
+              // console.log(res.data);
             }
           });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
   }
@@ -162,11 +145,6 @@ function Register(props) {
                       required
                     />
                   </div>
-
-                  {/* <div className="custom-control custom-checkbox mb-3">
-                    <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                    <label className="custom-control-label" for="customCheck1">Remember password</label>
-                  </div> */}
                   <button
                     className="btn btn-lg btn-primary btn-block text-uppercase"
                     type="submit"
@@ -190,9 +168,6 @@ function Register(props) {
                   onSuccess={googleResponse}
                   onFailure={googleResponse}
                 />
-                {/* <button className="btn btn-lg btn-google btn-block text-uppercase">
-                    <i className="fab fa-google mr-2"></i> Sign in with Google
-                  </button> */}
                 <button className="btn btn-lg btn-facebook btn-block text-uppercase">
                   <i className="fab fa-facebook-f mr-2"></i> Sign in with
                   Facebook

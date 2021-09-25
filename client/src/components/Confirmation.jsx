@@ -19,13 +19,13 @@ function Confirmation(props) {
   
   var [emailConfirmed,setEmailConfirmed]=useState(false)
   useEffect(() => {
-    console.log(id, rFieldVal);
+    // console.log(id, rFieldVal);
     axios.post("verify/", { id: id, rFieldVal: rFieldVal }).then((res) => {
       if (res.data.status === "Successful") {
-        console.log(res.data.status);
+        // console.log(res.data.status);
         setEmailConfirmed(true);
       } else {
-        console.log(res.data.status);
+        // console.log(res.data.status);
         alert(res.data.status);
         window.location.replace(window.location.host);
       }

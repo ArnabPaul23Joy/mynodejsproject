@@ -13,13 +13,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function Home() {
 
   useEffect(() => {
-    console.log("hey!!!!!");
+    // console.log("hey!!!!!");
     axios.post("loginWithToken/", { withCredentials: true }).then((res) => {
       if (res.data.status === "Success") {
-        console.log();
+        // console.log();
         setToken();
       } else {
-        console.log(res.data.status);
+        // console.log(res.data.status);
         logInOrRegister("login");
       }
     });
@@ -41,7 +41,7 @@ function Home() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.status === "Failed to save the note bruh!") {
           window.alert("failed to add note bro!");
         } else {
@@ -67,15 +67,15 @@ function Home() {
         } else {
           window.alert("Failed to Delete bruh!");
         }
-        console.log("App's delete butt res");
-        console.log(res.data);
+        // console.log("App's delete butt res");
+        // console.log(res.data);
       });
   }
   function setToken() {
     axios.post("getnotes/", { withCredentials: true }).then((res) => {
       if (res.data.status === "Invalid Token") {
       }
-      console.log(res.data);
+      // console.log(res.data);
 
       if (res.data.status === "Found bruh!") {
         setNotes(res.data.notes);

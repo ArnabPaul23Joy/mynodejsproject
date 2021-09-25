@@ -7,7 +7,6 @@ function CreateArea(props) {
     title: "",
     content: ""
   });
-  // var nRows = "1";
   const [inBool, setIn] = useState(false);
   function showFullForm(event) {
     setIn(true);
