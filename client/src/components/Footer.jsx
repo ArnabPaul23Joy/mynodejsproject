@@ -3,9 +3,11 @@ import React from "react";
 function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer>
-      <p>Copyright ⓒ {year}</p>
-    </footer>
+    <div className="footerClass">
+      <footer>
+        <p>Copyrightⓒ Arnab Paul Joy, {year}</p>
+      </footer>
+    </div>
   );
 }
 

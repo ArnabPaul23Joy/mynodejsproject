@@ -183,10 +183,6 @@ function LogIn(props){
                       <i className="fab fa-google mr-2"></i> Sign in with Google
                    </button> */}
                 {/* onClick={handleFacebookSignIn} */}
-                <button className="btn btn-lg btn-facebook btn-block">
-                  <i className="fab fa-facebook-f mr-2"></i> Sign in with
-                  Facebook
-                </button>
                 <br />
                 <p>
                   Do not have an account?{" "}

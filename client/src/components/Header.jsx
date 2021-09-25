@@ -2,6 +2,8 @@ import React from "react";
 import HighlightIcon from "@material-ui/icons/Highlight";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
 import Button from "@material-ui/core/Button";
+import ListIcon from "@material-ui/icons/List";
+
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 function Header(props) {
@@ -22,43 +24,31 @@ function Header(props) {
   };
 
   return (
-    <header>
-      <h1>
-        <HighlightIcon />
-        Keeper{" "}
-        {props.loginOr == "home" ? (
+    <div>
+      {props.loginOr == "home" ? (
+        <div className="NavigationBar">
+          <ListIcon />
+          <h1>TaskListApp</h1>
           <div className="allMenuItems">
             <Button
+              onClick={handleLogout}
               aria-controls="simple-menu"
               aria-haspopup="true"
-              onClick={handleIconAccClick}
             >
-              <AccountCircleRoundedIcon />
+              <p>
+                <AccountCircleRoundedIcon />
+                logout
+              </p>
             </Button>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
           </div>
-        ) : (
-          <div></div>
-        )}
-        {/* {props.loginOr == "home" ? (
-          <div className="allMenuItems">
-            <button onClick={handleClick}><AccountCircleRoundedIcon/></button>
-          </div>
-        ) : (
-          <div></div>
-        )} */}
-      </h1>
-    </header>
+        </div>
+      ) : (
+        <div className="NavigationBar">
+          <ListIcon />
+          <h1>TaskListApp</h1>
+        </div>
+      )}
+    </div>
   );
 }
 
