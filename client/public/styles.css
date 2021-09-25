@@ -314,6 +314,7 @@ form.create-note button {
   color: #fff;
   font-family: "McLaren", cursive;
   font-weight: 100;
+  text-transform: capitalize;
 }
 .LogoClass {
   position: absolute; /*or fixed*/

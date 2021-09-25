@@ -168,10 +168,10 @@ function Register(props) {
                   onSuccess={googleResponse}
                   onFailure={googleResponse}
                 />
-                <button className="btn btn-lg btn-facebook btn-block text-uppercase">
+                {/* <button className="btn btn-lg btn-facebook btn-block text-uppercase">
                   <i className="fab fa-facebook-f mr-2"></i> Sign in with
                   Facebook
-                </button>
+                </button> */}
                 <br />
                 <p>
                   already have an account?{" "}
